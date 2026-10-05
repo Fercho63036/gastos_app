@@ -25,6 +25,12 @@ class MenuConfig {
       ruta: RouteNames.home,
     ),
     MenuItem(
+      id: 'iniciar_mes',
+      titulo: LayoutStrings.menuIniciarMes,
+      icono: CupertinoIcons.calendar_badge_plus,
+      ruta: RouteNames.iniciarMes,
+    ),
+    MenuItem(
       id: 'seccion_cuenta',
       titulo: LayoutStrings.seccionCuenta,
       tipo: TipoMenuItem.seccion,

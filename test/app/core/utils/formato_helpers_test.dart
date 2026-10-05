@@ -32,4 +32,17 @@ void main() {
       'MIE 30 SEP',
     );
   });
+
+  test('formatearNumero y parsearMonto son inversos', () {
+    expect(FormatoHelpers.formatearNumero(120000), '1.200,00');
+    expect(FormatoHelpers.parsearMonto('1.200,00'), 120000);
+    expect(FormatoHelpers.parsearMonto(''), 0);
+  });
+
+  test('fechas completas y mes', () {
+    final fecha = DateTime(2026, 10, 5, 13, 20);
+    expect(FormatoHelpers.formatearFecha(fecha), '05/10/2026');
+    expect(FormatoHelpers.formatearFechaHora(fecha), '05/10/2026 13:20');
+    expect(FormatoHelpers.formatearMesAnio(fecha), 'Octubre 2026');
+  });
 }

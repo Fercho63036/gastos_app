@@ -1,21 +1,23 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:gastos_app/app/shared/models/grupo_dia_model.dart';
+import 'package:gastos_app/app/shared/models/movimiento_model.dart';
+import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
 import 'package:gastos_app/app/shared/paginado/constants/base_main_list_constants.dart';
 import 'package:gastos_app/app/shared/paginado/models/paginated_response_model.dart';
 import 'package:gastos_app/app/shared/paginado/utils/paginacion_mixin.dart';
 import 'package:gastos_app/app/shared/utils/agrupacion_helpers.dart';
 
 import '../constants/inicio_strings.dart';
-import '../models/movimiento_model.dart';
 import '../models/periodo_filtro.dart';
-import '../models/resumen_mes_model.dart';
 import '../services/inicio_mock_service.dart';
 
 class InicioProvider extends ChangeNotifier with PaginacionMixin<Movimiento> {
   final InicioMockService _servicio;
 
-  InicioProvider(this._servicio);
+  InicioProvider(this._servicio) {
+    _servicio.cambios.addListener(cargar);
+  }
 
   ResumenMes _resumen = ResumenMes.vacio;
   PeriodoFiltro _periodo = PeriodoFiltro.hoy;
@@ -64,5 +66,11 @@ class InicioProvider extends ChangeNotifier with PaginacionMixin<Movimiento> {
     if (_periodo == periodo) return;
     _periodo = periodo;
     await cargar();
+  }
+
+  @override
+  void dispose() {
+    _servicio.cambios.removeListener(cargar);
+    super.dispose();
   }
 }

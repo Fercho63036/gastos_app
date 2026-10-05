@@ -11,6 +11,7 @@ class TarjetaFilaWidget extends StatelessWidget {
   final Widget contenido;
   final Widget fin;
   final bool punteado;
+  final VoidCallback? onTap;
 
   const TarjetaFilaWidget({
     super.key,
@@ -18,6 +19,7 @@ class TarjetaFilaWidget extends StatelessWidget {
     required this.contenido,
     required this.fin,
     this.punteado = false,
+    this.onTap,
   });
 
   Widget _buildFila(ColorScheme colorScheme) {
@@ -38,9 +40,7 @@ class TarjetaFilaWidget extends StatelessWidget {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+  Widget _buildBorde(ColorScheme colorScheme) {
     final fila = _buildFila(colorScheme);
     if (!punteado) return fila;
     return BordePunteadoWidget(
@@ -49,6 +49,17 @@ class TarjetaFilaWidget extends StatelessWidget {
       ),
       radio: AppDimensions.radiusTarjeta,
       child: fila,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tarjeta = _buildBorde(Theme.of(context).colorScheme);
+    if (onTap == null) return tarjeta;
+    return GestureDetector(
+      onTap: onTap,
+      behavior: HitTestBehavior.opaque,
+      child: tarjeta,
     );
   }
 }

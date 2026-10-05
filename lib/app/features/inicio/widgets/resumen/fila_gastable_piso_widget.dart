@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
+
 import '../../constants/inicio_strings.dart';
-import '../../models/resumen_mes_model.dart';
 
 class FilaGastablePisoWidget extends StatelessWidget {
   final ResumenMes resumen;

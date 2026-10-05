@@ -6,4 +6,5 @@ class ComunStrings {
   static const String rutaNoEncontrada = 'Ruta no encontrada';
   static const String irAlInicio = 'Ir al inicio';
   static const String proximamente = 'Próximamente';
+  static const String volver = 'Volver';
 }

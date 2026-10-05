@@ -1,7 +1,8 @@
-import '../constants/inicio_constants.dart';
-import '../constants/inicio_strings.dart';
-import '../models/categoria_movimiento.dart';
-import '../models/movimiento_model.dart';
+import '../../constants/dominio_constants.dart';
+import '../../constants/dominio_strings.dart';
+import '../../models/categoria_movimiento.dart';
+import '../../models/movimiento_model.dart';
+import '../../models/periodo_mes_model.dart';
 
 /// Movimientos de ejemplo: los de la captura primero y luego otros generados
 /// hacia atrás, día por día, para poder probar la carga por páginas.
@@ -10,15 +11,31 @@ class MovimientosEjemploMock {
 
   static const List<int> _montosEjemploCentavos = [450, 1200, 350, 600, 900];
 
+  /// El periodo de ejemplo empieza el día del movimiento más antiguo.
+  static PeriodoMes periodo(DateTime hoy) {
+    final inicio = hoy.subtract(
+      const Duration(days: DominioConstants.diasDeEjemploMock),
+    );
+    return PeriodoMes(
+      inicio: DateTime(inicio.year, inicio.month, inicio.day),
+      arrastradoCentavos: DominioConstants.arrastradoEjemploCentavos,
+      montoMesCentavos: DominioConstants.montoMesEjemploCentavos,
+      pisoCentavos: DominioConstants.pisoEjemploCentavos,
+    );
+  }
+
+  /// Sin movimientos posteriores a [hoy]: no deben contar en un mes que se
+  /// inicie ahora.
   static List<Movimiento> generar(DateTime hoy) {
     final ayer = hoy.subtract(const Duration(days: 1));
-    return [
+    final todos = [
       ..._movimientosDeHoy(hoy),
       ..._generadosDelDia(hoy, 0),
       _cine(ayer),
-      for (var dia = 1; dia <= InicioConstants.diasDeEjemploMock; dia++)
+      for (var dia = 1; dia <= DominioConstants.diasDeEjemploMock; dia++)
         ..._generadosDelDia(hoy.subtract(Duration(days: dia)), dia),
     ];
+    return todos.where((mov) => !mov.fecha.isAfter(hoy)).toList();
   }
 
   static List<Movimiento> _movimientosDeHoy(DateTime hoy) => [
@@ -56,25 +73,26 @@ class MovimientosEjemploMock {
 
   /// Del más tarde al más temprano, para que el día se lea de arriba abajo.
   static List<Movimiento> _generadosDelDia(DateTime fecha, int diasAtras) {
-    const cantidad = InicioConstants.movimientosPorDiaMock;
+    const cantidad = DominioConstants.movimientosPorDiaMock;
     return [
       for (var orden = cantidad - 1; orden >= 0; orden--)
         _generado(fecha, diasAtras * cantidad + orden, orden),
     ];
   }
 
+  static int _horaDe(int orden) =>
+      DominioConstants.horaInicialMock +
+      orden * DominioConstants.horasEntreMovimientosMock;
+
   static Movimiento _generado(DateTime fecha, int semilla, int orden) {
-    const titulos = InicioStrings.titulosEjemploMock;
-    const categorias = CategoriaMovimiento.values;
-    final hora =
-        InicioConstants.horaInicialMock +
-        orden * InicioConstants.horasEntreMovimientosMock;
+    const titulos = DominioStrings.titulosEjemploMock;
+    const categorias = CategoriaMovimiento.deGasto;
     return _crear(
       'generado_$semilla',
       titulos[semilla % titulos.length],
       categorias[semilla % categorias.length],
       _montosEjemploCentavos[semilla % _montosEjemploCentavos.length],
-      DateTime(fecha.year, fecha.month, fecha.day, hora),
+      DateTime(fecha.year, fecha.month, fecha.day, _horaDe(orden)),
     );
   }
 

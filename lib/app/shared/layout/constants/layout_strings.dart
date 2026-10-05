@@ -13,6 +13,7 @@ class LayoutStrings {
   // Menú
   static const String seccionGastos = 'Gastos';
   static const String menuListaGastos = 'Lista de gastos';
+  static const String menuIniciarMes = 'Iniciar mes';
   static const String seccionCuenta = 'Cuenta';
   static const String menuPerfil = 'Perfil';
 

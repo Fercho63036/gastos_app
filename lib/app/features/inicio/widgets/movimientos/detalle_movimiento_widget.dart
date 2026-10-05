@@ -5,8 +5,8 @@ import 'package:gastos_app/app/core/constants/formato_strings.dart';
 import 'package:gastos_app/app/core/theme/app_colores.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
-import '../../constants/inicio_strings.dart';
-import '../../models/movimiento_model.dart';
+import 'package:gastos_app/app/shared/constants/dominio_strings.dart';
+import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 
 /// Título y "Categoría · hora" (más "Anulado" si corresponde).
 class DetalleMovimientoWidget extends StatelessWidget {
@@ -28,7 +28,7 @@ class DetalleMovimientoWidget extends StatelessWidget {
       children: [
         if (movimiento.anulado)
           const TextSpan(
-            text: '${FormatoStrings.separadorPunto}${InicioStrings.anulado}',
+            text: '${FormatoStrings.separadorPunto}${DominioStrings.anulado}',
             style: TextStyle(
               color: AppColores.alertaAnulado,
               fontWeight: FontWeight.w700,

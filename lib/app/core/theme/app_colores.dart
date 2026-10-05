@@ -42,5 +42,9 @@ class AppColores {
   static const Color categoriaComida = Color(0xFFF2B84B);
   static const Color categoriaPasajes = Color(0xFF7FB2F0);
   static const Color categoriaDiversion = Color(0xFFF08BC0);
+  static const Color categoriaRopa = Color(0xFF9FD8A8);
+  static const Color categoriaDeportes = Color(0xFFFF9E80);
+  static const Color categoriaOtros = Color(0xFFB8B4D8);
+  static const Color categoriaEntrada = exitoOscuro;
   static const Color alertaAnulado = Color(0xFFFFB37A);
 }

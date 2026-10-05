@@ -1,10 +1,11 @@
 import 'package:gastos_app/app/core/constants/formato_strings.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+import 'package:gastos_app/app/shared/models/movimiento_model.dart';
+import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
+
 import '../constants/inicio_constants.dart';
-import '../models/movimiento_model.dart';
 import '../models/periodo_filtro.dart';
-import '../models/resumen_mes_model.dart';
 
 /// Reglas propias de Inicio; el formateo genérico vive en [FormatoHelpers].
 class InicioHelpers {

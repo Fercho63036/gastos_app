@@ -103,4 +103,13 @@ class AppDimensions {
   static const double espacioGuionBorde = 4.0;
   static const double opacidadAnulado = 0.45;
   static const double opacidadPistaIcono = 0.18;
+
+  // Formularios
+  static const double fontMontoGrande = 48.0;
+  static const double fontPrefijoMonto = 22.0;
+  static const double fontTituloEncabezado = 24.0;
+  static const double anchoMinimoMonto = 80.0;
+  static const double alturaCeldaSeleccion = 76.0;
+  static const double alturaSegmento = 46.0;
+  static const double tamanoPuntoLinea = 8.0;
 }

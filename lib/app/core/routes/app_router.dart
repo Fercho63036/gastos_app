@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:gastos_app/app/core/routes/route_guards.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 import 'package:gastos_app/app/core/routes/ruta_no_encontrada_page.dart';
+import 'package:gastos_app/app/core/routes/rutas_formularios.dart';
 import 'package:gastos_app/app/features/auth/pages/login_page.dart';
 import 'package:gastos_app/app/features/auth/pages/recuperar_contrasena_page.dart';
 import 'package:gastos_app/app/features/auth/pages/registrar_page.dart';
@@ -40,6 +41,7 @@ class AppRouter {
             path: RouteNames.recuperarPassword,
             builder: (context, state) => const RecuperarContrasenaPage(),
           ),
+          ...RutasFormularios.rutas,
           ShellRoute(
             navigatorKey: _shellNavigatorKey,
             builder: (context, state, child) => MainLayout(child: child),

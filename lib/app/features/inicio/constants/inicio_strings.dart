@@ -17,23 +17,7 @@ class InicioStrings {
   static const String mes = 'Mes';
 
   // Movimientos
-  static const String anulado = 'Anulado';
   static const String sinMovimientos = 'No hay movimientos en este periodo';
   static const String errorCarga = 'No se pudieron cargar los movimientos';
   static const String sinMasMovimientos = 'No hay más movimientos';
-
-  /// Títulos de los movimientos de ejemplo generados por el mock.
-  static const List<String> titulosEjemploMock = [
-    'Pan',
-    'Taxi',
-    'Helado',
-    'Fotocopias',
-    'Salteña',
-    'Trufi',
-  ];
-
-  // Categorías
-  static const String comida = 'Comida';
-  static const String pasajes = 'Pasajes';
-  static const String diversion = 'Diversión';
 }

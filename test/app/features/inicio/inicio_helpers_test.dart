@@ -2,11 +2,13 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
+import 'package:gastos_app/app/shared/models/movimiento_model.dart';
+import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
+import 'package:gastos_app/app/shared/services/movimientos_memoria_service.dart';
+
 import 'package:gastos_app/app/features/inicio/constants/inicio_constants.dart';
-import 'package:gastos_app/app/features/inicio/models/categoria_movimiento.dart';
-import 'package:gastos_app/app/features/inicio/models/movimiento_model.dart';
 import 'package:gastos_app/app/features/inicio/models/periodo_filtro.dart';
-import 'package:gastos_app/app/features/inicio/models/resumen_mes_model.dart';
 import 'package:gastos_app/app/features/inicio/services/inicio_mock_service.dart';
 import 'package:gastos_app/app/features/inicio/utils/inicio_helpers.dart';
 
@@ -59,7 +61,7 @@ void main() {
   });
 
   test('el mock pagina por periodo', () async {
-    final servicio = InicioMockService();
+    final servicio = InicioMockService(MovimientosMemoriaService());
     final semana = await servicio.obtenerMovimientos(
       periodo: PeriodoFiltro.semana,
       pagina: 1,

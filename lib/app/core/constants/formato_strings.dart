@@ -9,6 +9,9 @@ class FormatoStrings {
   static const String separadorDecimal = ',';
   static const String separadorPunto = ' · ';
   static const String separadorHora = ':';
+  static const String separadorFecha = '/';
+  static const String espacio = ' ';
+  static const String suma = ' + ';
   static const String porcentaje = '%';
   static const String hoyMayuscula = 'HOY';
   static const String ayerMayuscula = 'AYER';
@@ -38,5 +41,21 @@ class FormatoStrings {
     'OCT',
     'NOV',
     'DIC',
+  ];
+
+  /// Índice 0 = enero, igual que `DateTime.month - 1`.
+  static const List<String> mesesCompletos = [
+    'Enero',
+    'Febrero',
+    'Marzo',
+    'Abril',
+    'Mayo',
+    'Junio',
+    'Julio',
+    'Agosto',
+    'Septiembre',
+    'Octubre',
+    'Noviembre',
+    'Diciembre',
   ];
 }

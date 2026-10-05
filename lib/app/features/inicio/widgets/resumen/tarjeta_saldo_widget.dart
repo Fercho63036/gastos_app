@@ -6,10 +6,10 @@ import 'package:gastos_app/app/core/theme/app_colores.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
+import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
 import 'package:gastos_app/app/shared/widgets/progreso/barra_progreso_widget.dart';
 
 import '../../constants/inicio_strings.dart';
-import '../../models/resumen_mes_model.dart';
 import '../../utils/inicio_helpers.dart';
 import 'fila_gastable_piso_widget.dart';
 

@@ -56,6 +56,14 @@ class _FormularioRegistroWidgetState extends State<FormularioRegistroWidget> {
     context.go(RouteNames.auth);
   }
 
+  Widget _buildBotonRegistrar(bool cargando) {
+    return BotonPrimarioWidget(
+      texto: AuthStrings.registrar,
+      cargando: cargando,
+      onPressed: _manejarRegistro,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final cargando = context.watch<AuthProvider>().cargando;
@@ -79,11 +87,7 @@ class _FormularioRegistroWidgetState extends State<FormularioRegistroWidget> {
             etiquetaConfirmacion: AuthStrings.confirmarContrasena,
           ),
           const SizedBox(height: AppDimensions.paddingS),
-          BotonPrimarioWidget(
-            texto: AuthStrings.registrar,
-            cargando: cargando,
-            onPressed: _manejarRegistro,
-          ),
+          _buildBotonRegistrar(cargando),
         ],
       ),
     );

@@ -4,15 +4,20 @@ import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
 import 'package:gastos_app/app/shared/models/grupo_dia_model.dart';
+import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/widgets/textos/encabezado_seccion_widget.dart';
 
-import '../../models/movimiento_model.dart';
 import 'tarjeta_movimiento_widget.dart';
 
 class GrupoDiaWidget extends StatelessWidget {
   final GrupoDia<Movimiento> grupo;
+  final ValueChanged<Movimiento> onSeleccionar;
 
-  const GrupoDiaWidget({super.key, required this.grupo});
+  const GrupoDiaWidget({
+    super.key,
+    required this.grupo,
+    required this.onSeleccionar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,10 @@ class GrupoDiaWidget extends StatelessWidget {
             ),
           ),
           for (final movimiento in grupo.items)
-            TarjetaMovimientoWidget(movimiento: movimiento),
+            TarjetaMovimientoWidget(
+              movimiento: movimiento,
+              onTap: () => onSeleccionar(movimiento),
+            ),
         ],
       ),
     );

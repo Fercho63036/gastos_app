@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-import 'package:gastos_app/app/shared/constants/comun_strings.dart';
-import 'package:gastos_app/app/shared/utils/snackbar_helpers.dart';
 import 'package:gastos_app/app/shared/widgets/botones/boton_contorno_icono_widget.dart';
 
 import '../../constants/inicio_strings.dart';
 
 class BotonesAccionWidget extends StatelessWidget {
-  const BotonesAccionWidget({super.key});
+  final VoidCallback onGasto;
+  final VoidCallback onEntrada;
 
-  void _mostrarProximamente(BuildContext context) =>
-      SnackbarHelpers.mostrar(context, ComunStrings.proximamente);
+  const BotonesAccionWidget({
+    super.key,
+    required this.onGasto,
+    required this.onEntrada,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +25,14 @@ class BotonesAccionWidget extends StatelessWidget {
           child: BotonContornoIconoWidget(
             etiqueta: InicioStrings.gasto,
             icono: Icons.remove_circle_outline,
-            onPressed: () => _mostrarProximamente(context),
+            onPressed: onGasto,
           ),
         ),
         Expanded(
           child: BotonContornoIconoWidget(
             etiqueta: InicioStrings.entrada,
             icono: Icons.add_circle_outline,
-            onPressed: () => _mostrarProximamente(context),
+            onPressed: onEntrada,
           ),
         ),
       ],

@@ -15,6 +15,10 @@ class ResponsiveHelper {
   static const int columnasTablet = 2;
   static const int columnasDesktop = 3;
 
+  static const int columnasCuadriculaMovil = 3;
+  static const int columnasCuadriculaTablet = 4;
+  static const int columnasCuadriculaDesktop = 6;
+
   static double anchoPantalla(BuildContext context) =>
       MediaQuery.sizeOf(context).width;
 
@@ -58,6 +62,13 @@ class ResponsiveHelper {
     if (isDesktop(context)) return columnasDesktop;
     if (isTablet(context)) return columnasTablet;
     return columnasMovil;
+  }
+
+  /// Columnas para cuadrículas de opciones pequeñas (p. ej. categorías).
+  static int columnasCuadricula(BuildContext context) {
+    if (isDesktop(context)) return columnasCuadriculaDesktop;
+    if (isTablet(context)) return columnasCuadriculaTablet;
+    return columnasCuadriculaMovil;
   }
 
   static double fraccionAlto(BuildContext context, double fraccion) =>
