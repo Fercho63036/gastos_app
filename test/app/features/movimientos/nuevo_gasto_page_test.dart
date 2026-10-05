@@ -5,15 +5,18 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
-import 'package:gastos_app/app/shared/services/movimientos_memoria_service.dart';
+import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 
 import 'package:gastos_app/app/features/movimientos/constants/movimientos_strings.dart';
 import 'package:gastos_app/app/features/movimientos/pages/nuevo_gasto_page.dart';
 import 'package:gastos_app/app/features/movimientos/providers/nuevo_gasto_provider.dart';
 
+import '../../../helpers/movimientos_almacen_fake.dart';
+
 void main() {
   testWidgets('registra el gasto en el servicio compartido', (tester) async {
-    final servicio = MovimientosMemoriaService();
+    final almacen = MovimientosAlmacenFake();
+    final servicio = MovimientosService(almacen);
     final router = GoRouter(
       initialLocation: '/nuevo',
       routes: [
@@ -40,5 +43,6 @@ void main() {
     expect(gasto.titulo, 'Almuerzo');
     expect(gasto.montoCentavos, 2500);
     expect(gasto.categoria, CategoriaMovimiento.pasajes);
+    expect(almacen.guardados.single.id, gasto.id);
   });
 }

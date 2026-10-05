@@ -31,13 +31,7 @@ class DominioStrings {
   static const String prefijoGasto = 'G-';
   static const String prefijoEntrada = 'E-';
 
-  /// Títulos de los movimientos de ejemplo generados por el mock.
-  static const List<String> titulosEjemploMock = [
-    'Pan',
-    'Taxi',
-    'Helado',
-    'Fotocopias',
-    'Salteña',
-    'Trufi',
-  ];
+  // Persistencia
+  static const String errorGuardar = 'No se pudo guardar. Intenta de nuevo.';
+  static const String guardando = 'Guardando…';
 }

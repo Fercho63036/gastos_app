@@ -20,8 +20,12 @@ import '../widgets/formulario/nota_fecha_automatica_widget.dart';
 class NuevaEntradaPage extends StatelessWidget {
   const NuevaEntradaPage({super.key});
 
-  void _registrar(BuildContext context, NuevaEntradaProvider provider) {
-    final error = provider.registrar();
+  Future<void> _registrar(
+    BuildContext context,
+    NuevaEntradaProvider provider,
+  ) async {
+    final error = await provider.registrar();
+    if (!context.mounted) return;
     SnackbarHelpers.mostrar(
       context,
       error ?? MovimientosStrings.entradaRegistrada,
@@ -49,6 +53,7 @@ class NuevaEntradaPage extends StatelessWidget {
       titulo: MovimientosStrings.nuevaEntrada,
       textoBoton: MovimientosStrings.registrarEntrada,
       onConfirmar: () => _registrar(context, provider),
+      cargando: provider.guardando,
       children: [
         const Text(
           MovimientosStrings.introEntrada,

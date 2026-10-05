@@ -5,6 +5,7 @@ class PeriodoStrings {
   static const String inicioManual = 'Inicio manual del periodo';
   static const String saldoArrastra = 'Saldo que se arrastra';
   static const String sobranteDe = 'Sobrante de ';
+  static const String sinMesAnterior = 'Tu primer mes: aún no hay sobrante';
   static const String montoMesBs = 'Monto del mes (Bs)';
   static const String pisoBs = 'Piso de ahorro (Bs)';
   static const String ayudaPiso =

@@ -4,17 +4,17 @@ import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
 import 'package:gastos_app/app/shared/paginado/models/paginated_response_model.dart';
 import 'package:gastos_app/app/shared/paginado/utils/paginado_helpers.dart';
-import 'package:gastos_app/app/shared/services/movimientos_memoria_service.dart';
+import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 
 import '../constants/inicio_constants.dart';
 import '../models/periodo_filtro.dart';
 import '../utils/inicio_helpers.dart';
 
-/// Lee del servicio en memoria compartido y filtra/pagina para Inicio.
-class InicioMockService {
-  final MovimientosMemoriaService _datos;
+/// Lee los movimientos guardados y los filtra/pagina para Inicio.
+class InicioService {
+  final MovimientosService _datos;
 
-  InicioMockService(this._datos);
+  InicioService(this._datos);
 
   /// Avisa cuando otra pantalla registra o edita un movimiento.
   Listenable get cambios => _datos;

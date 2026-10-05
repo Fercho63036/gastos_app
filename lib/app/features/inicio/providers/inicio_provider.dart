@@ -10,10 +10,10 @@ import 'package:gastos_app/app/shared/utils/agrupacion_helpers.dart';
 
 import '../constants/inicio_strings.dart';
 import '../models/periodo_filtro.dart';
-import '../services/inicio_mock_service.dart';
+import '../services/inicio_service.dart';
 
 class InicioProvider extends ChangeNotifier with PaginacionMixin<Movimiento> {
-  final InicioMockService _servicio;
+  final InicioService _servicio;
 
   InicioProvider(this._servicio) {
     _servicio.cambios.addListener(cargar);

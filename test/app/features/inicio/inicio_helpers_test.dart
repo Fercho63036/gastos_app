@@ -5,11 +5,13 @@ import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
-import 'package:gastos_app/app/shared/services/movimientos_memoria_service.dart';
+import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 
 import 'package:gastos_app/app/features/inicio/constants/inicio_constants.dart';
 import 'package:gastos_app/app/features/inicio/models/periodo_filtro.dart';
-import 'package:gastos_app/app/features/inicio/services/inicio_mock_service.dart';
+import 'package:gastos_app/app/features/inicio/services/inicio_service.dart';
+
+import '../../../helpers/movimientos_almacen_fake.dart';
 import 'package:gastos_app/app/features/inicio/utils/inicio_helpers.dart';
 
 Movimiento _movimiento(String id, DateTime fecha) => Movimiento(
@@ -60,24 +62,32 @@ void main() {
     expect(semana.length, 3);
   });
 
-  test('el mock pagina por periodo', () async {
-    final servicio = InicioMockService(MovimientosMemoriaService());
-    final semana = await servicio.obtenerMovimientos(
-      periodo: PeriodoFiltro.semana,
-      pagina: 1,
-    );
-    expect(semana.datos.length, InicioConstants.movimientosPorPagina);
-    expect(semana.total, greaterThan(InicioConstants.movimientosPorPagina));
-
-    final soloHoy = await servicio.obtenerMovimientos(
+  test('pagina por periodo solo lo registrado', () async {
+    final datos = MovimientosService(MovimientosAlmacenFake());
+    final servicio = InicioService(datos);
+    final vacio = await servicio.obtenerMovimientos(
       periodo: PeriodoFiltro.hoy,
       pagina: 1,
     );
+    expect(vacio.total, 0);
+
+    const cantidad = InicioConstants.movimientosPorPagina + 1;
+    for (var numero = 0; numero < cantidad; numero++) {
+      await datos.registrarGasto(
+        titulo: 'Gasto $numero',
+        categoria: CategoriaMovimiento.comida,
+        montoCentavos: 100,
+      );
+    }
+    final hoy = await servicio.obtenerMovimientos(
+      periodo: PeriodoFiltro.hoy,
+      pagina: 1,
+    );
+    expect(hoy.datos.length, InicioConstants.movimientosPorPagina);
+    expect(hoy.total, cantidad);
     final inicioHoy = FormatoHelpers.soloDia(DateTime.now());
     expect(
-      soloHoy.datos.every(
-        (mov) => FormatoHelpers.soloDia(mov.fecha) == inicioHoy,
-      ),
+      hoy.datos.every((mov) => FormatoHelpers.soloDia(mov.fecha) == inicioHoy),
       isTrue,
     );
   });

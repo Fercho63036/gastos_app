@@ -30,6 +30,7 @@ class Movimiento {
   EstadoMovimiento get estado => EstadoMovimiento.desde(anulado: anulado);
 
   Movimiento copyWith({
+    String? id,
     String? codigo,
     String? titulo,
     CategoriaMovimiento? categoria,
@@ -38,7 +39,7 @@ class Movimiento {
     List<EdicionMovimiento>? ediciones,
   }) {
     return Movimiento(
-      id: id,
+      id: id ?? this.id,
       codigo: codigo ?? this.codigo,
       titulo: titulo ?? this.titulo,
       categoria: categoria ?? this.categoria,

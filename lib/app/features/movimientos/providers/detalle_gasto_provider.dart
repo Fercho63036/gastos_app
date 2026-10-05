@@ -5,14 +5,15 @@ import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/models/estado_movimiento.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
-import 'package:gastos_app/app/shared/services/movimientos_memoria_service.dart';
+import 'package:gastos_app/app/shared/services/movimientos_service.dart';
+import 'package:gastos_app/app/shared/utils/guardado_mixin.dart';
 
 import '../constants/movimientos_strings.dart';
 import '../utils/movimientos_helpers.dart';
 
 /// Borrador editable de un gasto; al guardar, el servicio arma el historial.
-class DetalleGastoProvider extends ChangeNotifier {
-  final MovimientosMemoriaService _datos;
+class DetalleGastoProvider extends ChangeNotifier with GuardadoMixin {
+  final MovimientosService _datos;
   final String _id;
   final TextEditingController montoController = TextEditingController();
   final TextEditingController descripcionController = TextEditingController();
@@ -49,7 +50,9 @@ class DetalleGastoProvider extends ChangeNotifier {
   }
 
   /// Devuelve el error a mostrar, o `null` si los cambios se guardaron.
-  String? guardarCambios() {
+  Future<String?> guardarCambios() => guardarConEstado(_guardarBorrador);
+
+  Future<String?> _guardarBorrador() async {
     final gasto = _gasto;
     if (gasto == null) return MovimientosStrings.gastoNoEncontrado;
     final monto = FormatoHelpers.parsearMonto(montoController.text);
@@ -62,9 +65,8 @@ class DetalleGastoProvider extends ChangeNotifier {
       categoria: _categoria,
       anulado: _estado == EstadoMovimiento.anulado,
     );
-    if (!_datos.actualizar(editado)) return MovimientosStrings.sinCambios;
+    if (!await _datos.actualizar(editado)) return MovimientosStrings.sinCambios;
     _cargarBorrador();
-    notifyListeners();
     return null;
   }
 

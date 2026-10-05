@@ -26,8 +26,12 @@ class IniciarMesPage extends StatelessWidget {
     fontWeight: FontWeight.w800,
   );
 
-  void _iniciar(BuildContext context, IniciarMesProvider provider) {
-    final error = provider.iniciar();
+  Future<void> _iniciar(
+    BuildContext context,
+    IniciarMesProvider provider,
+  ) async {
+    final error = await provider.iniciar();
+    if (!context.mounted) return;
     SnackbarHelpers.mostrar(context, error ?? PeriodoStrings.mesIniciado);
     if (error == null) NavegacionHelpers.volver(context);
   }
@@ -66,6 +70,7 @@ class IniciarMesPage extends StatelessWidget {
       titulo: PeriodoStrings.iniciarMes,
       textoBoton: PeriodoStrings.iniciarMes,
       onConfirmar: () => _iniciar(context, provider),
+      cargando: provider.guardando,
       children: [
         EncabezadoIconoWidget(
           icono: CupertinoIcons.calendar,

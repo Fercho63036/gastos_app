@@ -21,8 +21,12 @@ import '../widgets/formulario/nota_fecha_automatica_widget.dart';
 class NuevoGastoPage extends StatelessWidget {
   const NuevoGastoPage({super.key});
 
-  void _guardar(BuildContext context, NuevoGastoProvider provider) {
-    final error = provider.guardar();
+  Future<void> _guardar(
+    BuildContext context,
+    NuevoGastoProvider provider,
+  ) async {
+    final error = await provider.guardar();
+    if (!context.mounted) return;
     SnackbarHelpers.mostrar(
       context,
       error ?? MovimientosStrings.gastoRegistrado,
@@ -51,6 +55,7 @@ class NuevoGastoPage extends StatelessWidget {
       titulo: MovimientosStrings.nuevoGasto,
       textoBoton: MovimientosStrings.guardarGasto,
       onConfirmar: () => _guardar(context, provider),
+      cargando: provider.guardando,
       children: [
         CampoMontoGrandeWidget(
           etiqueta: MovimientosStrings.monto,

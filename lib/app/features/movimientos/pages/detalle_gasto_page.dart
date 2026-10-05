@@ -23,8 +23,12 @@ import '../widgets/detalle/historial_ediciones_widget.dart';
 class DetalleGastoPage extends StatelessWidget {
   const DetalleGastoPage({super.key});
 
-  void _guardar(BuildContext context, DetalleGastoProvider provider) {
-    final error = provider.guardarCambios();
+  Future<void> _guardar(
+    BuildContext context,
+    DetalleGastoProvider provider,
+  ) async {
+    final error = await provider.guardarCambios();
+    if (!context.mounted) return;
     SnackbarHelpers.mostrar(
       context,
       error ?? MovimientosStrings.cambiosGuardados,
@@ -79,6 +83,7 @@ class DetalleGastoPage extends StatelessWidget {
       titulo: MovimientosStrings.detalleGasto,
       textoBoton: MovimientosStrings.guardarCambios,
       onConfirmar: () => _guardar(context, provider),
+      cargando: provider.guardando,
       children: _buildCampos(provider, gasto),
     );
   }

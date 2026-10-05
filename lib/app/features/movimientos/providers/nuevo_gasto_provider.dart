@@ -3,13 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
-import 'package:gastos_app/app/shared/services/movimientos_memoria_service.dart';
+import 'package:gastos_app/app/shared/services/movimientos_service.dart';
+import 'package:gastos_app/app/shared/utils/guardado_mixin.dart';
 import 'package:gastos_app/app/shared/utils/resumen_helpers.dart';
 
 import '../utils/movimientos_helpers.dart';
 
-class NuevoGastoProvider extends ChangeNotifier {
-  final MovimientosMemoriaService _datos;
+class NuevoGastoProvider extends ChangeNotifier with GuardadoMixin {
+  final MovimientosService _datos;
   final TextEditingController montoController = TextEditingController();
   final TextEditingController descripcionController = TextEditingController();
   CategoriaMovimiento _categoria = CategoriaMovimiento.comida;
@@ -33,17 +34,17 @@ class NuevoGastoProvider extends ChangeNotifier {
   }
 
   /// Devuelve el error a mostrar, o `null` si el gasto se guardó.
-  String? guardar() {
+  Future<String?> guardar() => guardarConEstado(() async {
     final titulo = descripcionController.text.trim();
     final error = MovimientosHelpers.validarGasto(montoCentavos, titulo);
     if (error != null) return error;
-    _datos.registrarGasto(
+    await _datos.registrarGasto(
       titulo: titulo,
       categoria: _categoria,
       montoCentavos: montoCentavos,
     );
     return null;
-  }
+  });
 
   @override
   void dispose() {

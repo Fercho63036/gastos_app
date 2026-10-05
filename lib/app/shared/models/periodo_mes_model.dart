@@ -12,5 +12,14 @@ class PeriodoMes {
     required this.pisoCentavos,
   });
 
+  /// Mientras no se inicie un mes: todo en cero y cuentan todos los
+  /// movimientos.
+  static final PeriodoMes sinIniciar = PeriodoMes(
+    inicio: DateTime.fromMillisecondsSinceEpoch(0),
+    arrastradoCentavos: 0,
+    montoMesCentavos: 0,
+    pisoCentavos: 0,
+  );
+
   int get saldoInicialCentavos => arrastradoCentavos + montoMesCentavos;
 }

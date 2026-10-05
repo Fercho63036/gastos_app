@@ -3,13 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
 import 'package:gastos_app/app/shared/models/fila_resumen_model.dart';
-import 'package:gastos_app/app/shared/services/movimientos_memoria_service.dart';
+import 'package:gastos_app/app/shared/services/movimientos_service.dart';
+import 'package:gastos_app/app/shared/utils/guardado_mixin.dart';
 
 import '../constants/movimientos_strings.dart';
 import '../utils/movimientos_helpers.dart';
 
-class NuevaEntradaProvider extends ChangeNotifier {
-  final MovimientosMemoriaService _datos;
+class NuevaEntradaProvider extends ChangeNotifier with GuardadoMixin {
+  final MovimientosService _datos;
   final TextEditingController montoController = TextEditingController();
   final TextEditingController motivoController = TextEditingController();
 
@@ -25,16 +26,16 @@ class NuevaEntradaProvider extends ChangeNotifier {
   );
 
   /// Devuelve el error a mostrar, o `null` si la entrada se registró.
-  String? registrar() {
+  Future<String?> registrar() => guardarConEstado(() async {
     final error = MovimientosHelpers.validarMonto(montoCentavos);
     if (error != null) return error;
     final motivo = motivoController.text.trim();
-    _datos.registrarEntrada(
+    await _datos.registrarEntrada(
       titulo: motivo.isEmpty ? MovimientosStrings.entrada : motivo,
       montoCentavos: montoCentavos,
     );
     return null;
-  }
+  });
 
   @override
   void dispose() {

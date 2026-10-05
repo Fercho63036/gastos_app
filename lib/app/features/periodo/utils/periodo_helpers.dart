@@ -3,16 +3,25 @@ import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
 import 'package:gastos_app/app/shared/constants/dominio_constants.dart';
 import 'package:gastos_app/app/shared/models/fila_resumen_model.dart';
+import 'package:gastos_app/app/shared/models/periodo_mes_model.dart';
 
 import '../constants/periodo_strings.dart';
 
 class PeriodoHelpers {
   PeriodoHelpers._();
 
-  /// "Sobrante de septiembre".
-  static String textoSobrante(DateTime inicioAnterior) =>
-      '${PeriodoStrings.sobranteDe}'
-      '${FormatoHelpers.nombreMes(inicioAnterior).toLowerCase()}';
+  /// "Sobrante de septiembre", o el aviso de que es el primer mes.
+  static String textoSobrante(PeriodoMes? anterior) {
+    if (anterior == null) return PeriodoStrings.sinMesAnterior;
+    return '${PeriodoStrings.sobranteDe}'
+        '${FormatoHelpers.nombreMes(anterior.inicio).toLowerCase()}';
+  }
+
+  /// El piso del mes anterior; vacío si es el primer mes.
+  static String pisoPrecargado(PeriodoMes? anterior) {
+    if (anterior == null) return '';
+    return FormatoHelpers.formatearNumero(anterior.pisoCentavos);
+  }
 
   static String? validar({
     required int montoMesCentavos,
