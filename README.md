@@ -1,17 +1,80 @@
-# gastos_app
+# Gastos App
 
-A new Flutter project.
+Aplicación Flutter para registrar y gestionar gastos personales con almacenamiento local.
 
-## Getting Started
+## Requisitos
 
-This project is a starting point for a Flutter application.
+- Flutter 3.41.6+ (Dart SDK ^3.11.4)
+- Java JDK 17
+- Android SDK API 24+
 
-A few resources to get you started if this is your first Flutter project:
+## Instalación
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+```bash
+flutter pub get
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Ejecutar
+
+```bash
+flutter clean
+flutter pub get
+
+# Android
+flutter run -d emulator-5554
+
+# iOS
+flutter run -d ios
+
+# Auto
+flutter run
+```
+
+## Dependencias Principales
+
+- `provider: ^6.1.2` - Gestión de estado
+- `sqflite: ^2.4.1` - Persistencia local (SQLite)
+- `path: ^1.9.0` - Manejo de rutas
+- `path_provider: ^2.1.4` - Directorios del sistema
+
+## Estructura
+
+```
+lib/
+├── main.dart
+├── app.dart          # MultiProvider (inyección de dependencias)
+├── core/             # constants, database, theme, widgets compartidos
+└── features/
+    └── expenses/
+        ├── data/         # models, repositories
+        └── presentation/ # providers, screens
+```
+
+Las reglas de arquitectura para desarrolladores e IAs están en [AGENTS.md](AGENTS.md).
+
+## Comandos Útiles
+
+```bash
+# Ver dispositivos
+flutter devices
+
+# Analizar código
+flutter analyze
+
+# Ejecutar tests
+flutter test
+
+# Construir APK
+flutter build apk --release
+
+# Limpiar proyecto
+flutter clean
+```
+
+## Configuración Android
+
+Definida en `android/app/build.gradle.kts`:
+
+- minSdk: 24 (valor por defecto de Flutter)
+- targetSdk: 36 (valor por defecto de Flutter)
+- Java: 17
