@@ -6,13 +6,14 @@ import 'package:provider/provider.dart';
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 
+import 'package:gastos_app/app/shared/widgets/botones/boton_primario_widget.dart';
+
 import '../../constants/auth_constants.dart';
 import '../../constants/auth_strings.dart';
 import '../../models/credenciales_model.dart';
 import '../../providers/auth_provider.dart';
 import '../../utils/auth_helpers.dart';
 import '../../utils/auth_mensajes.dart';
-import '../campos/boton_primario_widget.dart';
 import '../campos/campo_contrasena_widget.dart';
 import '../campos/campo_correo_widget.dart';
 

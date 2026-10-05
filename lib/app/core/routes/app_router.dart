@@ -8,9 +8,9 @@ import 'package:gastos_app/app/core/routes/ruta_no_encontrada_page.dart';
 import 'package:gastos_app/app/features/auth/pages/login_page.dart';
 import 'package:gastos_app/app/features/auth/pages/recuperar_contrasena_page.dart';
 import 'package:gastos_app/app/features/auth/pages/registrar_page.dart';
+import 'package:gastos_app/app/features/inicio/pages/inicio_page.dart';
 import 'package:gastos_app/app/features/perfil/pages/perfil_page.dart';
 import 'package:gastos_app/app/shared/layout/main_layout.dart';
-import 'package:gastos_app/features/expenses/presentation/screens/expenses_list_screen.dart';
 
 class AppRouter {
   final GoRouter config;
@@ -46,7 +46,7 @@ class AppRouter {
             routes: [
               GoRoute(
                 path: RouteNames.home,
-                builder: (context, state) => const ExpensesListScreen(),
+                builder: (context, state) => const InicioPage(),
               ),
               GoRoute(
                 path: RouteNames.perfil,

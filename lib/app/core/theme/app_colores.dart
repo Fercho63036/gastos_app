@@ -32,4 +32,15 @@ class AppColores {
   // Encabezado y barra inferior (ambos modos)
   static const Color barra = primario;
   static const Color textoBarra = blanco;
+
+  // Inicio: tarjeta de saldo (ambos modos)
+  static const Color tarjetaSaldo = Color(0xFF9C8EEB);
+  static const Color textoTarjetaSaldo = Color(0xFF1E1A3C);
+  static const Color pistaProgresoSaldo = Color(0xFF7C6CD6);
+
+  // Inicio: categorías y estados de movimientos
+  static const Color categoriaComida = Color(0xFFF2B84B);
+  static const Color categoriaPasajes = Color(0xFF7FB2F0);
+  static const Color categoriaDiversion = Color(0xFFF08BC0);
+  static const Color alertaAnulado = Color(0xFFFFB37A);
 }

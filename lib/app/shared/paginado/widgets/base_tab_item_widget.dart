@@ -35,15 +35,37 @@ class BaseTabItemWidget extends StatelessWidget {
     );
   }
 
+  Color _buildColorEtiqueta(ColorScheme colorScheme) {
+    if (seleccionado) return colorScheme.primary;
+    return colorScheme.onSurface.withValues(
+      alpha: AppDimensions.opacidadSecundaria,
+    );
+  }
+
+  Widget _buildContenido(Color colorEtiqueta) {
+    final iconoTab = icon;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (iconoTab != null) ...[
+          Icon(iconoTab, size: AppDimensions.iconXS, color: colorEtiqueta),
+          const SizedBox(width: AppDimensions.paddingTabIcono),
+        ],
+        Text(
+          label,
+          style: TextStyle(
+            color: colorEtiqueta,
+            fontWeight: seleccionado ? FontWeight.w700 : FontWeight.w500,
+            fontSize: AppDimensions.fontS,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    final iconoTab = icon;
-    final colorEtiqueta = seleccionado
-        ? colorScheme.primary
-        : colorScheme.onSurface.withValues(
-            alpha: AppDimensions.opacidadSecundaria,
-          );
 
     return GestureDetector(
       onTap: onTap,
@@ -55,23 +77,7 @@ class BaseTabItemWidget extends StatelessWidget {
           vertical: AppDimensions.paddingTabVertical,
         ),
         decoration: _buildDecoracion(colorScheme),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (iconoTab != null) ...[
-              Icon(iconoTab, size: AppDimensions.iconXS, color: colorEtiqueta),
-              const SizedBox(width: AppDimensions.paddingTabIcono),
-            ],
-            Text(
-              label,
-              style: TextStyle(
-                color: colorEtiqueta,
-                fontWeight: seleccionado ? FontWeight.w700 : FontWeight.w500,
-                fontSize: AppDimensions.fontS,
-              ),
-            ),
-          ],
-        ),
+        child: _buildContenido(_buildColorEtiqueta(colorScheme)),
       ),
     );
   }

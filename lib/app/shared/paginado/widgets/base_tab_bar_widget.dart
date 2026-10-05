@@ -33,9 +33,21 @@ class BaseTabBarWidget<T> extends StatelessWidget {
     ];
   }
 
+  BoxDecoration _buildDecoracion(ThemeData theme) {
+    return BoxDecoration(
+      color: theme.scaffoldBackgroundColor,
+      border: Border(
+        bottom: BorderSide(
+          color: theme.colorScheme.onSurface.withValues(
+            alpha: AppDimensions.opacidadBordeSutil,
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final trailing = widgetFinal;
 
     return Container(
@@ -44,16 +56,7 @@ class BaseTabBarWidget<T> extends StatelessWidget {
         horizontal: AppDimensions.paddingSM,
         vertical: AppDimensions.paddingS,
       ),
-      decoration: BoxDecoration(
-        color: theme.scaffoldBackgroundColor,
-        border: Border(
-          bottom: BorderSide(
-            color: theme.colorScheme.onSurface.withValues(
-              alpha: AppDimensions.opacidadBordeSutil,
-            ),
-          ),
-        ),
-      ),
+      decoration: _buildDecoracion(Theme.of(context)),
       child: Row(
         children: [
           Expanded(

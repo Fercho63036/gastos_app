@@ -5,4 +5,5 @@ class ComunStrings {
   static const String errorArranque = 'No se pudo iniciar la aplicación';
   static const String rutaNoEncontrada = 'Ruta no encontrada';
   static const String irAlInicio = 'Ir al inicio';
+  static const String proximamente = 'Próximamente';
 }

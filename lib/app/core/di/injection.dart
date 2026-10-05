@@ -2,6 +2,8 @@ import 'package:get_it/get_it.dart';
 
 import 'package:gastos_app/app/core/routes/app_router.dart';
 import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
+import 'package:gastos_app/app/features/inicio/providers/inicio_provider.dart';
+import 'package:gastos_app/app/features/inicio/services/inicio_mock_service.dart';
 import 'package:gastos_app/app/shared/layout/providers/theme_provider.dart';
 import 'package:gastos_app/app/shared/services/storage_service.dart';
 import 'package:gastos_app/features/expenses/data/repositories/expenses_repository.dart';
@@ -26,6 +28,9 @@ Future<void> setupDependencias() async {
   );
 
   // Nivel 4: features
+  getIt.registerLazySingleton<InicioProvider>(
+    () => InicioProvider(InicioMockService()),
+  );
   getIt.registerLazySingleton<ExpensesProvider>(
     () => ExpensesProvider(ExpensesRepository()),
   );

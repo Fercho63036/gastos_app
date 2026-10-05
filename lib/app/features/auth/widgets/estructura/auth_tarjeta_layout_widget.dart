@@ -12,43 +12,43 @@ class AuthTarjetaLayoutWidget extends StatelessWidget {
 
   const AuthTarjetaLayoutWidget({super.key, required this.child});
 
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
+  Widget _buildBotonTema(BuildContext context) {
+    return SafeArea(
+      child: Align(
+        alignment: Alignment.topRight,
+        child: Padding(
+          padding: ResponsiveHelper.paddingAll(context),
+          child: const BotonTemaAuthWidget(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTarjeta(BuildContext context) {
     final fraccionTarjeta = ResponsiveHelper.isMobile(context)
         ? AppDimensions.fraccionAlturaTarjetaAuthMovil
         : AppDimensions.fraccionAlturaTarjetaAuthAmplia;
-
-    return Scaffold(
-      backgroundColor: colorScheme.primary,
-      body: Stack(
-        children: [
-          SafeArea(
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: ResponsiveHelper.paddingAll(context),
-                child: const BotonTemaAuthWidget(),
-              ),
-            ),
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: Container(
+        height: ResponsiveHelper.fraccionAlto(context, fraccionTarjeta),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.only(
+            topRight: Radius.circular(AppDimensions.radiusTarjetaAuth),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              height: ResponsiveHelper.fraccionAlto(context, fraccionTarjeta),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: theme.cardColor,
-                borderRadius: const BorderRadius.only(
-                  topRight: Radius.circular(AppDimensions.radiusTarjetaAuth),
-                ),
-              ),
-              child: _ContenidoDesplazable(child: child),
-            ),
-          ),
-        ],
+        ),
+        child: _ContenidoDesplazable(child: child),
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      body: Stack(children: [_buildBotonTema(context), _buildTarjeta(context)]),
     );
   }
 }
