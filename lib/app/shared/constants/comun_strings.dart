@@ -1,0 +1,8 @@
+class ComunStrings {
+  ComunStrings._();
+
+  static const String error = 'Error';
+  static const String errorArranque = 'No se pudo iniciar la aplicación';
+  static const String rutaNoEncontrada = 'Ruta no encontrada';
+  static const String irAlInicio = 'Ir al inicio';
+}
