@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/theme/app_colores.dart';
@@ -50,11 +51,15 @@ class AppTema {
       scaffoldBackgroundColor: fondo,
       cardColor: colorScheme.surface,
       appBarTheme: AppBarTheme(
-        backgroundColor: colorScheme.surface,
-        foregroundColor: colorScheme.onSurface,
+        backgroundColor: AppColores.barra,
+        foregroundColor: AppColores.textoBarra,
+        iconTheme: const IconThemeData(color: AppColores.textoBarra),
+        actionsIconTheme: const IconThemeData(color: AppColores.textoBarra),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
         elevation: AppDimensions.elevacionAppBar,
         scrolledUnderElevation: AppDimensions.elevacionAppBar,
       ),
+      bottomAppBarTheme: BottomAppBarThemeData(color: AppColores.barra),
       drawerTheme: DrawerThemeData(backgroundColor: colorScheme.surface),
       inputDecorationTheme: _construirInputs(colorScheme, borde),
       filledButtonTheme: FilledButtonThemeData(

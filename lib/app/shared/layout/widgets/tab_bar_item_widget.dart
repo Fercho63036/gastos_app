@@ -19,8 +19,7 @@ class TabBarItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final color = MenuColores.texto(colorScheme, activo: estaActivo);
+    final color = MenuColores.textoTab(activo: estaActivo);
 
     return GestureDetector(
       onTap: onTap,
@@ -58,7 +57,7 @@ class _IndicadorTabWidget extends StatelessWidget {
       height: AppDimensions.altoIndicadorTab,
       width: estaActivo ? AppDimensions.anchoIndicadorTab : 0,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: MenuColores.textoTab(activo: true),
         borderRadius: BorderRadius.circular(AppDimensions.paddingXXS),
       ),
     );

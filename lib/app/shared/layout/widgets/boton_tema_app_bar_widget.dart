@@ -16,10 +16,7 @@ class BotonTemaAppBarWidget extends StatelessWidget {
     final esModoOscuro = temaProvider.temaOscuro;
 
     return IconButton(
-      icon: Icon(
-        esModoOscuro ? CupertinoIcons.sun_max : CupertinoIcons.moon,
-        color: Theme.of(context).colorScheme.onSurface,
-      ),
+      icon: Icon(esModoOscuro ? CupertinoIcons.sun_max : CupertinoIcons.moon),
       iconSize: AppDimensions.iconM,
       tooltip: esModoOscuro
           ? LayoutStrings.modoClaro

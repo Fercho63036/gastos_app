@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// Paleta blanco + morado, tomada de los fondos del logo:
-/// lavanda (claro) / morado índigo suave (oscuro).
+/// fondo lavanda (claro) o morado medio (oscuro), barras violeta en ambos.
 class AppColores {
   AppColores._();
 
@@ -25,7 +25,11 @@ class AppColores {
   static const Color bordeClaro = Color(0xFFDCD8EE);
 
   // Modo oscuro
-  static const Color fondoOscuro = Color(0xFF221C4A);
-  static const Color superficieOscura = Color(0xFF2E2763);
-  static const Color bordeOscuro = Color(0xFF4A3FA0);
+  static const Color fondoOscuro = Color(0xFF2D2468);
+  static const Color superficieOscura = Color(0xFF3A2F82);
+  static const Color bordeOscuro = Color(0xFF5446A8);
+
+  // Encabezado y barra inferior (ambos modos)
+  static const Color barra = primario;
+  static const Color textoBarra = blanco;
 }

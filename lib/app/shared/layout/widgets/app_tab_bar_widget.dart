@@ -14,9 +14,10 @@ class AppTabBarWidget extends StatelessWidget {
     required this.onTabSeleccionado,
   });
 
-  BoxDecoration _decoracion(ColorScheme colorScheme, bool esModoOscuro) {
+  BoxDecoration _decoracion(ThemeData theme, bool esModoOscuro) {
+    final colorScheme = theme.colorScheme;
     return BoxDecoration(
-      color: colorScheme.surface,
+      color: theme.bottomAppBarTheme.color ?? colorScheme.surface,
       border: Border(
         top: BorderSide(
           color: colorScheme.outlineVariant,
@@ -42,13 +43,13 @@ class AppTabBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final esModoOscuro = Theme.of(context).brightness == Brightness.dark;
+    final theme = Theme.of(context);
+    final esModoOscuro = theme.brightness == Brightness.dark;
     final indiceActivo = TabBarConfig.obtenerIndiceActivo(rutaActual);
     const items = TabBarConfig.items;
 
     return Container(
-      decoration: _decoracion(colorScheme, esModoOscuro),
+      decoration: _decoracion(theme, esModoOscuro),
       child: SafeArea(
         top: false,
         child: SizedBox(

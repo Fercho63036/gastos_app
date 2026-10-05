@@ -15,8 +15,6 @@ class AppBarPrincipalWidget extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return AppBar(
       automaticallyImplyLeading: false,
       titleSpacing: AppDimensions.elevacionNula,
@@ -25,7 +23,7 @@ class AppBarPrincipalWidget extends StatelessWidget
         children: [
           Builder(
             builder: (scaffoldContext) => IconButton(
-              icon: Icon(Icons.menu, color: colorScheme.onSurface),
+              icon: const Icon(Icons.menu),
               iconSize: AppDimensions.iconM,
               tooltip: LayoutStrings.menu,
               onPressed: () => Scaffold.of(scaffoldContext).openDrawer(),
