@@ -76,4 +76,19 @@ class AppDimensions {
   static const double fraccionAlturaFondoAuth = 0.32;
   static const double fraccionAlturaTarjetaAuthMovil = 0.72;
   static const double fraccionAlturaTarjetaAuthAmplia = 0.68;
+
+  // Lista paginada
+  static const double alturaBuscador = 46.0;
+  static const double radiusPildora = 30.0;
+  static const double bordeTab = 1.5;
+  static const double paddingTabHorizontal = 18.0;
+  static const double paddingTabVertical = 9.0;
+  static const double paddingTabIcono = 6.0;
+  static const double paddingListaBase = 5.0;
+  static const double paddingBuscadorSuperior = 10.0;
+  static const double paddingBuscadorInferior = 6.0;
+  static const double opacidadSeleccion = 0.10;
+  static const double opacidadBordeSutil = 0.12;
+  static const double opacidadBorde = 0.20;
+  static const double opacidadBordeTab = 0.25;
 }
