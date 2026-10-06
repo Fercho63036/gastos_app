@@ -1,5 +1,4 @@
 /****************************** FLUTTER / DART ******************************/
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /**************************** PAQUETES EXTERNOS *****************************/
@@ -11,38 +10,39 @@ import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
 /********************************* FEATURE **********************************/
 import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
-import '../constants/perfil_strings.dart';
+import '../widgets/acciones_perfil_widget.dart';
+import '../widgets/avatar_iniciales_widget.dart';
+import '../widgets/boton_cerrar_sesion_widget.dart';
+import '../widgets/datos_usuario_widget.dart';
 
 class PerfilPage extends StatelessWidget {
+  /******************************** CONSTRUCTOR ********************************/
   const PerfilPage({super.key});
 
+  /************************************ BUILD ************************************/
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final colorScheme = Theme.of(context).colorScheme;
-    final correo = context.watch<AuthProvider>().correoUsuario;
+    final authProvider = context.watch<AuthProvider>();
 
-    return Center(
-      child: Padding(
-        padding: ResponsiveHelper.paddingAll(context),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              CupertinoIcons.person_crop_circle,
-              size: AppDimensions.iconXL,
-              color: colorScheme.primary,
-            ),
-            const SizedBox(height: AppDimensions.paddingSM),
-            Text(PerfilStrings.titulo, style: textTheme.headlineSmall),
-            const SizedBox(height: AppDimensions.paddingS),
-            Text(PerfilStrings.sesionIniciadaComo, style: textTheme.bodySmall),
-            Text(
-              correo ?? PerfilStrings.sinCorreo,
-              style: textTheme.titleMedium,
-            ),
-          ],
-        ),
+    return SingleChildScrollView(
+      padding: ResponsiveHelper.paddingAll(context),
+      child: Column(
+        children: [
+          const SizedBox(height: AppDimensions.paddingL),
+          AvatarInicialesWidget(
+            nombre: authProvider.nombreUsuario,
+            correo: authProvider.correoUsuario,
+          ),
+          const SizedBox(height: AppDimensions.paddingM),
+          DatosUsuarioWidget(
+            nombre: authProvider.nombreUsuario,
+            correo: authProvider.correoUsuario,
+          ),
+          const SizedBox(height: AppDimensions.paddingXL),
+          const AccionesPerfilWidget(),
+          const SizedBox(height: AppDimensions.paddingXXL),
+          const BotonCerrarSesionWidget(),
+        ],
       ),
     );
   }

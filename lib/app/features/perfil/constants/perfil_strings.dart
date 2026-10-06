@@ -1,7 +1,8 @@
 class PerfilStrings {
   PerfilStrings._();
 
-  static const String titulo = 'Perfil';
-  static const String sesionIniciadaComo = 'Sesión iniciada como';
   static const String sinCorreo = 'Usuario local';
+  static const String editarDatos = 'Editar datos';
+  static const String cambiarContrasena = 'Cambiar contraseña';
+  static const String exportarExcel = 'Exportar a Excel';
 }

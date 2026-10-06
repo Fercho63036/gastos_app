@@ -104,6 +104,10 @@ class AppDimensions {
   static const double opacidadAnulado = 0.45;
   static const double opacidadPistaIcono = 0.18;
 
+  /********************************** PERFIL ***********************************/
+  static const double radioAvatarPerfil = 48.0;
+  static const double fontInicialesAvatar = 28.0;
+
   /******************************* FORMULARIOS ********************************/
   static const double fontMontoGrande = 48.0;
   static const double fontPrefijoMonto = 22.0;

@@ -25,6 +25,7 @@ class AuthProvider extends ChangeNotifier {
   bool get cargando => _cargando;
   bool get estaAutenticado => _sesion != null;
   String? get correoUsuario => _sesion?.correo;
+  String? get nombreUsuario => _sesion?.nombre;
   String? get token => _sesion?.token;
 
   void verificarSesion() {
