@@ -105,7 +105,6 @@ class AppDimensions {
   static const double opacidadAnulado = 0.45;
   static const double opacidadPistaIcono = 0.18;
   static const double paddingMetricaTarjeta = 12.0;
-  static const double tamanoIconoEditar = 14.0;
   static const double espacioMetricas = 10.0;
 
   /********************************** PERFIL ***********************************/

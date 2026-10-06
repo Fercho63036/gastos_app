@@ -13,13 +13,11 @@ import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 /********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/constants/comun_strings.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
-import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 import 'package:gastos_app/app/shared/utils/snackbar_helpers.dart';
 import 'package:gastos_app/app/shared/widgets/seleccion/grupo_chips_seleccion_widget.dart';
 import 'package:gastos_app/app/shared/widgets/textos/mensaje_centrado_widget.dart';
 
 /********************************* FEATURE **********************************/
-import '../../periodo/widgets/dialogo_editar_piso_widget.dart';
 import '../models/periodo_filtro.dart';
 import '../providers/inicio_provider.dart';
 import '../widgets/acciones/botones_accion_widget.dart';
@@ -43,39 +41,11 @@ class _InicioPageState extends State<InicioPage> {
     context.push(RouteNames.detalleGastoDe(movimiento.id));
   }
 
-  /******************************* EDITAR PISO ******************************/
-  Future<void> _editarPiso() async {
-    final datosService = context.read<MovimientosService>();
-    final pisoCentavosActual = datosService.resumen.pisoCentavos;
-    final nuevoPiso = await showDialog<int>(
-      context: context,
-      builder: (_) => DialogoEditarPisoWidget(
-        pisoCentavosActual: pisoCentavosActual,
-      ),
-    );
-    if (nuevoPiso == null || !context.mounted) return;
-    if (nuevoPiso == pisoCentavosActual) return;
-    try {
-      await datosService.actualizarPiso(pisoCentavos: nuevoPiso);
-      if (!context.mounted) return;
-      SnackbarHelpers.mostrar(
-        context,
-        'Piso actualizado',
-      );
-    } catch (e) {
-      if (!context.mounted) return;
-      SnackbarHelpers.mostrar(context, e.toString());
-    }
-  }
-
   Widget _buildCabeceraFija(InicioProvider provider) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        TarjetaSaldoWidget(
-          resumen: provider.resumen,
-          onEditarPiso: _editarPiso,
-        ),
+        TarjetaSaldoWidget(resumen: provider.resumen),
         const SizedBox(height: AppDimensions.paddingM),
         BotonesAccionWidget(
           onGasto: () => context.push(RouteNames.nuevoGasto),
