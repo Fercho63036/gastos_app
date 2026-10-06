@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+import 'package:gastos_app/app/core/errors/app_exception.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 
 import 'package:gastos_app/app/shared/widgets/botones/boton_primario_widget.dart';
@@ -47,10 +48,15 @@ class _FormularioRegistroWidgetState extends State<FormularioRegistroWidget> {
       correo: _correoController.text.trim(),
       contrasena: _contrasenaController.text,
     );
-    await context.read<AuthProvider>().registrarUsuario(
-      nombre: _nombreController.text.trim(),
-      credenciales: credenciales,
-    );
+    try {
+      await context.read<AuthProvider>().registrarUsuario(
+        nombre: _nombreController.text.trim(),
+        credenciales: credenciales,
+      );
+    } on AppException catch (error) {
+      if (mounted) AuthMensajes.mostrar(context, error.mensaje);
+      return;
+    }
     if (!mounted) return;
     AuthMensajes.mostrar(context, AuthStrings.registroExitoso);
     context.go(RouteNames.auth);

@@ -2,6 +2,7 @@ import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 
 import '../constants/database_constants.dart';
+import 'migraciones_database.dart';
 
 /// Base SQLite de la app; se abre una sola vez y se reutiliza.
 class AppDatabase {
@@ -57,6 +58,7 @@ class AppDatabase {
       version: DatabaseConstants.version,
       onConfigure: (db) => db.execute(_sqlClavesForaneas),
       onCreate: _crearTablas,
+      onUpgrade: MigracionesDatabase.actualizar,
     );
   }
 

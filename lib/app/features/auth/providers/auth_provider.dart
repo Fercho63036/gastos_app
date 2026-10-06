@@ -1,55 +1,74 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:gastos_app/app/core/errors/app_exception.dart';
 import 'package:gastos_app/app/shared/services/storage_service.dart';
 
-import '../constants/auth_constants.dart';
 import '../models/credenciales_model.dart';
+import '../models/sesion_model.dart';
+import '../repositories/auth_repositorio.dart';
 
-/// Auth 100% local (mock): no valida contra ningún backend; solo guarda una
-/// sesión en el dispositivo. Aquí se conectará el backend más adelante.
+/// Estado de la sesión. Las llamadas van al [AuthRepositorio]; la sesión
+/// obtenida se guarda en el dispositivo para no pedir login al reabrir.
 class AuthProvider extends ChangeNotifier {
+  final AuthRepositorio _repositorio;
   final StorageService _storage;
 
-  AuthProvider(this._storage);
+  AuthProvider(this._repositorio, this._storage);
 
   bool _cargando = false;
-  bool _autenticado = false;
+  SesionModel? _sesion;
 
   bool get cargando => _cargando;
-  bool get estaAutenticado => _autenticado;
-  String? get correoUsuario => _storage.leerCorreoSesion();
+  bool get estaAutenticado => _sesion != null;
+  String? get correoUsuario => _sesion?.correo;
+  String? get token => _sesion?.token;
 
   void verificarSesion() {
-    _autenticado = _storage.tieneSesion;
+    final token = _storage.leerTokenSesion();
+    final correo = _storage.leerCorreoSesion();
+    _sesion = token == null || correo == null
+        ? null
+        : SesionModel(token: token, correo: correo);
     notifyListeners();
   }
 
-  Future<void> iniciarSesion(CredencialesModel credenciales) async {
-    await _simularOperacion(() async {
-      await _storage.guardarSesion(credenciales.correo);
-      _autenticado = true;
-    });
-  }
+  /// Lanza `AppException` si el servidor rechaza las credenciales.
+  Future<void> iniciarSesion(CredencialesModel credenciales) => _ejecutar(
+    () async {
+      final sesion = await _repositorio.iniciarSesion(credenciales);
+      await _storage.guardarSesion(token: sesion.token, correo: sesion.correo);
+      _sesion = sesion;
+    },
+  );
 
   Future<void> registrarUsuario({
     required String nombre,
     required CredencialesModel credenciales,
-  }) => _simularOperacion(() async {});
+  }) => _ejecutar(
+    () => _repositorio.registrar(nombre: nombre, credenciales: credenciales),
+  );
 
   Future<void> recuperarContrasena(CredencialesModel credenciales) =>
-      _simularOperacion(() async {});
+      _ejecutar(() => _repositorio.recuperarContrasena(credenciales));
 
+  /// La sesión local se cierra aunque el servidor no responda.
   Future<void> logout() async {
+    final sesion = _sesion;
     await _storage.eliminarSesion();
-    _autenticado = false;
+    _sesion = null;
     notifyListeners();
+    if (sesion == null) return;
+    try {
+      await _repositorio.cerrarSesion(sesion.token);
+    } on AppException catch (error) {
+      debugPrint('[Auth] logout remoto falló: $error');
+    }
   }
 
-  Future<void> _simularOperacion(Future<void> Function() operacion) async {
+  Future<void> _ejecutar(Future<void> Function() operacion) async {
     _cargando = true;
     notifyListeners();
     try {
-      await Future<void>.delayed(AuthConstants.demoraSimulada);
       await operacion();
     } finally {
       _cargando = false;

@@ -3,7 +3,10 @@ class DatabaseConstants {
   DatabaseConstants._();
 
   static const String nombreArchivo = 'gastos_app.db';
-  static const int version = 1;
+  static const int version = 2;
+
+  /// v2: el historial guarda claves y valores crudos.
+  static const int versionEdicionesCrudas = 2;
 
   // Tablas
   static const String tablaMovimientos = 'movimientos';

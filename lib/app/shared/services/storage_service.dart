@@ -9,18 +9,21 @@ class StorageService {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  // Sesión local (mock, sin backend)
-  bool get tieneSesion => _prefs.getBool(AppConfig.storageSesionKey) ?? false;
+  // Sesión: el token lo entrega el backend (hoy, el repositorio local)
+  String? leerTokenSesion() => _prefs.getString(AppConfig.storageTokenKey);
 
   String? leerCorreoSesion() => _prefs.getString(AppConfig.storageCorreoKey);
 
-  Future<void> guardarSesion(String correo) async {
-    await _prefs.setBool(AppConfig.storageSesionKey, true);
+  Future<void> guardarSesion({
+    required String token,
+    required String correo,
+  }) async {
+    await _prefs.setString(AppConfig.storageTokenKey, token);
     await _prefs.setString(AppConfig.storageCorreoKey, correo);
   }
 
   Future<void> eliminarSesion() async {
-    await _prefs.remove(AppConfig.storageSesionKey);
+    await _prefs.remove(AppConfig.storageTokenKey);
     await _prefs.remove(AppConfig.storageCorreoKey);
   }
 

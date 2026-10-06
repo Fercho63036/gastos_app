@@ -1,67 +1,83 @@
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
 import '../constants/dominio_strings.dart';
+import '../models/campo_edicion.dart';
+import '../models/categoria_movimiento.dart';
 import '../models/edicion_movimiento_model.dart';
+import '../models/estado_movimiento.dart';
 import '../models/movimiento_model.dart';
 
-/// Compara dos versiones de un movimiento y arma su historial de cambios.
+/// Compara dos versiones de un movimiento y formatea su historial.
 class EdicionesHelpers {
   EdicionesHelpers._();
 
   static String _entreComillas(String texto) =>
       '${DominioStrings.comillaApertura}$texto${DominioStrings.comillaCierre}';
 
-  /// (campo, antes, después) ya formateados para el historial.
-  static List<(String, String, String)> _comparaciones(
-    Movimiento original,
-    Movimiento editado,
-  ) {
-    const monto = FormatoHelpers.formatearMonto;
-    return [
-      (
-        DominioStrings.campoMonto,
-        monto(original.montoCentavos),
-        monto(editado.montoCentavos),
-      ),
-      (
-        DominioStrings.campoDescripcion,
-        _entreComillas(original.titulo),
-        _entreComillas(editado.titulo),
-      ),
-      (
-        DominioStrings.campoCategoria,
-        original.categoria.nombre,
-        editado.categoria.nombre,
-      ),
-      (
-        DominioStrings.campoEstado,
-        original.estado.etiqueta,
-        editado.estado.etiqueta,
-      ),
-    ];
+  /// Valor crudo de [campo]: lo que se guarda y lo que viaja al API.
+  static String valorCrudo(Movimiento movimiento, CampoEdicion campo) =>
+      switch (campo) {
+        CampoEdicion.monto => movimiento.montoCentavos.toString(),
+        CampoEdicion.descripcion => movimiento.titulo,
+        CampoEdicion.categoria => movimiento.categoria.name,
+        CampoEdicion.estado => movimiento.estado.name,
+      };
+
+  /// Si el valor de un campo no se reconoce, se muestra tal cual llegó.
+  static String formatearValor(CampoEdicion campo, String valor) =>
+      switch (campo) {
+        CampoEdicion.monto => _formatearMonto(valor),
+        CampoEdicion.descripcion => _entreComillas(valor),
+        CampoEdicion.categoria => _nombreCategoria(valor),
+        CampoEdicion.estado => _etiquetaEstado(valor),
+      };
+
+  static String _formatearMonto(String valor) {
+    final centavos = int.tryParse(valor);
+    return centavos == null ? valor : FormatoHelpers.formatearMonto(centavos);
   }
 
-  /// Si el texto formateado cambió, hubo edición en ese campo.
+  static String _nombreCategoria(String valor) {
+    for (final categoria in CategoriaMovimiento.values) {
+      if (categoria.name == valor) return categoria.nombre;
+    }
+    return valor;
+  }
+
+  static String _etiquetaEstado(String valor) {
+    for (final estado in EstadoMovimiento.values) {
+      if (estado.name == valor) return estado.etiqueta;
+    }
+    return valor;
+  }
+
   static List<EdicionMovimiento> diferencias(
     Movimiento original,
     Movimiento editado,
     DateTime fecha,
   ) {
     return [
-      for (final (campo, anterior, nuevo) in _comparaciones(original, editado))
-        if (anterior != nuevo)
+      for (final campo in CampoEdicion.values)
+        if (valorCrudo(original, campo) != valorCrudo(editado, campo))
           EdicionMovimiento(
             campo: campo,
-            valorAnterior: anterior,
-            valorNuevo: nuevo,
+            valorAnterior: valorCrudo(original, campo),
+            valorNuevo: valorCrudo(editado, campo),
             fecha: fecha,
           ),
     ];
   }
 
+  /// Aviso inmediato de "sin cambios" antes de llamar al servidor.
+  static bool hayCambios(Movimiento original, Movimiento editado) =>
+      CampoEdicion.values.any(
+        (campo) => valorCrudo(original, campo) != valorCrudo(editado, campo),
+      );
+
   /// "Monto: Bs 20,00 → Bs 25,00".
   static String describir(EdicionMovimiento edicion) =>
-      '${edicion.campo}${DominioStrings.separadorCampo}'
-      '${edicion.valorAnterior}${DominioStrings.flechaCambio}'
-      '${edicion.valorNuevo}';
+      '${edicion.campo.etiqueta}${DominioStrings.separadorCampo}'
+      '${formatearValor(edicion.campo, edicion.valorAnterior)}'
+      '${DominioStrings.flechaCambio}'
+      '${formatearValor(edicion.campo, edicion.valorNuevo)}';
 }

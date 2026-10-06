@@ -1,17 +1,20 @@
 import 'package:flutter/widgets.dart';
 
+import 'package:gastos_app/app/core/errors/app_exception.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+import 'package:gastos_app/app/shared/constants/dominio_strings.dart';
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/models/estado_movimiento.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/services/movimientos_service.dart';
+import 'package:gastos_app/app/shared/utils/ediciones_helpers.dart';
 import 'package:gastos_app/app/shared/utils/guardado_mixin.dart';
 
 import '../constants/movimientos_strings.dart';
 import '../utils/movimientos_helpers.dart';
 
-/// Borrador editable de un gasto; al guardar, el servicio arma el historial.
+/// Borrador editable de un gasto; al guardar, el servidor arma el historial.
 class DetalleGastoProvider extends ChangeNotifier with GuardadoMixin {
   final MovimientosService _datos;
   final String _id;
@@ -20,19 +23,32 @@ class DetalleGastoProvider extends ChangeNotifier with GuardadoMixin {
   Movimiento? _gasto;
   CategoriaMovimiento _categoria = CategoriaMovimiento.comida;
   EstadoMovimiento _estado = EstadoMovimiento.activo;
+  bool _cargando = true;
+  bool _desechado = false;
 
   DetalleGastoProvider(this._datos, this._id) {
-    _cargarBorrador();
+    _cargarGasto();
   }
 
   Movimiento? get gasto => _gasto;
   CategoriaMovimiento get categoria => _categoria;
   EstadoMovimiento get estado => _estado;
+  bool get cargando => _cargando;
 
-  void _cargarBorrador() {
-    final gasto = _datos.buscar(_id);
+  /// Si falla, [gasto] queda en `null` y la página muestra "no encontrado".
+  Future<void> _cargarGasto() async {
+    try {
+      _aplicarBorrador(await _datos.obtener(_id));
+    } on AppException catch (error) {
+      debugPrint('${MovimientosStrings.gastoNoEncontrado}: $error');
+    } finally {
+      _cargando = false;
+      if (!_desechado) notifyListeners();
+    }
+  }
+
+  void _aplicarBorrador(Movimiento gasto) {
     _gasto = gasto;
-    if (gasto == null) return;
     montoController.text = FormatoHelpers.formatearNumero(gasto.montoCentavos);
     descripcionController.text = gasto.titulo;
     _categoria = gasto.categoria;
@@ -65,13 +81,16 @@ class DetalleGastoProvider extends ChangeNotifier with GuardadoMixin {
       categoria: _categoria,
       anulado: _estado == EstadoMovimiento.anulado,
     );
-    if (!await _datos.actualizar(editado)) return MovimientosStrings.sinCambios;
-    _cargarBorrador();
+    if (!EdicionesHelpers.hayCambios(gasto, editado)) {
+      return DominioStrings.sinCambios;
+    }
+    _aplicarBorrador(await _datos.actualizar(editado));
     return null;
   }
 
   @override
   void dispose() {
+    _desechado = true;
     montoController.dispose();
     descripcionController.dispose();
     super.dispose();

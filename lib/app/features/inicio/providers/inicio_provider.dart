@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:gastos_app/app/core/errors/app_exception.dart';
+
 import 'package:gastos_app/app/shared/models/grupo_dia_model.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
@@ -46,6 +48,9 @@ class InicioProvider extends ChangeNotifier with PaginacionMixin<Movimiento> {
       reiniciarPaginacion(
         await obtenerPagina(BaseMainListConstants.paginaInicial),
       );
+    } on AppException catch (error) {
+      _error = error.mensaje;
+      debugPrint('${InicioStrings.errorCarga}: $error');
     } catch (error) {
       _error = InicioStrings.errorCarga;
       debugPrint('${InicioStrings.errorCarga}: $error');

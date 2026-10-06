@@ -27,19 +27,15 @@ class InicioHelpers {
   static int porcentajeDisponible(ResumenMes resumen) =>
       FormatoHelpers.porcentaje(fraccionDisponible(resumen));
 
-  static List<Movimiento> filtrarPorPeriodo(
-    List<Movimiento> movimientos,
-    PeriodoFiltro periodo,
-    DateTime hoy,
-  ) {
+  /// Primer instante que entra en [periodo], según la hora del dispositivo.
+  static DateTime desdeDePeriodo(PeriodoFiltro periodo, DateTime hoy) {
     final inicioHoy = FormatoHelpers.soloDia(hoy);
-    final desde = switch (periodo) {
+    return switch (periodo) {
       PeriodoFiltro.hoy => inicioHoy,
       PeriodoFiltro.semana => inicioHoy.subtract(
         const Duration(days: InicioConstants.diasSemana - 1),
       ),
       PeriodoFiltro.mes => DateTime(hoy.year, hoy.month),
     };
-    return movimientos.where((mov) => !mov.fecha.isBefore(desde)).toList();
   }
 }

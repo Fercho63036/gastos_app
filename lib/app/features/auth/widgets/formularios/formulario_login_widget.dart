@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+import 'package:gastos_app/app/core/errors/app_exception.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 
 import 'package:gastos_app/app/shared/widgets/botones/boton_primario_widget.dart';
@@ -45,6 +46,8 @@ class _FormularioLoginWidgetState extends State<FormularioLoginWidget> {
     try {
       await context.read<AuthProvider>().iniciarSesion(credenciales);
       if (mounted) context.go(RouteNames.home);
+    } on AppException catch (error) {
+      if (mounted) AuthMensajes.mostrar(context, error.mensaje);
     } on Exception catch (error) {
       debugPrint('[Login] $error');
       if (mounted) AuthMensajes.mostrar(context, AuthStrings.ocurrioError);

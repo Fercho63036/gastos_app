@@ -70,6 +70,12 @@ class DetalleGastoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = context.watch<DetalleGastoProvider>();
     final gasto = provider.gasto;
+    if (provider.cargando) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: const Center(child: CircularProgressIndicator()),
+      );
+    }
     if (gasto == null) {
       return Scaffold(
         appBar: AppBar(),

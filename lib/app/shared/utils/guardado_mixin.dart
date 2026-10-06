@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 
+import 'package:gastos_app/app/core/errors/app_exception.dart';
+
 import '../constants/dominio_strings.dart';
 
 /// Estado "guardando" para formularios que persisten de forma asíncrona.
@@ -16,6 +18,9 @@ mixin GuardadoMixin on ChangeNotifier {
     notifyListeners();
     try {
       return await accion();
+    } on AppException catch (error) {
+      debugPrint('${DominioStrings.errorGuardar}: $error');
+      return error.mensaje;
     } catch (error) {
       debugPrint('${DominioStrings.errorGuardar}: $error');
       return DominioStrings.errorGuardar;

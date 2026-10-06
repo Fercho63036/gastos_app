@@ -32,6 +32,8 @@ class DominioStrings {
   static const String prefijoEntrada = 'E-';
 
   // Persistencia
+  static const String sinCambios = 'No hay cambios para guardar';
+  static const String movimientoNoEncontrado = 'No se encontró el movimiento';
   static const String errorGuardar = 'No se pudo guardar. Intenta de nuevo.';
   static const String guardando = 'Guardando…';
 }

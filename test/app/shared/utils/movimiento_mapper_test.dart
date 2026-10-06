@@ -2,6 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:gastos_app/app/core/constants/database_constants.dart';
 
+import 'package:gastos_app/app/shared/models/campo_edicion.dart';
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/models/edicion_movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
@@ -25,9 +26,9 @@ void main() {
       DatabaseConstants.colId: 7,
     };
     final edicion = EdicionMovimiento(
-      campo: 'Monto',
-      valorAnterior: 'Bs 1,00',
-      valorNuevo: 'Bs 2,00',
+      campo: CampoEdicion.monto,
+      valorAnterior: '100',
+      valorNuevo: '200',
       fecha: fecha,
     );
     final leido = MovimientoMapper.desdeFila(fila, [edicion]);
@@ -40,20 +41,20 @@ void main() {
     expect(leido.fecha, fecha);
     expect(leido.esEntrada, isTrue);
     expect(leido.anulado, isFalse);
-    expect(leido.ediciones.single.valorNuevo, 'Bs 2,00');
+    expect(leido.ediciones.single.valorNuevo, '200');
   });
 
   test('edición y periodo: ida y vuelta', () {
     final edicion = EdicionMovimiento(
-      campo: 'Estado',
-      valorAnterior: 'Activo',
-      valorNuevo: 'Anulado',
+      campo: CampoEdicion.estado,
+      valorAnterior: 'activo',
+      valorNuevo: 'anulado',
       fecha: fecha,
     );
     final edicionLeida = MovimientoMapper.edicionDesdeFila(
       MovimientoMapper.edicionAFila(3, edicion),
     );
-    expect(edicionLeida.campo, 'Estado');
+    expect(edicionLeida.campo, CampoEdicion.estado);
     expect(edicionLeida.fecha, fecha);
 
     final periodo = PeriodoMes(

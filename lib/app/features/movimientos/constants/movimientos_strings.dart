@@ -30,7 +30,6 @@ class MovimientosStrings {
   static const String historialEdiciones = 'HISTORIAL DE EDICIONES';
   static const String guardarCambios = 'Guardar cambios';
   static const String cambiosGuardados = 'Cambios guardados';
-  static const String sinCambios = 'No hay cambios para guardar';
   static const String gastoNoEncontrado = 'No se encontró el gasto';
 
   // Nueva entrada

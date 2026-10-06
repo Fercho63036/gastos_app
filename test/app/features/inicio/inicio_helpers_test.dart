@@ -3,24 +3,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
-import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
-import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 
 import 'package:gastos_app/app/features/inicio/constants/inicio_constants.dart';
 import 'package:gastos_app/app/features/inicio/models/periodo_filtro.dart';
 import 'package:gastos_app/app/features/inicio/services/inicio_service.dart';
 
-import '../../../helpers/movimientos_almacen_fake.dart';
 import 'package:gastos_app/app/features/inicio/utils/inicio_helpers.dart';
 
-Movimiento _movimiento(String id, DateTime fecha) => Movimiento(
-  id: id,
-  titulo: id,
-  categoria: CategoriaMovimiento.comida,
-  montoCentavos: 100,
-  fecha: fecha,
-);
+import '../../../helpers/movimientos_almacen_fake.dart';
+import '../../../helpers/movimientos_servicio_prueba.dart';
 
 void main() {
   final hoy = DateTime(2026, 10, 5, 15);
@@ -36,34 +28,23 @@ void main() {
     expect(InicioHelpers.porcentajeDisponible(ResumenMes.vacio), 0);
   });
 
-  test('filtrarPorPeriodo', () {
-    final movimientos = [
-      _movimiento('hoy', DateTime(2026, 10, 5, 9)),
-      _movimiento('ayer', DateTime(2026, 10, 4, 20)),
-      _movimiento('mesPasado', DateTime(2026, 9, 30, 8)),
-    ];
-    final soloHoy = InicioHelpers.filtrarPorPeriodo(
-      movimientos,
-      PeriodoFiltro.hoy,
-      hoy,
+  test('desdeDePeriodo', () {
+    expect(
+      InicioHelpers.desdeDePeriodo(PeriodoFiltro.hoy, hoy),
+      DateTime(2026, 10, 5),
     );
-    final delMes = InicioHelpers.filtrarPorPeriodo(
-      movimientos,
-      PeriodoFiltro.mes,
-      hoy,
+    expect(
+      InicioHelpers.desdeDePeriodo(PeriodoFiltro.semana, hoy),
+      DateTime(2026, 9, 29),
     );
-    final semana = InicioHelpers.filtrarPorPeriodo(
-      movimientos,
-      PeriodoFiltro.semana,
-      hoy,
+    expect(
+      InicioHelpers.desdeDePeriodo(PeriodoFiltro.mes, hoy),
+      DateTime(2026, 10),
     );
-    expect(soloHoy.map((mov) => mov.id), ['hoy']);
-    expect(delMes.map((mov) => mov.id), ['hoy', 'ayer']);
-    expect(semana.length, 3);
   });
 
   test('pagina por periodo solo lo registrado', () async {
-    final datos = MovimientosService(MovimientosAlmacenFake());
+    final datos = servicioDePrueba(MovimientosAlmacenFake());
     final servicio = InicioService(datos);
     final vacio = await servicio.obtenerMovimientos(
       periodo: PeriodoFiltro.hoy,

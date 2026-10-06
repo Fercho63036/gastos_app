@@ -1,6 +1,7 @@
 import 'package:gastos_app/app/core/constants/database_constants.dart';
 
 import '../constants/dominio_strings.dart';
+import '../models/campo_edicion.dart';
 import '../models/categoria_movimiento.dart';
 import '../models/edicion_movimiento_model.dart';
 import '../models/movimiento_model.dart';
@@ -62,14 +63,16 @@ class MovimientoMapper {
 
   static Fila edicionAFila(int movimientoId, EdicionMovimiento edicion) => {
     DatabaseConstants.colMovimientoId: movimientoId,
-    DatabaseConstants.colCampo: edicion.campo,
+    DatabaseConstants.colCampo: edicion.campo.name,
     DatabaseConstants.colValorAnterior: edicion.valorAnterior,
     DatabaseConstants.colValorNuevo: edicion.valorNuevo,
     DatabaseConstants.colFecha: edicion.fecha.toIso8601String(),
   };
 
   static EdicionMovimiento edicionDesdeFila(Fila fila) => EdicionMovimiento(
-    campo: fila[DatabaseConstants.colCampo] as String,
+    campo: CampoEdicion.values.byName(
+      fila[DatabaseConstants.colCampo] as String,
+    ),
     valorAnterior: fila[DatabaseConstants.colValorAnterior] as String,
     valorNuevo: fila[DatabaseConstants.colValorNuevo] as String,
     fecha: _aFecha(fila[DatabaseConstants.colFecha]),

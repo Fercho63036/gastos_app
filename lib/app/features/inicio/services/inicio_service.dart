@@ -3,14 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
 import 'package:gastos_app/app/shared/paginado/models/paginated_response_model.dart';
-import 'package:gastos_app/app/shared/paginado/utils/paginado_helpers.dart';
 import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 
 import '../constants/inicio_constants.dart';
 import '../models/periodo_filtro.dart';
 import '../utils/inicio_helpers.dart';
 
-/// Lee los movimientos guardados y los filtra/pagina para Inicio.
+/// Pide el resumen y las páginas de movimientos del periodo para Inicio.
 class InicioService {
   final MovimientosService _datos;
 
@@ -24,19 +23,9 @@ class InicioService {
   Future<PaginatedResponse<Movimiento>> obtenerMovimientos({
     required PeriodoFiltro periodo,
     required int pagina,
-  }) async {
-    final delPeriodo = InicioHelpers.filtrarPorPeriodo(
-      _datos.movimientos,
-      periodo,
-      DateTime.now(),
-    );
-    return PaginatedResponse(
-      datos: PaginadoHelpers.paginar(
-        delPeriodo,
-        pagina,
-        InicioConstants.movimientosPorPagina,
-      ),
-      total: delPeriodo.length,
-    );
-  }
+  }) => _datos.listarMovimientos(
+    desde: InicioHelpers.desdeDePeriodo(periodo, DateTime.now()),
+    pagina: pagina,
+    porPagina: InicioConstants.movimientosPorPagina,
+  );
 }
