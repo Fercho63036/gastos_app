@@ -77,12 +77,6 @@ class FilaGastablePisoWidget extends StatelessWidget {
       children: [
         Expanded(
           child: _buildMetrica(
-            etiqueta: InicioStrings.gastable,
-            montoCentavos: resumen.gastableCentavos,
-          ),
-        ),
-        Expanded(
-          child: _buildMetrica(
             etiqueta: InicioStrings.gastado,
             montoCentavos: resumen.gastadoCentavos,
           ),

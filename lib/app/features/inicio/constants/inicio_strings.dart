@@ -3,7 +3,6 @@ class InicioStrings {
 
   /********************************* RESUMEN **********************************/
   static const String teQuedaEsteMes = 'Te queda este mes';
-  static const String gastable = 'Gastable';
   static const String gastado = 'Gastado';
   static const String montoInicial = 'Monto inicial';
   static const String piso = 'Piso';

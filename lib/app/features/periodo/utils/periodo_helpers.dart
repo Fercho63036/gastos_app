@@ -66,10 +66,16 @@ class PeriodoHelpers {
         estilo: EstiloFilaResumen.destacado,
       ),
       FilaResumen(
-        etiqueta: PeriodoStrings.gastable,
+        etiqueta: PeriodoStrings.pisoDescontado,
+        valor:
+            '${FormatoStrings.signoNegativo}'
+            '${FormatoHelpers.formatearNumero(pisoCentavos)}',
+        divisorAntes: true,
+      ),
+      FilaResumen(
+        etiqueta: PeriodoStrings.disponibleEsteMes,
         valor: FormatoHelpers.formatearMonto(saldoInicial - pisoCentavos),
         estilo: EstiloFilaResumen.acento,
-        divisorAntes: true,
       ),
     ];
   }

@@ -14,7 +14,8 @@ class PeriodoStrings {
       'Dinero que no deberías tocar. Puedes cambiarlo cuando quieras.';
   static const String arrastradoMasMonto = 'Arrastrado + monto del mes';
   static const String saldoInicial = 'Saldo inicial';
-  static const String gastable = 'Gastable (saldo − piso)';
+  static const String pisoDescontado = 'Piso descontado';
+  static const String disponibleEsteMes = 'Disponible este mes';
   static const String mesIniciado = 'Mes iniciado';
   static const String montoInvalido = 'Ingresa el monto del mes';
   static const String pisoMayorASaldo =

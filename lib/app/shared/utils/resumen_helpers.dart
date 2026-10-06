@@ -26,11 +26,12 @@ class ResumenHelpers {
     final entradas = _sumar(cuentan.where((mov) => mov.esEntrada));
     final gastos = _sumar(cuentan.where((mov) => !mov.esEntrada));
     final ingresado = periodo.saldoInicialCentavos + entradas;
-    final saldo = ingresado - gastos;
+    final ingresadoNeto = ingresado - periodo.pisoCentavos;
+    final saldo = ingresadoNeto - gastos;
     return ResumenMes(
       saldoCentavos: saldo,
-      gastableCentavos: saldo - periodo.pisoCentavos,
-      gastableTotalCentavos: ingresado - periodo.pisoCentavos,
+      gastableCentavos: saldo,
+      gastableTotalCentavos: ingresadoNeto,
       pisoCentavos: periodo.pisoCentavos,
       entradasCentavos: entradas,
       gastadoCentavos: gastos,
