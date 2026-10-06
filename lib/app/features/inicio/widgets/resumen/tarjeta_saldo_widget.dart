@@ -16,6 +16,7 @@ import 'package:gastos_app/app/shared/widgets/progreso/barra_progreso_widget.dar
 import '../../constants/inicio_strings.dart';
 import '../../utils/inicio_helpers.dart';
 import 'fila_gastable_piso_widget.dart';
+import 'monto_inicial_widget.dart';
 
 class TarjetaSaldoWidget extends StatelessWidget {
   final ResumenMes resumen;
@@ -62,6 +63,10 @@ class TarjetaSaldoWidget extends StatelessWidget {
           Text(
             FormatoHelpers.formatearMonto(resumen.saldoCentavos),
             style: _buildEstiloSaldo(context, estiloBase),
+          ),
+          MontoInicialWidget(
+            montoInicialCentavos: resumen.montoInicialCentavos,
+            estilo: estiloBase,
           ),
           FilaGastablePisoWidget(resumen: resumen, estilo: estiloBase),
           BarraProgresoWidget(

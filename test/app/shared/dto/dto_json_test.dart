@@ -94,9 +94,11 @@ void main() {
       pisoCentavos: 4,
       entradasCentavos: 5,
       gastadoCentavos: 6,
+      montoInicialCentavos: 7,
     );
     final resumenLeido = ResumenDto.desdeJson(ResumenDto.aJson(resumen));
     expect(resumenLeido.gastableTotalCentavos, 3);
+    expect(resumenLeido.montoInicialCentavos, 7);
 
     final pagina = PaginaDto.desdeJson<int>({
       ApiClaves.datos: [

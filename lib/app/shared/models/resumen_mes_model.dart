@@ -5,6 +5,7 @@ class ResumenMes {
   final int pisoCentavos;
   final int entradasCentavos;
   final int gastadoCentavos;
+  final int montoInicialCentavos;
 
   const ResumenMes({
     required this.saldoCentavos,
@@ -13,6 +14,7 @@ class ResumenMes {
     required this.pisoCentavos,
     required this.entradasCentavos,
     required this.gastadoCentavos,
+    required this.montoInicialCentavos,
   });
 
   static const ResumenMes vacio = ResumenMes(
@@ -22,5 +24,6 @@ class ResumenMes {
     pisoCentavos: 0,
     entradasCentavos: 0,
     gastadoCentavos: 0,
+    montoInicialCentavos: 0,
   );
 }
