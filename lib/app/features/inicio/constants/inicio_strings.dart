@@ -4,6 +4,7 @@ class InicioStrings {
   /********************************* RESUMEN **********************************/
   static const String teQuedaEsteMes = 'Te queda este mes';
   static const String gastable = 'Gastable';
+  static const String gastado = 'Gastado';
   static const String piso = 'Piso';
   static const String gastableDisponible = 'del gastable disponible';
 

@@ -22,7 +22,7 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 - [x] RF-14 — Vistas Hoy / Semana / Mes (`lib/app/features/inicio/models/periodo_filtro.dart`, `inicio_page.dart`)
 - [x] RF-15 — Semana de 7 días corridos, no semana calendario (`inicio_helpers.dart` → `desdeDePeriodo`)
 - [x] RF-17 — Se puede gastar bajo el piso sin bloqueo (`PeriodoHelpers.validar` solo rechaza piso > saldo inicial; nada impide `gastable` negativo)
-- [x] RF-02 — Monto del mes editable en cualquier momento, subiendo o bajando (ver "Desviaciones acordadas": se implementa fusionado con RF-03 en la pantalla "Entrada")
+- [x] RF-02 — Monto del mes editable en cualquier momento, subiendo o bajando (ver "Desviaciones acordadas": se implementa en la pantalla "Iniciar Mes", con modo de edición in-place)
 
 ## Parcial (falta terminar)
 

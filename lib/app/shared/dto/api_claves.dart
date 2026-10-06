@@ -33,4 +33,5 @@ class ApiClaves {
   static const String gastableCentavos = 'gastable_centavos';
   static const String gastableTotalCentavos = 'gastable_total_centavos';
   static const String entradasCentavos = 'entradas_centavos';
+  static const String gastadoCentavos = 'gastado_centavos';
 }

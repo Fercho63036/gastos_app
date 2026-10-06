@@ -16,16 +16,56 @@ class FilaGastablePisoWidget extends StatelessWidget {
 
   const FilaGastablePisoWidget({super.key, required this.resumen, this.estilo});
 
+  Widget _buildValor(
+    String etiqueta,
+    int montoCentavos,
+    CrossAxisAlignment alineacion,
+  ) {
+    final monto = FormatoHelpers.formatearMonto(montoCentavos);
+    return Column(
+      crossAxisAlignment: alineacion,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Text(
+          etiqueta,
+          style: estilo?.copyWith(fontWeight: FontWeight.w500),
+          overflow: TextOverflow.ellipsis,
+        ),
+        Text(
+          monto,
+          style: estilo,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final gastable = FormatoHelpers.formatearMonto(resumen.gastableCentavos);
-    final piso = FormatoHelpers.formatearMonto(resumen.pisoCentavos);
-
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text('${InicioStrings.gastable}: $gastable', style: estilo),
-        Text('${InicioStrings.piso}: $piso', style: estilo),
+        Expanded(
+          child: _buildValor(
+            InicioStrings.gastable,
+            resumen.gastableCentavos,
+            CrossAxisAlignment.start,
+          ),
+        ),
+        Expanded(
+          child: _buildValor(
+            InicioStrings.gastado,
+            resumen.gastadoCentavos,
+            CrossAxisAlignment.center,
+          ),
+        ),
+        Expanded(
+          child: _buildValor(
+            InicioStrings.piso,
+            resumen.pisoCentavos,
+            CrossAxisAlignment.end,
+          ),
+        ),
       ],
     );
   }
