@@ -53,16 +53,20 @@ class TarjetaSaldoWidget extends StatelessWidget {
     final estiloBase = _buildEstiloBase(context);
 
     return Container(
-      padding: const EdgeInsets.all(AppDimensions.paddingL),
+      padding: const EdgeInsets.all(AppDimensions.paddingSM),
       decoration: _decoracion,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: AppDimensions.paddingSM,
+        spacing: AppDimensions.paddingS,
         children: [
           Text(InicioStrings.teQuedaEsteMes, style: estiloBase),
-          Text(
-            FormatoHelpers.formatearMonto(resumen.saldoCentavos),
-            style: _buildEstiloSaldo(context, estiloBase),
+          FittedBox(
+            fit: BoxFit.scaleDown,
+            alignment: Alignment.centerLeft,
+            child: Text(
+              FormatoHelpers.formatearMonto(resumen.saldoCentavos),
+              style: _buildEstiloSaldo(context, estiloBase),
+            ),
           ),
           MontoInicialWidget(
             montoInicialCentavos: resumen.montoInicialCentavos,

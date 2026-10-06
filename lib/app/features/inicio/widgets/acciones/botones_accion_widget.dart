@@ -23,7 +23,7 @@ class BotonesAccionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      spacing: AppDimensions.paddingM,
+      spacing: AppDimensions.paddingS,
       children: [
         Expanded(
           child: BotonContornoIconoWidget(

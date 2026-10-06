@@ -22,14 +22,18 @@ class BotonContornoIconoWidget extends StatelessWidget {
 
     return OutlinedButton.icon(
       onPressed: onPressed,
-      icon: Icon(icono, size: AppDimensions.iconM),
+      icon: Icon(icono, size: AppDimensions.iconS),
       label: Text(etiqueta),
       style: OutlinedButton.styleFrom(
         minimumSize: const Size.fromHeight(AppDimensions.alturaBotonAccion),
+        padding: const EdgeInsets.symmetric(
+          horizontal: AppDimensions.paddingS,
+          vertical: AppDimensions.paddingXS,
+        ),
         backgroundColor: colorScheme.surface,
         foregroundColor: colorScheme.onSurface,
         textStyle: const TextStyle(
-          fontSize: AppDimensions.fontL,
+          fontSize: AppDimensions.fontM,
           fontWeight: FontWeight.w700,
         ),
         side: BorderSide(

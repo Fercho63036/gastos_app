@@ -93,12 +93,12 @@ class AppDimensions {
   static const double opacidadBordeTab = 0.25;
 
   /********************************** INICIO **********************************/
-  static const double fontSaldo = 44.0;
-  static const double alturaBarraProgreso = 12.0;
+  static const double fontSaldo = 40.0;
+  static const double alturaBarraProgreso = 8.0;
   static const double tamanoIconoCategoria = 48.0;
   static const double radiusTarjeta = 18.0;
   static const double radiusTarjetaSaldo = 24.0;
-  static const double alturaBotonAccion = 60.0;
+  static const double alturaBotonAccion = 44.0;
   static const double largoGuionBorde = 5.0;
   static const double espacioGuionBorde = 4.0;
   static const double opacidadAnulado = 0.45;

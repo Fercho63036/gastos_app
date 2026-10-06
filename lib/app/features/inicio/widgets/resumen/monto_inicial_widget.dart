@@ -23,6 +23,8 @@ class MontoInicialWidget extends StatelessWidget {
     return Text(
       '${InicioStrings.montoInicial}: $monto',
       style: estilo?.copyWith(fontWeight: FontWeight.w500),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
