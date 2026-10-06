@@ -21,9 +21,14 @@ import 'monto_inicial_widget.dart';
 class TarjetaSaldoWidget extends StatelessWidget {
   /******************************** PROPIEDADES ********************************/
   final ResumenMes resumen;
+  final VoidCallback? onEditarPiso;
 
   /******************************** CONSTRUCTOR ********************************/
-  const TarjetaSaldoWidget({super.key, required this.resumen});
+  const TarjetaSaldoWidget({
+    super.key,
+    required this.resumen,
+    this.onEditarPiso,
+  });
 
   /********************************* DECORACION *********************************/
   static final BoxDecoration _decoracion = BoxDecoration(
@@ -79,7 +84,11 @@ class TarjetaSaldoWidget extends StatelessWidget {
             montoInicialCentavos: resumen.montoInicialCentavos,
             estilo: estiloBase,
           ),
-          FilaGastablePisoWidget(resumen: resumen, estilo: estiloBase),
+          FilaGastablePisoWidget(
+            resumen: resumen,
+            estilo: estiloBase,
+            onEditarPiso: onEditarPiso,
+          ),
           BarraProgresoWidget(
             fraccion: InicioHelpers.fraccionDisponible(resumen),
             color: AppColores.textoTarjetaSaldo,

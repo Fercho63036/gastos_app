@@ -19,4 +19,6 @@ class PeriodoStrings {
   static const String montoInvalido = 'Ingresa el monto del mes';
   static const String pisoMayorASaldo =
       'El piso no puede superar el saldo inicial';
+  static const String editarPiso = 'Editar piso de ahorro';
+  static const String pisoActualizado = 'Piso actualizado';
 }

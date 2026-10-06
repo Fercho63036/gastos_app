@@ -100,4 +100,14 @@ class MovimientosService extends ChangeNotifier {
     );
     await cargar();
   }
+
+  /******************************* ACTUALIZAR PISO ******************************/
+  Future<void> actualizarPiso({
+    required int pisoCentavos,
+  }) async {
+    await _repositorio.actualizarPiso(
+      pisoCentavos: pisoCentavos,
+    );
+    await cargar();
+  }
 }

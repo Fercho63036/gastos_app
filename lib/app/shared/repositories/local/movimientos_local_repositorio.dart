@@ -130,4 +130,23 @@ class MovimientosLocalRepositorio implements MovimientosRepositorio {
     await _almacen.actualizarPeriodoActual(periodo);
     return periodo;
   }
+
+  /******************************* ACTUALIZAR PISO ******************************/
+  @override
+  Future<PeriodoMes> actualizarPiso({
+    required int pisoCentavos,
+  }) async {
+    final actual = await _almacen.cargarPeriodoActual();
+    if (actual == null) {
+      throw const ValidacionException(DominioStrings.sinCambios);
+    }
+    final periodo = PeriodoMes(
+      inicio: actual.inicio,
+      arrastradoCentavos: actual.arrastradoCentavos,
+      montoMesCentavos: actual.montoMesCentavos,
+      pisoCentavos: pisoCentavos,
+    );
+    await _almacen.actualizarPeriodoActual(periodo);
+    return periodo;
+  }
 }

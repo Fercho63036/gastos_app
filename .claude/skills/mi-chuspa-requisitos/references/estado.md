@@ -1,6 +1,6 @@
 # Estado vivo de implementación — MI Chuspa
 
-Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige o se decide algo distinto a la spec sobre un RF. Última actualización: 2026-10-06 (auditoría de código real contra RF-01 a RF-21).
+Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige o se decide algo distinto a la spec sobre un RF. Última actualización: 2026-10-06 (auditoría de código real contra RF-01 a RF-21). Actualizado: 2026-10-07 (RF-16 completado).
 
 ## Completados (verificado contra código)
 
@@ -23,10 +23,7 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 - [x] RF-15 — Semana de 7 días corridos, no semana calendario (`inicio_helpers.dart` → `desdeDePeriodo`)
 - [x] RF-17 — Se puede gastar bajo el piso sin bloqueo (`PeriodoHelpers.validar` solo rechaza piso > saldo inicial; nada impide `gastable` negativo)
 - [x] RF-02 — Monto del mes editable en cualquier momento, subiendo o bajando (ver "Desviaciones acordadas": se implementa en la pantalla "Iniciar Mes", con modo de edición in-place)
-
-## Parcial (falta terminar)
-
-- [ ] RF-16 — Piso editable y `gastable = saldo − piso` ya funcionan (`iniciar_mes_page.dart`, `ResumenHelpers.calcular`). Falta: (a) default de 50 Bs cuando no hay mes anterior — hoy `PeriodoHelpers.pisoPrecargado` devuelve `''`; (b) el piso solo se edita dentro del flujo "Iniciar mes", no en cualquier momento del mes en curso.
+- [x] RF-16 — Piso editable y `gastable = saldo − piso` funcionan. Sin default (lo define el usuario). Editable desde Inicio (columna "Piso" tocable abre diálogo) y desde "Iniciar/Editar mes" (`iniciar_mes_page.dart`, `ResumenHelpers.calcular`, `dialogo_editar_piso_widget.dart`)
 
 ## Pendientes, en orden de la fase que les corresponde
 

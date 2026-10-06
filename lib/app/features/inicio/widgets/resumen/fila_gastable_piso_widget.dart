@@ -14,9 +14,15 @@ class FilaGastablePisoWidget extends StatelessWidget {
   /******************************** PROPIEDADES ********************************/
   final ResumenMes resumen;
   final TextStyle? estilo;
+  final VoidCallback? onEditarPiso;
 
   /******************************** CONSTRUCTOR ********************************/
-  const FilaGastablePisoWidget({super.key, required this.resumen, this.estilo});
+  const FilaGastablePisoWidget({
+    super.key,
+    required this.resumen,
+    this.estilo,
+    this.onEditarPiso,
+  });
 
   /********************************* BUILD VALOR *********************************/
   Widget _buildValor(
@@ -64,10 +70,25 @@ class FilaGastablePisoWidget extends StatelessWidget {
           ),
         ),
         Expanded(
-          child: _buildValor(
-            InicioStrings.piso,
-            resumen.pisoCentavos,
-            CrossAxisAlignment.end,
+          child: GestureDetector(
+            onTap: onEditarPiso,
+            child: MouseRegion(
+              cursor: onEditarPiso != null
+                  ? SystemMouseCursors.click
+                  : MouseCursor.defer,
+              child: Stack(
+                alignment: Alignment.topRight,
+                children: [
+                  _buildValor(
+                    InicioStrings.piso,
+                    resumen.pisoCentavos,
+                    CrossAxisAlignment.end,
+                  ),
+                  if (onEditarPiso != null)
+                    const Icon(Icons.edit, size: 16),
+                ],
+              ),
+            ),
           ),
         ),
       ],
