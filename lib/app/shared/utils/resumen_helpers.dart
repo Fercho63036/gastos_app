@@ -1,12 +1,13 @@
+/********************************** SHARED **********************************/
 import '../models/movimiento_model.dart';
 import '../models/periodo_mes_model.dart';
 import '../models/resumen_mes_model.dart';
 
-/// Cálculo del saldo del mes a partir del periodo y sus movimientos.
+/***************************** RESUMEN HELPERS ******************************/
 class ResumenHelpers {
   ResumenHelpers._();
 
-  /// Movimientos que cuentan: no anulados y desde el inicio del periodo.
+  /********************************* VIGENTES *********************************/
   static Iterable<Movimiento> vigentes(
     PeriodoMes periodo,
     List<Movimiento> movimientos,

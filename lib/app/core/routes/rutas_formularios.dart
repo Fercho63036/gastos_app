@@ -1,8 +1,12 @@
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/di/injection.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
+
+/********************************* FEATURE **********************************/
 import 'package:gastos_app/app/features/movimientos/pages/detalle_gasto_page.dart';
 import 'package:gastos_app/app/features/movimientos/pages/nueva_entrada_page.dart';
 import 'package:gastos_app/app/features/movimientos/pages/nuevo_gasto_page.dart';
@@ -12,8 +16,7 @@ import 'package:gastos_app/app/features/movimientos/providers/nuevo_gasto_provid
 import 'package:gastos_app/app/features/periodo/pages/iniciar_mes_page.dart';
 import 'package:gastos_app/app/features/periodo/providers/iniciar_mes_provider.dart';
 
-/// Pantallas de formulario a pantalla completa (sin tabs ni drawer); cada
-/// una crea su provider al abrirse y lo libera al cerrarse.
+/**************************** RUTAS FORMULARIOS *****************************/
 class RutasFormularios {
   RutasFormularios._();
 

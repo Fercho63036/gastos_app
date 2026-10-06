@@ -1,5 +1,7 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/services/storage_service.dart';
 
 class ThemeProvider extends ChangeNotifier {

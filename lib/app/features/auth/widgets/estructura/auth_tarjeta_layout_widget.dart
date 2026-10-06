@@ -1,12 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
+/********************************* FEATURE **********************************/
 import 'boton_tema_auth_widget.dart';
 
-/// Estructura común de login/registro/recuperar: fondo de color arriba,
-/// tarjeta con esquina redondeada abajo y botón de tema.
+/************************ AUTH TARJETA LAYOUT WIDGET ************************/
 class AuthTarjetaLayoutWidget extends StatelessWidget {
   final Widget child;
 

@@ -1,18 +1,19 @@
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/formato_constants.dart';
 import 'package:gastos_app/app/core/constants/formato_strings.dart';
 
-/// Formateo de dinero (en centavos), horas y fechas para cualquier feature.
+/***************************** FORMATO HELPERS ******************************/
 class FormatoHelpers {
   FormatoHelpers._();
 
-  /// 124550 → "Bs 1.245,50".
+  /***************************** FORMATEAR MONTO ******************************/
   static String formatearMonto(int centavos) {
     final signo = centavos < 0 ? FormatoStrings.signoNegativo : '';
     return '$signo${FormatoStrings.moneda}${FormatoStrings.espacio}'
         '${formatearNumero(centavos.abs())}';
   }
 
-  /// 124550 → "1.245,50", sin moneda ni signo.
+  /***************************** FORMATEAR NUMERO *****************************/
   static String formatearNumero(int centavos) {
     final absoluto = centavos.abs();
     final enteros = absoluto ~/ FormatoConstants.centavosPorUnidad;
@@ -23,7 +24,7 @@ class FormatoHelpers {
         '${FormatoStrings.separadorDecimal}$decimales';
   }
 
-  /// "1.245,50" → 124550; los dígitos se leen siempre como centavos.
+  /****************************** PARSEAR MONTO *******************************/
   static int parsearMonto(String texto) {
     final digitos = texto.replaceAll(RegExp(r'\D'), '');
     if (digitos.isEmpty) return 0;
@@ -52,25 +53,25 @@ class FormatoHelpers {
       '${_dosDigitos(fecha.hour)}${FormatoStrings.separadorHora}'
       '${_dosDigitos(fecha.minute)}';
 
-  /// "05/10/2026".
+  /***************************** FORMATEAR FECHA ******************************/
   static String formatearFecha(DateTime fecha) {
     const separador = FormatoStrings.separadorFecha;
     return '${_dosDigitos(fecha.day)}$separador'
         '${_dosDigitos(fecha.month)}$separador${fecha.year}';
   }
 
-  /// "05/10/2026 13:20".
+  /*************************** FORMATEAR FECHA HORA ***************************/
   static String formatearFechaHora(DateTime fecha) =>
       '${formatearFecha(fecha)}${FormatoStrings.espacio}${formatearHora(fecha)}';
 
   static String nombreMes(DateTime fecha) =>
       FormatoStrings.mesesCompletos[fecha.month - 1];
 
-  /// "Octubre 2026".
+  /**************************** FORMATEAR MES ANIO ****************************/
   static String formatearMesAnio(DateTime fecha) =>
       '${nombreMes(fecha)}${FormatoStrings.espacio}${fecha.year}';
 
-  /// Parte sobre total entre 0 y 1; 0 si el total no es positivo.
+  /********************************* FRACCION *********************************/
   static double fraccion(int parte, int total) {
     if (total <= 0) return 0;
     return (parte / total).clamp(0, 1).toDouble();
@@ -82,7 +83,7 @@ class FormatoHelpers {
   static DateTime soloDia(DateTime fecha) =>
       DateTime(fecha.year, fecha.month, fecha.day);
 
-  /// "HOY · LUN 5 OCT", "AYER · DOM 4 OCT" o "MIE 1 OCT".
+  /************************* FORMATEAR ENCABEZADO DIA *************************/
   static String formatearEncabezadoDia(DateTime fecha, DateTime hoy) {
     final dia = soloDia(fecha);
     final diasAtras = soloDia(hoy).difference(dia).inDays;

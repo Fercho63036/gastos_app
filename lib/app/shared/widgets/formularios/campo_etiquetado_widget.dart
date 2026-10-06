@@ -1,9 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/constants/formato_strings.dart';
 
-/// Etiqueta arriba ("Motivo (opcional)"), el campo y una ayuda opcional abajo.
+/************************* CAMPO ETIQUETADO WIDGET **************************/
 class CampoEtiquetadoWidget extends StatelessWidget {
   final String etiqueta;
   final String? etiquetaSecundaria;

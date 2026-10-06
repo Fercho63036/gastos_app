@@ -1,12 +1,16 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:provider/provider.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
-import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
 
+/********************************* FEATURE **********************************/
+import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
 import '../constants/perfil_strings.dart';
 
 class PerfilPage extends StatelessWidget {

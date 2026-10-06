@@ -1,5 +1,7 @@
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/errors/app_exception.dart';
 
+/********************************** SHARED **********************************/
 import '../../constants/dominio_strings.dart';
 import '../../models/borrador_movimiento_model.dart';
 import '../../models/movimiento_model.dart';
@@ -12,8 +14,7 @@ import '../../utils/ediciones_helpers.dart';
 import '../../utils/resumen_helpers.dart';
 import '../movimientos_repositorio.dart';
 
-/// Backend simulado sobre SQLite: hace en el dispositivo lo que hará el
-/// servidor. Al conectar el API se reemplaza en DI y esta carpeta se borra.
+/********************** MOVIMIENTOS LOCAL REPOSITORIO ***********************/
 class MovimientosLocalRepositorio implements MovimientosRepositorio {
   final MovimientosAlmacen _almacen;
   final DateTime Function() _ahora;
@@ -76,7 +77,7 @@ class MovimientosLocalRepositorio implements MovimientosRepositorio {
     );
   }
 
-  /// Antepone al historial los campos que cambiaron.
+  /*************************** ACTUALIZAR MOVIMIENTO ****************************/
   @override
   Future<Movimiento> actualizarMovimiento(Movimiento editado) async {
     final original = await obtenerMovimiento(editado.id);

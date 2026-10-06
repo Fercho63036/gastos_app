@@ -1,10 +1,12 @@
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart';
 
+/*********************************** CORE ***********************************/
 import '../constants/database_constants.dart';
 import 'migraciones_database.dart';
 
-/// Base SQLite de la app; se abre una sola vez y se reutiliza.
+/******************************* APP DATABASE *******************************/
 class AppDatabase {
   AppDatabase._();
 

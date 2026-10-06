@@ -1,8 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// Título pequeño y espaciado para separar secciones de una lista.
+/************************ ENCABEZADO SECCION WIDGET *************************/
 class EncabezadoSeccionWidget extends StatelessWidget {
   final String texto;
 

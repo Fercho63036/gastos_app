@@ -1,6 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/routes/route_names.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/constants/layout_strings.dart';
 import 'package:gastos_app/app/shared/layout/models/tab_bar_model.dart';
 
@@ -28,7 +32,6 @@ class TabBarConfig {
     final exacto = items.indexWhere((item) => item.ruta == rutaActual);
     if (exacto >= 0) return exacto;
 
-    // Rutas anidadas: gana el prefijo más largo.
     final indices = List<int>.generate(items.length, (indice) => indice)
       ..sort((a, b) => items[b].ruta.length.compareTo(items[a].ruta.length));
     for (final indice in indices) {

@@ -1,10 +1,10 @@
+/********************************* FEATURE **********************************/
 import '../constants/auth_constants.dart';
 import '../models/credenciales_model.dart';
 import '../models/sesion_model.dart';
 import 'auth_repositorio.dart';
 
-/// Auth simulada: acepta cualquier credencial válida en el formulario. Se
-/// reemplaza en DI por la versión que llama al backend.
+/************************** AUTH LOCAL REPOSITORIO **************************/
 class AuthLocalRepositorio implements AuthRepositorio {
   Future<void> _simularLlamada() =>
       Future<void>.delayed(AuthConstants.demoraSimulada);

@@ -1,9 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/theme/app_colores.dart';
 
-/// Colores compartidos por los items del Drawer (tile, expandible, logout).
+/******************************* MENU COLORES *******************************/
 class MenuColores {
   MenuColores._();
 
@@ -19,7 +21,7 @@ class MenuColores {
   static Color texto(ColorScheme colorScheme, {required bool activo}) =>
       activo ? colorScheme.primary : inactivo(colorScheme);
 
-  /// La barra inferior es violeta en ambos modos; el `primary` no contrasta.
+  /******************************** TEXTO TAB *********************************/
   static Color textoTab({required bool activo}) => activo
       ? AppColores.textoBarra
       : AppColores.textoBarra.withValues(

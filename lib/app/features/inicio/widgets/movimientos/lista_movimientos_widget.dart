@@ -1,16 +1,20 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/grupo_dia_model.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/paginado/widgets/lista_paginada_scroll_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/inicio_strings.dart';
 import 'grupo_dia_widget.dart';
 
-/// Movimientos agrupados por día sobre la lista paginada compartida.
+/************************* LISTA MOVIMIENTOS WIDGET *************************/
 class ListaMovimientosWidget extends StatelessWidget {
   final List<GrupoDia<Movimiento>> grupos;
   final bool hayMas;

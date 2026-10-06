@@ -1,8 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/widgets.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/errors/app_exception.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/constants/dominio_strings.dart';
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/models/estado_movimiento.dart';
@@ -11,10 +14,11 @@ import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 import 'package:gastos_app/app/shared/utils/ediciones_helpers.dart';
 import 'package:gastos_app/app/shared/utils/guardado_mixin.dart';
 
+/********************************* FEATURE **********************************/
 import '../constants/movimientos_strings.dart';
 import '../utils/movimientos_helpers.dart';
 
-/// Borrador editable de un gasto; al guardar, el servidor arma el historial.
+/************************** DETALLE GASTO PROVIDER **************************/
 class DetalleGastoProvider extends ChangeNotifier with GuardadoMixin {
   final MovimientosService _datos;
   final String _id;
@@ -35,7 +39,7 @@ class DetalleGastoProvider extends ChangeNotifier with GuardadoMixin {
   EstadoMovimiento get estado => _estado;
   bool get cargando => _cargando;
 
-  /// Si falla, [gasto] queda en `null` y la página muestra "no encontrado".
+  /******************************* CARGAR GASTO *******************************/
   Future<void> _cargarGasto() async {
     try {
       _aplicarBorrador(await _datos.obtener(_id));
@@ -65,7 +69,7 @@ class DetalleGastoProvider extends ChangeNotifier with GuardadoMixin {
     notifyListeners();
   }
 
-  /// Devuelve el error a mostrar, o `null` si los cambios se guardaron.
+  /***************************** GUARDAR CAMBIOS ******************************/
   Future<String?> guardarCambios() => guardarConEstado(_guardarBorrador);
 
   Future<String?> _guardarBorrador() async {

@@ -1,11 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
+/********************************** SHARED **********************************/
 import 'celda_seleccion_widget.dart';
 
-/// Cuadrícula de opciones con ícono; una sola seleccionada.
+/*********************** CUADRICULA SELECCION WIDGET ************************/
 class CuadriculaSeleccionWidget<T> extends StatelessWidget {
   final List<T> opciones;
   final T seleccionado;

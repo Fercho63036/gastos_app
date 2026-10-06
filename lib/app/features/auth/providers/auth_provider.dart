@@ -1,14 +1,18 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/foundation.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/errors/app_exception.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/services/storage_service.dart';
 
+/********************************* FEATURE **********************************/
 import '../models/credenciales_model.dart';
 import '../models/sesion_model.dart';
 import '../repositories/auth_repositorio.dart';
 
-/// Estado de la sesión. Las llamadas van al [AuthRepositorio]; la sesión
-/// obtenida se guarda en el dispositivo para no pedir login al reabrir.
+/****************************** AUTH PROVIDER *******************************/
 class AuthProvider extends ChangeNotifier {
   final AuthRepositorio _repositorio;
   final StorageService _storage;
@@ -32,7 +36,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Lanza `AppException` si el servidor rechaza las credenciales.
+  /****************************** INICIAR SESION ******************************/
   Future<void> iniciarSesion(CredencialesModel credenciales) => _ejecutar(
     () async {
       final sesion = await _repositorio.iniciarSesion(credenciales);
@@ -51,7 +55,7 @@ class AuthProvider extends ChangeNotifier {
   Future<void> recuperarContrasena(CredencialesModel credenciales) =>
       _ejecutar(() => _repositorio.recuperarContrasena(credenciales));
 
-  /// La sesión local se cierra aunque el servidor no responda.
+  /********************************** LOGOUT **********************************/
   Future<void> logout() async {
     final sesion = _sesion;
     await _storage.eliminarSesion();

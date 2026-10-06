@@ -1,5 +1,7 @@
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import '../constants/dominio_strings.dart';
 import '../models/campo_edicion.dart';
 import '../models/categoria_movimiento.dart';
@@ -7,14 +9,14 @@ import '../models/edicion_movimiento_model.dart';
 import '../models/estado_movimiento.dart';
 import '../models/movimiento_model.dart';
 
-/// Compara dos versiones de un movimiento y formatea su historial.
+/**************************** EDICIONES HELPERS *****************************/
 class EdicionesHelpers {
   EdicionesHelpers._();
 
   static String _entreComillas(String texto) =>
       '${DominioStrings.comillaApertura}$texto${DominioStrings.comillaCierre}';
 
-  /// Valor crudo de [campo]: lo que se guarda y lo que viaja al API.
+  /******************************* VALOR CRUDO ********************************/
   static String valorCrudo(Movimiento movimiento, CampoEdicion campo) =>
       switch (campo) {
         CampoEdicion.monto => movimiento.montoCentavos.toString(),
@@ -23,7 +25,7 @@ class EdicionesHelpers {
         CampoEdicion.estado => movimiento.estado.name,
       };
 
-  /// Si el valor de un campo no se reconoce, se muestra tal cual llegó.
+  /***************************** FORMATEAR VALOR ******************************/
   static String formatearValor(CampoEdicion campo, String valor) =>
       switch (campo) {
         CampoEdicion.monto => _formatearMonto(valor),
@@ -68,13 +70,13 @@ class EdicionesHelpers {
     ];
   }
 
-  /// Aviso inmediato de "sin cambios" antes de llamar al servidor.
+  /******************************* HAY CAMBIOS ********************************/
   static bool hayCambios(Movimiento original, Movimiento editado) =>
       CampoEdicion.values.any(
         (campo) => valorCrudo(original, campo) != valorCrudo(editado, campo),
       );
 
-  /// "Monto: Bs 20,00 → Bs 25,00".
+  /******************************** DESCRIBIR *********************************/
   static String describir(EdicionMovimiento edicion) =>
       '${edicion.campo.etiqueta}${DominioStrings.separadorCampo}'
       '${formatearValor(edicion.campo, edicion.valorAnterior)}'

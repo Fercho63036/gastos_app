@@ -1,9 +1,13 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/routes/route_names.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/auth_strings.dart';
 
 class VolverLoginWidget extends StatelessWidget {

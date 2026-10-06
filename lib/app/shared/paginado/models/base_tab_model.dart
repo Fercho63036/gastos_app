@@ -1,9 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/widgets.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/paginado/models/paginated_response_model.dart';
 
-/// Un tab puede filtrar los items cargados, mostrar su propia página o tener
-/// su propia fuente de datos; nunca más de una de esas opciones.
+/********************************* BASE TAB *********************************/
 class BaseTab<T> {
   final String label;
   final IconData? icon;

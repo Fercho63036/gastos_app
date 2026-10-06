@@ -1,9 +1,13 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/widgets/botones/boton_contorno_icono_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/inicio_strings.dart';
 
 class BotonesAccionWidget extends StatelessWidget {

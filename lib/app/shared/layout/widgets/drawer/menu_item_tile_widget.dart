@@ -1,8 +1,13 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/config/menu_config.dart';
 import 'package:gastos_app/app/shared/layout/models/menu_item_model.dart';
 import 'package:gastos_app/app/shared/layout/utils/menu_colores.dart';

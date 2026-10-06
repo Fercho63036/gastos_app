@@ -1,12 +1,13 @@
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/grupo_dia_model.dart';
 
 class AgrupacionHelpers {
   AgrupacionHelpers._();
 
-  /// Agrupa por día (más reciente primero) respetando el orden recibido
-  /// dentro de cada día.
+  /****************************** AGRUPAR POR DIA ******************************/
   static List<GrupoDia<T>> agruparPorDia<T>(
     List<T> items,
     DateTime Function(T item) fechaDe,

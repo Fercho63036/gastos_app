@@ -1,6 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/paginado/base_main_list_state.dart';
 import 'package:gastos_app/app/shared/paginado/constants/base_main_list_constants.dart';
 import 'package:gastos_app/app/shared/paginado/models/base_tab_model.dart';
@@ -10,9 +14,7 @@ export 'package:gastos_app/app/shared/paginado/base_main_list_state.dart';
 export 'package:gastos_app/app/shared/paginado/models/base_tab_model.dart';
 export 'package:gastos_app/app/shared/paginado/models/paginated_response_model.dart';
 
-/// Lista paginada base: búsqueda con debounce, pull-to-refresh, scroll
-/// infinito y tabs opcionales. Cada listado solo implementa [loadData] y
-/// [buildItem]; el resto son hooks opcionales.
+/****************************** BASE MAIN LIST *******************************/
 abstract class BaseMainList<T> extends StatefulWidget {
   final String? title;
   final Widget? footer;
@@ -45,8 +47,7 @@ abstract class BaseMainList<T> extends StatefulWidget {
   List<Widget>? buildSearchActions(BuildContext context) => null;
   Widget? buildFilterButton(BuildContext context) => null;
 
-  /// Hook entre tabs y lista. [refresh] recarga la lista desde la página 1;
-  /// úsalo en lugar de llamar al estado directamente.
+  /****************************** BUILD PRE LIST ******************************/
   Widget? buildPreList(BuildContext context, VoidCallback refresh) => null;
 
   Future<void>? cargardatos(BuildContext context) => null;

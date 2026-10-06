@@ -1,5 +1,7 @@
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/database_constants.dart';
 
+/********************************** SHARED **********************************/
 import '../constants/dominio_strings.dart';
 import '../models/campo_edicion.dart';
 import '../models/categoria_movimiento.dart';
@@ -10,7 +12,7 @@ import 'codigo_helpers.dart';
 
 typedef Fila = Map<String, Object?>;
 
-/// Conversión pura entre filas de SQLite y modelos del dominio.
+/**************************** MOVIMIENTO MAPPER *****************************/
 class MovimientoMapper {
   MovimientoMapper._();
 
@@ -21,7 +23,7 @@ class MovimientoMapper {
 
   static DateTime _aFecha(Object? valor) => DateTime.parse(valor as String);
 
-  /// El código ("G-0007" o "E-0008") sale del id autoincremental.
+  /******************************** CODIGO DE *********************************/
   static String codigoDe(int id, {required bool esEntrada}) =>
       CodigoHelpers.formatear(
         esEntrada ? DominioStrings.prefijoEntrada : DominioStrings.prefijoGasto,
@@ -33,7 +35,7 @@ class MovimientoMapper {
     codigo: codigoDe(id, esEntrada: movimiento.esEntrada),
   );
 
-  /// Sin la columna id: SQLite la asigna al insertar.
+  /********************************** A FILA **********************************/
   static Fila aFila(Movimiento movimiento) => {
     DatabaseConstants.colTitulo: movimiento.titulo,
     DatabaseConstants.colCategoria: movimiento.categoria.name,

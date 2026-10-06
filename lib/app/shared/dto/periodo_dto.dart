@@ -1,3 +1,4 @@
+/********************************** SHARED **********************************/
 import '../models/periodo_mes_model.dart';
 import 'api_claves.dart';
 import 'json_helpers.dart';
@@ -19,7 +20,7 @@ class PeriodoDto {
     ApiClaves.pisoCentavos: periodo.pisoCentavos,
   };
 
-  /// Cuerpo de `POST /periodos`; el arrastre lo calcula el servidor.
+  /**************************** INICIO MES A JSON *****************************/
   static Json inicioMesAJson({
     required int montoMesCentavos,
     required int pisoCentavos,

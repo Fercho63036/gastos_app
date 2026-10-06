@@ -1,9 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/constants/comun_strings.dart';
 
 class RutaNoEncontradaPage extends StatelessWidget {

@@ -1,3 +1,4 @@
+/********************************** SHARED **********************************/
 import '../paginado/models/paginated_response_model.dart';
 import 'api_claves.dart';
 import 'json_helpers.dart';
@@ -5,7 +6,7 @@ import 'json_helpers.dart';
 class PaginaDto {
   PaginaDto._();
 
-  /// `{"datos": [...], "total": 42}` con [itemDesdeJson] para cada elemento.
+  /******************************** DESDE JSON *********************************/
   static PaginatedResponse<T> desdeJson<T>(
     Json json,
     T Function(Json) itemDesdeJson,

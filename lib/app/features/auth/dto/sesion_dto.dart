@@ -1,5 +1,7 @@
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/dto/json_helpers.dart';
 
+/********************************* FEATURE **********************************/
 import '../models/credenciales_model.dart';
 import '../models/sesion_model.dart';
 import 'auth_claves.dart';
@@ -7,7 +9,7 @@ import 'auth_claves.dart';
 class SesionDto {
   SesionDto._();
 
-  /// `{"token": "...", "usuario": {"correo": "...", "nombre": "..."}}`.
+  /******************************** DESDE JSON ********************************/
   static SesionModel desdeJson(Json json) {
     final usuario = json[AuthClaves.usuario] as Json;
     return SesionModel(
@@ -25,13 +27,13 @@ class SesionDto {
     },
   };
 
-  /// Cuerpo de `/auth/login` y `/auth/recuperar`.
+  /*************************** CREDENCIALES A JSON ****************************/
   static Json credencialesAJson(CredencialesModel credenciales) => {
     AuthClaves.correo: credenciales.correo,
     AuthClaves.contrasena: credenciales.contrasena,
   };
 
-  /// Cuerpo de `/auth/registro`.
+  /***************************** REGISTRO A JSON ******************************/
   static Json registroAJson(String nombre, CredencialesModel credenciales) => {
     AuthClaves.nombre: nombre,
     ...credencialesAJson(credenciales),

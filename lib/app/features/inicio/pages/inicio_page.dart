@@ -1,18 +1,23 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/constants/comun_strings.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/utils/snackbar_helpers.dart';
 import 'package:gastos_app/app/shared/widgets/seleccion/grupo_chips_seleccion_widget.dart';
 import 'package:gastos_app/app/shared/widgets/textos/mensaje_centrado_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../models/periodo_filtro.dart';
 import '../providers/inicio_provider.dart';
 import '../widgets/acciones/botones_accion_widget.dart';
@@ -27,7 +32,7 @@ class InicioPage extends StatefulWidget {
 }
 
 class _InicioPageState extends State<InicioPage> {
-  /// Las entradas aún no tienen pantalla de detalle.
+  /***************************** ABRIR MOVIMIENTO *****************************/
   void _abrirMovimiento(Movimiento movimiento) {
     if (movimiento.esEntrada) {
       SnackbarHelpers.mostrar(context, ComunStrings.proximamente);

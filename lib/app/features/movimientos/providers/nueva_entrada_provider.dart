@@ -1,11 +1,15 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/widgets.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/fila_resumen_model.dart';
 import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 import 'package:gastos_app/app/shared/utils/guardado_mixin.dart';
 
+/********************************* FEATURE **********************************/
 import '../constants/movimientos_strings.dart';
 import '../utils/movimientos_helpers.dart';
 
@@ -25,7 +29,7 @@ class NuevaEntradaProvider extends ChangeNotifier with GuardadoMixin {
     montoCentavos,
   );
 
-  /// Devuelve el error a mostrar, o `null` si la entrada se registró.
+  /******************************** REGISTRAR *********************************/
   Future<String?> registrar() => guardarConEstado(() async {
     final error = MovimientosHelpers.validarMonto(montoCentavos);
     if (error != null) return error;

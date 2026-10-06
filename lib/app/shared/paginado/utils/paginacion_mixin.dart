@@ -1,11 +1,12 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/foundation.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/paginado/constants/base_main_list_constants.dart';
 import 'package:gastos_app/app/shared/paginado/constants/base_main_list_strings.dart';
 import 'package:gastos_app/app/shared/paginado/models/paginated_response_model.dart';
 
-/// Estado de páginas para cualquier provider: guarda los items cargados y
-/// pide la página siguiente con [obtenerPagina].
+/***************************** PAGINACION MIXIN *****************************/
 mixin PaginacionMixin<T> on ChangeNotifier {
   List<T> _items = [];
   int _pagina = BaseMainListConstants.paginaInicial;
@@ -17,14 +18,14 @@ mixin PaginacionMixin<T> on ChangeNotifier {
 
   Future<PaginatedResponse<T>> obtenerPagina(int pagina);
 
-  /// Reemplaza la lista con la primera página; no notifica por sí solo.
+  /*************************** REINICIAR PAGINACION ***************************/
   void reiniciarPaginacion(PaginatedResponse<T> primeraPagina) {
     _pagina = BaseMainListConstants.paginaInicial;
     _items = primeraPagina.datos;
     _total = primeraPagina.total;
   }
 
-  /// Si falla se conserva lo ya cargado y la página no avanza.
+  /******************************** CARGAR MAS ********************************/
   Future<void> cargarMas() async {
     if (_cargandoMas || !hayMas) return;
     _cargandoMas = true;

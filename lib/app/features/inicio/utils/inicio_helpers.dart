@@ -1,13 +1,16 @@
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/formato_strings.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
 
+/********************************* FEATURE **********************************/
 import '../constants/inicio_constants.dart';
 import '../models/periodo_filtro.dart';
 
-/// Reglas propias de Inicio; el formateo genérico vive en [FormatoHelpers].
+/****************************** INICIO HELPERS ******************************/
 class InicioHelpers {
   InicioHelpers._();
 
@@ -27,7 +30,7 @@ class InicioHelpers {
   static int porcentajeDisponible(ResumenMes resumen) =>
       FormatoHelpers.porcentaje(fraccionDisponible(resumen));
 
-  /// Primer instante que entra en [periodo], según la hora del dispositivo.
+  /***************************** DESDE DE PERIODO *****************************/
   static DateTime desdeDePeriodo(PeriodoFiltro periodo, DateTime hoy) {
     final inicioHoy = FormatoHelpers.soloDia(hoy);
     return switch (periodo) {

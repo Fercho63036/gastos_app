@@ -1,8 +1,8 @@
+/********************************* FEATURE **********************************/
 import '../constants/auth_constants.dart';
 import '../constants/auth_strings.dart';
 
-/// Validadores puros para los formularios de auth (devuelven el mensaje de
-/// error o `null` si el valor es válido).
+/******************************* AUTH HELPERS *******************************/
 class AuthHelpers {
   AuthHelpers._();
 

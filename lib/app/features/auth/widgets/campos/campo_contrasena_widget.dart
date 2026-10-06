@@ -1,8 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/auth_strings.dart';
 
 class CampoContrasenaWidget extends StatefulWidget {

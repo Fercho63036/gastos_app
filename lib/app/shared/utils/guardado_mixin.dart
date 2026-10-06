@@ -1,17 +1,19 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/foundation.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/errors/app_exception.dart';
 
+/********************************** SHARED **********************************/
 import '../constants/dominio_strings.dart';
 
-/// Estado "guardando" para formularios que persisten de forma asíncrona.
+/****************************** GUARDADO MIXIN ******************************/
 mixin GuardadoMixin on ChangeNotifier {
   bool _guardando = false;
 
   bool get guardando => _guardando;
 
-  /// Ejecuta [accion] (que devuelve el error a mostrar o `null`) e impide
-  /// un segundo guardado mientras el primero sigue en curso.
+  /**************************** GUARDAR CON ESTADO ****************************/
   Future<String?> guardarConEstado(Future<String?> Function() accion) async {
     if (_guardando) return DominioStrings.guardando;
     _guardando = true;

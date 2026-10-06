@@ -1,15 +1,17 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
+/********************************** SHARED **********************************/
 import '../../constants/comun_strings.dart';
 import '../../utils/navegacion_helpers.dart';
 import '../botones/boton_primario_widget.dart';
 
-/// Pantalla completa de formulario: AppBar con volver, contenido con scroll
-/// y botón principal fijo abajo.
+/************************* PAGINA FORMULARIO WIDGET *************************/
 class PaginaFormularioWidget extends StatelessWidget {
   final String titulo;
   final List<Widget> children;

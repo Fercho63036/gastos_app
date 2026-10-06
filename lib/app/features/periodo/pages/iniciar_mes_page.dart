@@ -1,11 +1,15 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:provider/provider.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 import 'package:gastos_app/app/core/utils/monto_input_formatter.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/utils/navegacion_helpers.dart';
 import 'package:gastos_app/app/shared/utils/snackbar_helpers.dart';
 import 'package:gastos_app/app/shared/widgets/estructura/pagina_formulario_widget.dart';
@@ -15,6 +19,7 @@ import 'package:gastos_app/app/shared/widgets/tarjetas/tarjeta_etiqueta_valor_wi
 import 'package:gastos_app/app/shared/widgets/tarjetas/tarjeta_resumen_widget.dart';
 import 'package:gastos_app/app/shared/widgets/textos/encabezado_icono_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../constants/periodo_strings.dart';
 import '../providers/iniciar_mes_provider.dart';
 

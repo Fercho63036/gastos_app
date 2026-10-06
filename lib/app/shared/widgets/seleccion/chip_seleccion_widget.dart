@@ -1,5 +1,7 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/constants/app_duraciones.dart';
 
@@ -15,8 +17,7 @@ class ChipSeleccionWidget extends StatelessWidget {
     required this.onTap,
   });
 
-  /// Seleccionado invierte colores: fondo `onSurface` (claro en modo oscuro,
-  /// oscuro en modo claro) para que resalte sobre cualquier fondo.
+  /***************************** BUILD DECORACION *****************************/
   BoxDecoration _buildDecoracion(ColorScheme colorScheme) {
     return BoxDecoration(
       color: seleccionado ? colorScheme.onSurface : colorScheme.surface,

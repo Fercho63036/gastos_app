@@ -1,4 +1,4 @@
-/// Elementos de cualquier tipo que comparten el mismo día.
+/******************************** GRUPO DIA *********************************/
 class GrupoDia<T> {
   final DateTime fecha;
   final List<T> items;

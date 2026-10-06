@@ -1,8 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// Flutter no trae borde punteado; se dibuja sobre el hijo (p. ej. anulados).
+/************************** BORDE PUNTEADO WIDGET ***************************/
 class BordePunteadoWidget extends StatelessWidget {
   final Color color;
   final double radio;

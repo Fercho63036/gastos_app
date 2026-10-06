@@ -1,11 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************** SHARED **********************************/
 import '../../models/fila_resumen_model.dart';
 import 'fila_resumen_widget.dart';
 
-/// Tarjeta con borde y filas "etiqueta · valor" (p. ej. cálculo de saldo).
+/************************** TARJETA RESUMEN WIDGET **************************/
 class TarjetaResumenWidget extends StatelessWidget {
   final List<FilaResumen> filas;
 

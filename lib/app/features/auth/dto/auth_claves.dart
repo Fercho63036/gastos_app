@@ -1,4 +1,4 @@
-/// Claves JSON de `/auth/*` (ver `docs/api_contrato.md`).
+/******************************* AUTH CLAVES ********************************/
 class AuthClaves {
   AuthClaves._();
 

@@ -1,10 +1,12 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/auth_constants.dart';
 import '../../utils/auth_helpers.dart';
 import 'campo_contrasena_widget.dart';
 
-/// Contraseña + confirmación, compartido por registro y recuperar contraseña.
+/****************** CAMPOS CONTRASENA CONFIRMACION WIDGET *******************/
 class CamposContrasenaConfirmacionWidget extends StatelessWidget {
   final TextEditingController contrasenaController;
   final TextEditingController confirmacionController;

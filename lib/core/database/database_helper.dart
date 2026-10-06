@@ -26,9 +26,6 @@ class DatabaseHelper {
       onCreate: (db, version) async {
         await ExpensesRepository.createTable(db);
       },
-      // onUpgrade: (db, oldVersion, newVersion) async {
-      //   // Add migrations here as the schema evolves.
-      // },
     );
   }
 }

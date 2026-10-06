@@ -1,7 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************** SHARED **********************************/
 import '../../models/fila_resumen_model.dart';
 
 class FilaResumenWidget extends StatelessWidget {

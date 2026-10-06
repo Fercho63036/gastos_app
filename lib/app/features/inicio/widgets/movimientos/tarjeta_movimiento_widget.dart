@@ -1,15 +1,19 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/widgets/decoracion/icono_contenedor_widget.dart';
 import 'package:gastos_app/app/shared/widgets/tarjetas/tarjeta_fila_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../../utils/inicio_helpers.dart';
 import 'detalle_movimiento_widget.dart';
 
-/// Un movimiento sobre la tarjeta en fila compartida; anulado = punteado.
+/************************ TARJETA MOVIMIENTO WIDGET *************************/
 class TarjetaMovimientoWidget extends StatelessWidget {
   final Movimiento movimiento;
   final VoidCallback? onTap;

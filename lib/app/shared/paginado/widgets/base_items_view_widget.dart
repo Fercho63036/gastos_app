@@ -1,9 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-/// Items como lista (1 columna) o grilla, con pull-to-refresh y carga de la
-/// página siguiente al llegar al final.
+/************************** BASE ITEMS VIEW WIDGET **************************/
 class BaseItemsViewWidget<T> extends StatelessWidget {
   final RefreshController refreshController;
   final VoidCallback onRefresh;

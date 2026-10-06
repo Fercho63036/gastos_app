@@ -1,4 +1,4 @@
-/// Un mes iniciado a mano: desde [inicio] cuentan los movimientos del saldo.
+/******************************* PERIODO MES ********************************/
 class PeriodoMes {
   final DateTime inicio;
   final int arrastradoCentavos;
@@ -12,8 +12,7 @@ class PeriodoMes {
     required this.pisoCentavos,
   });
 
-  /// Mientras no se inicie un mes: todo en cero y cuentan todos los
-  /// movimientos.
+  /******************************* SIN INICIAR ********************************/
   static final PeriodoMes sinIniciar = PeriodoMes(
     inicio: DateTime.fromMillisecondsSinceEpoch(0),
     arrastradoCentavos: 0,

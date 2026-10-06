@@ -1,7 +1,7 @@
+/********************************** SHARED **********************************/
 import 'categoria_movimiento.dart';
 
-/// Lo que la app envía al registrar un movimiento; el id, el código y la
-/// fecha los asigna quien lo guarda.
+/*************************** BORRADOR MOVIMIENTO ****************************/
 class BorradorMovimiento {
   final String titulo;
   final CategoriaMovimiento categoria;

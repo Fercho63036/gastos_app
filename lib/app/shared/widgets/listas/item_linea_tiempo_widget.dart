@@ -1,11 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************** SHARED **********************************/
 import '../tarjetas/tarjeta_superficie_widget.dart';
 import '../textos/titulo_subtitulo_widget.dart';
 
-/// Ítem de historial: punto de color, título y subtítulo (p. ej. fecha).
+/************************* ITEM LINEA TIEMPO WIDGET *************************/
 class ItemLineaTiempoWidget extends StatelessWidget {
   final String titulo;
   final String subtitulo;

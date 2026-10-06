@@ -1,5 +1,7 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/auth_strings.dart';
 import '../../utils/auth_helpers.dart';
 import 'campo_texto_auth_widget.dart';

@@ -3,6 +3,6 @@ class InicioConstants {
 
   static const int diasSemana = 7;
 
-  // Paginación
+  /******************************** PAGINACIÓN ********************************/
   static const int movimientosPorPagina = 8;
 }

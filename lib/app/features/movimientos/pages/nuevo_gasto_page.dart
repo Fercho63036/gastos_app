@@ -1,9 +1,13 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:provider/provider.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/formato_strings.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/utils/navegacion_helpers.dart';
 import 'package:gastos_app/app/shared/utils/snackbar_helpers.dart';
@@ -13,6 +17,7 @@ import 'package:gastos_app/app/shared/widgets/formularios/campo_monto_grande_wid
 import 'package:gastos_app/app/shared/widgets/formularios/campo_texto_widget.dart';
 import 'package:gastos_app/app/shared/widgets/seleccion/cuadricula_seleccion_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../constants/movimientos_strings.dart';
 import '../providers/nuevo_gasto_provider.dart';
 import '../utils/movimientos_helpers.dart';

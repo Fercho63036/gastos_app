@@ -1,14 +1,19 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/errors/app_exception.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/widgets/botones/boton_primario_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/auth_strings.dart';
 import '../../models/credenciales_model.dart';
 import '../../providers/auth_provider.dart';

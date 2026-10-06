@@ -1,8 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// Contenedor base con fondo de superficie y esquinas redondeadas.
+/************************ TARJETA SUPERFICIE WIDGET *************************/
 class TarjetaSuperficieWidget extends StatelessWidget {
   final Widget child;
 

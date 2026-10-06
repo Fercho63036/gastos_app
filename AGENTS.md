@@ -99,6 +99,12 @@ Cada método y cada bloque lógico de una clase (variables estáticas, variables
 - Indentación del banner igual a la del bloque que encabeza (los banners de métodos dentro de una clase van indentados igual que el método).
 - Dentro del cuerpo del método sigue prohibido comentar línea por línea lo que el código ya dice por sí mismo; el banner es la única excepción permitida.
 
+### 5.2 Prohibido comentar el historial del cambio
+
+- Nunca agregar comentarios que describan qué se modificó, por qué se tocó ese código ahora, o que hagan referencia a la tarea/fix en curso (ej. `// se cambió esto para arreglar el bug`, `// nuevo método`, `// antes estaba así`).
+- Esa información va en el mensaje de commit o en la conversación, nunca en el código.
+- Los únicos comentarios permitidos en el código son los banners de 5.1; todo lo demás queda prohibido, incluso si parece útil para el reviewer.
+
 ## 6. Orden de imports
 
 1. Flutter/Dart
@@ -106,6 +112,19 @@ Cada método y cada bloque lógico de una clase (variables estáticas, variables
 3. Core
 4. Shared
 5. Feature (relativos)
+
+Cada grupo presente en el archivo lleva su banner de encabezado (mismo formato de 5.1) inmediatamente arriba, en mayúsculas:
+
+```dart
+/****************************** FLUTTER / DART ******************************/
+import 'package:flutter/material.dart';
+
+/*********************************** CORE ***********************************/
+import 'package:gastos_app/app/core/utils/responsive_helper.dart';
+```
+
+- Solo se agrega el banner de un grupo si el archivo tiene al menos un import de ese grupo.
+- No inventar grupos vacíos ni reordenar imports para agruparlos artificialmente.
 
 ## 7. Orden dentro de una clase
 

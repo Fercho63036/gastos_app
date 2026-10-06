@@ -1,7 +1,7 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
-/// Paleta blanco + morado, tomada de los fondos del logo:
-/// fondo lavanda (claro) o morado medio (oscuro), barras violeta en ambos.
+/******************************* APP COLORES ********************************/
 class AppColores {
   AppColores._();
 
@@ -19,26 +19,26 @@ class AppColores {
   static const Color blanco = Colors.white;
   static const Color negro = Colors.black;
 
-  // Modo claro
+  /******************************** MODO CLARO ********************************/
   static const Color fondoClaro = Color(0xFFF4F2FC);
   static const Color superficieClara = Colors.white;
   static const Color bordeClaro = Color(0xFFDCD8EE);
 
-  // Modo oscuro
+  /******************************* MODO OSCURO ********************************/
   static const Color fondoOscuro = Color(0xFF2D2468);
   static const Color superficieOscura = Color(0xFF3A2F82);
   static const Color bordeOscuro = Color(0xFF5446A8);
 
-  // Encabezado y barra inferior (ambos modos)
+  /**************** ENCABEZADO Y BARRA INFERIOR (AMBOS MODOS) *****************/
   static const Color barra = primario;
   static const Color textoBarra = blanco;
 
-  // Inicio: tarjeta de saldo (ambos modos)
+  /****************** INICIO: TARJETA DE SALDO (AMBOS MODOS) ******************/
   static const Color tarjetaSaldo = Color(0xFF9C8EEB);
   static const Color textoTarjetaSaldo = Color(0xFF1E1A3C);
   static const Color pistaProgresoSaldo = Color(0xFF7C6CD6);
 
-  // Inicio: categorías y estados de movimientos
+  /*************** INICIO: CATEGORÍAS Y ESTADOS DE MOVIMIENTOS ****************/
   static const Color categoriaComida = Color(0xFFF2B84B);
   static const Color categoriaPasajes = Color(0xFF7FB2F0);
   static const Color categoriaDiversion = Color(0xFFF08BC0);

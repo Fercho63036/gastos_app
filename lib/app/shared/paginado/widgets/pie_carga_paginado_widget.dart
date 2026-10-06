@@ -1,11 +1,16 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/paginado/constants/base_main_list_strings.dart';
 
-/// Pie de la lista que se muestra al llegar al final mientras carga más.
+/************************ PIE CARGA PAGINADO WIDGET *************************/
 class PieCargaPaginadoWidget extends StatelessWidget {
   final String textoSinMas;
 

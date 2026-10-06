@@ -1,12 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/routes/route_names.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/constants/layout_strings.dart';
 import 'package:gastos_app/app/shared/layout/models/menu_item_model.dart';
 
-/// Menú estático del Drawer. Para agregar una pantalla: registra su ruta en
-/// `RouteNames`/`AppRouter` y añade aquí su item (o un `expandible` con
-/// `subItems` para agrupar varias).
+/******************************* MENU CONFIG ********************************/
 class MenuConfig {
   MenuConfig._();
 

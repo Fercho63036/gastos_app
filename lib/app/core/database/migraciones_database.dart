@@ -1,8 +1,11 @@
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:sqflite/sqflite.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/database_constants.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/constants/dominio_strings.dart';
 import 'package:gastos_app/app/shared/models/campo_edicion.dart';
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
@@ -10,7 +13,7 @@ import 'package:gastos_app/app/shared/models/estado_movimiento.dart';
 
 typedef FilaEdicion = Map<String, Object?>;
 
-/// Cambios de esquema y datos entre versiones de la base local.
+/*************************** MIGRACIONES DATABASE ***************************/
 class MigracionesDatabase {
   MigracionesDatabase._();
 
@@ -36,9 +39,7 @@ class MigracionesDatabase {
     await batch.commit(noResult: true);
   }
 
-  /// v1 guardaba textos ya formateados ("Monto", "Bs 20,00"); v2 guarda la
-  /// clave del campo y su valor crudo ("monto", "2000"). Devuelve la misma
-  /// [fila] si no la reconoce.
+  /***************************** EDICION A CRUDA ******************************/
   static FilaEdicion edicionACruda(FilaEdicion fila) {
     final campo = _campoDesdeEtiqueta(fila[DatabaseConstants.colCampo]);
     if (campo == null) return fila;

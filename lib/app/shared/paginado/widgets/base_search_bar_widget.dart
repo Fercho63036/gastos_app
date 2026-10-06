@@ -1,13 +1,15 @@
+/****************************** FLUTTER / DART ******************************/
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/constants/app_duraciones.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/paginado/constants/base_main_list_strings.dart';
 
-/// Buscador con debounce: llama a [onBuscar] al dejar de escribir y de
-/// inmediato al limpiar el texto.
+/************************** BASE SEARCH BAR WIDGET **************************/
 class BaseSearchBarWidget extends StatefulWidget {
   final ValueChanged<String> onBuscar;
   final List<Widget>? accionesExtra;

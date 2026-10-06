@@ -1,8 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// Ícono dentro de un cuadro redondeado con fondo suave del color primario.
+/************************* ICONO CONTENEDOR WIDGET **************************/
 class IconoContenedorWidget extends StatelessWidget {
   final IconData icono;
   final Color color;

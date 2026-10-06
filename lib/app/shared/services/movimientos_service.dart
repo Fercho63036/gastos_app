@@ -1,5 +1,7 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/foundation.dart';
 
+/********************************** SHARED **********************************/
 import '../models/borrador_movimiento_model.dart';
 import '../models/categoria_movimiento.dart';
 import '../models/movimiento_model.dart';
@@ -8,10 +10,7 @@ import '../models/resumen_mes_model.dart';
 import '../paginado/models/paginated_response_model.dart';
 import '../repositories/movimientos_repositorio.dart';
 
-/// Punto de acceso de las pantallas a los movimientos. No calcula nada: pide
-/// al [MovimientosRepositorio], guarda el resumen y el periodo (que algunos
-/// formularios leen al abrirse) y avisa en cada cambio para que todas las
-/// pantallas se refresquen solas.
+/*************************** MOVIMIENTOS SERVICE ****************************/
 class MovimientosService extends ChangeNotifier {
   final MovimientosRepositorio _repositorio;
   ResumenMes _resumen = ResumenMes.vacio;
@@ -23,7 +22,7 @@ class MovimientosService extends ChangeNotifier {
   PeriodoMes? get periodoActual => _periodo;
   bool get mesIniciado => _periodo != null;
 
-  /// Se llama al arrancar la app y después de cada cambio.
+  /********************************** CARGAR **********************************/
   Future<void> cargar() async {
     _resumen = await _repositorio.obtenerResumen();
     _periodo = await _repositorio.obtenerPeriodoActual();
@@ -72,7 +71,7 @@ class MovimientosService extends ChangeNotifier {
     ),
   );
 
-  /// Devuelve el movimiento guardado, con su historial actualizado.
+  /******************************** ACTUALIZAR ********************************/
   Future<Movimiento> actualizar(Movimiento editado) async {
     final guardado = await _repositorio.actualizarMovimiento(editado);
     await cargar();

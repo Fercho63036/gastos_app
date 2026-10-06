@@ -1,4 +1,4 @@
-/// Números del dominio de movimientos compartidos por varias features.
+/**************************** DOMINIO CONSTANTS *****************************/
 class DominioConstants {
   DominioConstants._();
 

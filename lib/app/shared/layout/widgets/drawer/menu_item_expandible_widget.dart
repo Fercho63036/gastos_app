@@ -1,8 +1,12 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/constants/app_duraciones.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/config/menu_config.dart';
 import 'package:gastos_app/app/shared/layout/models/menu_item_model.dart';
 import 'package:gastos_app/app/shared/layout/utils/menu_colores.dart';

@@ -1,6 +1,7 @@
+/********************************** SHARED **********************************/
 import '../constants/dominio_strings.dart';
 
-/// Campos editables de un movimiento; [name] es la clave que viaja al API.
+/****************************** CAMPO EDICION *******************************/
 enum CampoEdicion {
   monto(DominioStrings.campoMonto),
   descripcion(DominioStrings.campoDescripcion),

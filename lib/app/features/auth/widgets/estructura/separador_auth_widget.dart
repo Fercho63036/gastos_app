@@ -1,7 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/auth_strings.dart';
 
 class SeparadorAuthWidget extends StatelessWidget {

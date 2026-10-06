@@ -1,5 +1,7 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
 class ResponsiveHelper {
@@ -64,7 +66,7 @@ class ResponsiveHelper {
     return columnasMovil;
   }
 
-  /// Columnas para cuadrículas de opciones pequeñas (p. ej. categorías).
+  /*************************** COLUMNAS CUADRICULA ****************************/
   static int columnasCuadricula(BuildContext context) {
     if (isDesktop(context)) return columnasCuadriculaDesktop;
     if (isTablet(context)) return columnasCuadriculaTablet;

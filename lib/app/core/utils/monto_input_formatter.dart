@@ -1,10 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/services.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/formato_constants.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
-/// Escribe montos como cajero: cada dígito entra por los centavos
-/// ("2" → "0,02", "2500" → "25,00") y se muestra con miles ("1.200,00").
+/************************** MONTO INPUT FORMATTER ***************************/
 class MontoInputFormatter extends TextInputFormatter {
   const MontoInputFormatter();
 

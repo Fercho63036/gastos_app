@@ -1,15 +1,18 @@
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/formato_strings.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/constants/dominio_constants.dart';
 import 'package:gastos_app/app/shared/models/edicion_movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/fila_resumen_model.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/utils/resumen_helpers.dart';
 
+/********************************* FEATURE **********************************/
 import '../constants/movimientos_strings.dart';
 
-/// Validaciones y textos de las pantallas de gasto y entrada.
+/*************************** MOVIMIENTOS HELPERS ****************************/
 class MovimientosHelpers {
   MovimientosHelpers._();
 
@@ -23,7 +26,7 @@ class MovimientosHelpers {
     return validarMonto(montoCentavos);
   }
 
-  /// "Fecha y hora automáticas · 05/10/2026 13:20".
+  /************************** TEXTO FECHA AUTOMATICA **************************/
   static String textoFechaAutomatica(DateTime ahora) =>
       '${MovimientosStrings.fechaAutomatica}${FormatoStrings.separadorPunto}'
       '${FormatoHelpers.formatearFechaHora(ahora)}';
@@ -35,14 +38,14 @@ class MovimientosHelpers {
   static String tituloCodigo(Movimiento movimiento) =>
       '${MovimientosStrings.prefijoId}${movimiento.codigo}';
 
-  /// "Registrado el 05/10/2026 a las 13:20 · no editable".
+  /****************************** TEXTO REGISTRO ******************************/
   static String textoRegistro(Movimiento movimiento) =>
       '${MovimientosStrings.registradoEl}'
       '${FormatoHelpers.formatearFecha(movimiento.fecha)}'
       '${MovimientosStrings.aLas}${FormatoHelpers.formatearHora(movimiento.fecha)}'
       '${FormatoStrings.separadorPunto}${MovimientosStrings.noEditable}';
 
-  /// "05/10/2026 · 13:45".
+  /****************************** FECHA EDICION *******************************/
   static String fechaEdicion(EdicionMovimiento edicion) =>
       '${FormatoHelpers.formatearFecha(edicion.fecha)}'
       '${FormatoStrings.separadorPunto}${FormatoHelpers.formatearHora(edicion.fecha)}';

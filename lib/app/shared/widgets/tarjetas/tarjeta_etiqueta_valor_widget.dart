@@ -1,11 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************** SHARED **********************************/
 import '../textos/titulo_subtitulo_widget.dart';
 import 'tarjeta_superficie_widget.dart';
 
-/// Tarjeta con título, subtítulo opcional y un valor destacado a la derecha.
+/********************** TARJETA ETIQUETA VALOR WIDGET ***********************/
 class TarjetaEtiquetaValorWidget extends StatelessWidget {
   final String titulo;
   final String valor;

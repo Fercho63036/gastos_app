@@ -1,9 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/widgets.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/di/injection.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
+
+/********************************* FEATURE **********************************/
 import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
 
 class RouteGuards {

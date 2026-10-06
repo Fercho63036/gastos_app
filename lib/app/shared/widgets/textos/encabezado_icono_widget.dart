@@ -1,11 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************** SHARED **********************************/
 import '../decoracion/icono_contenedor_widget.dart';
 import 'titulo_subtitulo_widget.dart';
 
-/// Encabezado de página: ícono en contenedor, título grande y subtítulo.
+/************************* ENCABEZADO ICONO WIDGET **************************/
 class EncabezadoIconoWidget extends StatelessWidget {
   final IconData icono;
   final String titulo;

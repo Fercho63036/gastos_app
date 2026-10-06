@@ -1,9 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/constants/app_duraciones.dart';
 
-/// Opciones en una barra con borde; la elegida se rellena con el primario.
+/************************ SELECTOR SEGMENTADO WIDGET ************************/
 class SelectorSegmentadoWidget<T> extends StatelessWidget {
   final List<T> opciones;
   final T seleccionado;

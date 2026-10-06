@@ -1,7 +1,7 @@
 class AppDimensions {
   AppDimensions._();
 
-  // Padding / spacing
+  /**************************** PADDING / SPACING *****************************/
   static const double paddingXXS = 2.0;
   static const double paddingXS = 4.0;
   static const double paddingS = 8.0;
@@ -11,35 +11,35 @@ class AppDimensions {
   static const double paddingXL = 32.0;
   static const double paddingXXL = 40.0;
 
-  // Radios
+  /********************************** RADIOS **********************************/
   static const double radiusS = 8.0;
   static const double radiusM = 10.0;
   static const double radiusL = 14.0;
   static const double radiusXL = 20.0;
   static const double radiusTarjetaAuth = 80.0;
 
-  // Iconos
+  /********************************** ICONOS **********************************/
   static const double iconXS = 14.0;
   static const double iconS = 20.0;
   static const double iconM = 22.0;
   static const double iconL = 26.0;
   static const double iconXL = 56.0;
 
-  // Fuentes
+  /********************************* FUENTES **********************************/
   static const double fontXS = 11.0;
   static const double fontS = 13.0;
   static const double fontM = 15.0;
   static const double fontL = 17.0;
   static const double espaciadoLetraSeccion = 1.0;
 
-  // Bordes y elevación
+  /**************************** BORDES Y ELEVACIÓN ****************************/
   static const double bordeDelgado = 1.0;
   static const double bordeIndicadorMenu = 3.5;
   static const double elevacionAppBar = 0.5;
   static const double elevacionNula = 0.0;
   static const double alturaDivisor = 8.0;
 
-  // Opacidades
+  /******************************** OPACIDADES ********************************/
   static const double opacidadMuySutil = 0.06;
   static const double opacidadSutil = 0.08;
   static const double opacidadSombraOscura = 0.35;
@@ -47,37 +47,37 @@ class AppDimensions {
   static const double opacidadSecundaria = 0.60;
   static const double opacidadResaltada = 0.85;
 
-  // Sombras
+  /********************************* SOMBRAS **********************************/
   static const double desenfoqueSombra = 16.0;
   static const double desplazamientoSombra = -4.0;
 
-  // Tab bar
+  /********************************* TAB BAR **********************************/
   static const double alturaTabBar = 70.0;
   static const double anchoIndicadorTab = 32.0;
   static const double altoIndicadorTab = 2.5;
 
-  // Menú lateral
+  /******************************* MENÚ LATERAL *******************************/
   static const double alturaDrawerHeader = 132.0;
   static const double anchoMinimoLeadingMenu = 28.0;
   static const double densidadVerticalMenu = -1.0;
   static const double rotacionChevronExpandido = 0.5;
   static const double rotacionChevronColapsado = 0.0;
 
-  // Logos
+  /********************************** LOGOS ***********************************/
   static const double anchoLogoAppBar = 36.0;
   static const double altoLogoAppBar = 36.0;
   static const double anchoLogoDrawer = 64.0;
   static const double altoLogoDrawer = 64.0;
   static const double tamanoLogoAuth = 72.0;
 
-  // Auth
+  /*********************************** AUTH ***********************************/
   static const double anchoMaximoFormulario = 400.0;
   static const double alturaBoton = 50.0;
   static const double fraccionAlturaFondoAuth = 0.32;
   static const double fraccionAlturaTarjetaAuthMovil = 0.72;
   static const double fraccionAlturaTarjetaAuthAmplia = 0.68;
 
-  // Lista paginada
+  /****************************** LISTA PAGINADA ******************************/
   static const double alturaBuscador = 46.0;
   static const double radiusPildora = 30.0;
   static const double bordeTab = 1.5;
@@ -92,7 +92,7 @@ class AppDimensions {
   static const double opacidadBorde = 0.20;
   static const double opacidadBordeTab = 0.25;
 
-  // Inicio
+  /********************************** INICIO **********************************/
   static const double fontSaldo = 44.0;
   static const double alturaBarraProgreso = 12.0;
   static const double tamanoIconoCategoria = 48.0;
@@ -104,7 +104,7 @@ class AppDimensions {
   static const double opacidadAnulado = 0.45;
   static const double opacidadPistaIcono = 0.18;
 
-  // Formularios
+  /******************************* FORMULARIOS ********************************/
   static const double fontMontoGrande = 48.0;
   static const double fontPrefijoMonto = 22.0;
   static const double fontTituloEncabezado = 24.0;

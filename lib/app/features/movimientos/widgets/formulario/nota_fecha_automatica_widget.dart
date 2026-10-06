@@ -1,10 +1,13 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/widgets/tarjetas/nota_icono_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../../utils/movimientos_helpers.dart';
 
-/// Avisa que el movimiento se fecha solo, con la fecha y hora de ahora.
+/*********************** NOTA FECHA AUTOMATICA WIDGET ***********************/
 class NotaFechaAutomaticaWidget extends StatelessWidget {
   const NotaFechaAutomaticaWidget({super.key});
 

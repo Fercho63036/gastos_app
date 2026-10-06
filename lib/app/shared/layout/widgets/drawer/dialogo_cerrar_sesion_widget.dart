@@ -1,8 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/constants/layout_strings.dart';
 
-/// Devuelve `true` al confirmar y `false` al cancelar.
+/*********************** DIALOGO CERRAR SESION WIDGET ***********************/
 class DialogoCerrarSesionWidget extends StatelessWidget {
   const DialogoCerrarSesionWidget({super.key});
 

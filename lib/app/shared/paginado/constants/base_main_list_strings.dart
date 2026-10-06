@@ -5,7 +5,7 @@ class BaseMainListStrings {
   static const String errorRefrescoSilencioso =
       'BaseMainList: fallo el refresco silencioso';
 
-  // Pie de carga de las listas paginadas
+  /******************* PIE DE CARGA DE LAS LISTAS PAGINADAS *******************/
   static const String deslizaParaCargarMas = 'Desliza para ver más';
   static const String sueltaParaCargarMas = 'Suelta para cargar más';
   static const String cargandoMas = 'Cargando…';

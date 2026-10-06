@@ -1,5 +1,7 @@
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:shared_preferences/shared_preferences.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/config/app_config.dart';
 
 class StorageService {
@@ -9,7 +11,7 @@ class StorageService {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  // Sesión: el token lo entrega el backend (hoy, el repositorio local)
+  /*********************************** SESION **********************************/
   String? leerTokenSesion() => _prefs.getString(AppConfig.storageTokenKey);
 
   String? leerCorreoSesion() => _prefs.getString(AppConfig.storageCorreoKey);
@@ -27,7 +29,7 @@ class StorageService {
     await _prefs.remove(AppConfig.storageCorreoKey);
   }
 
-  // Tema
+  /*********************************** TEMA ***********************************/
   bool leerTemaOscuro() => _prefs.getBool(AppConfig.storageTemaKey) ?? false;
 
   Future<void> guardarTemaOscuro(bool temaOscuro) =>

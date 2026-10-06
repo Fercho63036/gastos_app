@@ -1,7 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/config/app_config.dart';
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/widgets/app_brand_logo_widget.dart';
 
 class DrawerHeaderWidget extends StatelessWidget {

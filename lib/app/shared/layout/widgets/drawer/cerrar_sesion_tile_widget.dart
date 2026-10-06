@@ -1,12 +1,19 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
+
+/********************************* FEATURE **********************************/
 import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/constants/layout_strings.dart';
 import 'package:gastos_app/app/shared/layout/utils/menu_colores.dart';
 import 'package:gastos_app/app/shared/layout/widgets/drawer/dialogo_cerrar_sesion_widget.dart';

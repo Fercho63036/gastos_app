@@ -1,9 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// Con [mostrarAppBar] arma su propio Scaffold; sin él (dentro de
-/// MainLayout) apila el FAB sobre el contenido.
+/*********************** BASE LIST CONTENEDOR WIDGET ************************/
 class BaseListContenedorWidget extends StatelessWidget {
   final bool mostrarAppBar;
   final String? titulo;

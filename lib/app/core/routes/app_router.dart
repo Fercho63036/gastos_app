@@ -1,16 +1,23 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/widgets.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/routes/route_guards.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 import 'package:gastos_app/app/core/routes/ruta_no_encontrada_page.dart';
 import 'package:gastos_app/app/core/routes/rutas_formularios.dart';
+
+/********************************* FEATURE **********************************/
 import 'package:gastos_app/app/features/auth/pages/login_page.dart';
 import 'package:gastos_app/app/features/auth/pages/recuperar_contrasena_page.dart';
 import 'package:gastos_app/app/features/auth/pages/registrar_page.dart';
 import 'package:gastos_app/app/features/inicio/pages/inicio_page.dart';
 import 'package:gastos_app/app/features/perfil/pages/perfil_page.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/main_layout.dart';
 
 class AppRouter {
@@ -21,7 +28,7 @@ class AppRouter {
   static final GlobalKey<NavigatorState> _shellNavigatorKey =
       GlobalKey<NavigatorState>();
 
-  /// [refrescarCon] re-evalúa el guard cuando cambia la sesión (login/logout).
+  /******************************** APP ROUTER ********************************/
   AppRouter({required Listenable refrescarCon})
     : config = GoRouter(
         navigatorKey: _rootNavigatorKey,

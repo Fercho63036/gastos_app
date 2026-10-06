@@ -1,14 +1,18 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/constants/formato_strings.dart';
 import 'package:gastos_app/app/core/theme/app_colores.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
 import 'package:gastos_app/app/shared/widgets/progreso/barra_progreso_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/inicio_strings.dart';
 import '../../utils/inicio_helpers.dart';
 import 'fila_gastable_piso_widget.dart';

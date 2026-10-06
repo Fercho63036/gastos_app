@@ -1,8 +1,7 @@
+/*********************************** CORE ***********************************/
 import 'errores_strings.dart';
 
-/// Errores esperables de cualquier repositorio (local o remoto). La UI solo
-/// muestra [mensaje]; el futuro cliente HTTP traduce cada código a una de
-/// estas clases.
+/******************************** APP EXCEPTION ********************************/
 sealed class AppException implements Exception {
   final String mensaje;
 
@@ -24,7 +23,7 @@ class NoEncontradoException extends AppException {
   const NoEncontradoException([super.mensaje = ErroresStrings.noEncontrado]);
 }
 
-/// Datos rechazados por las reglas de negocio (HTTP 422).
+/*************************** VALIDACION EXCEPTION ***************************/
 class ValidacionException extends AppException {
   const ValidacionException(super.mensaje);
 }

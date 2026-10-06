@@ -1,7 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/foundation.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/errors/app_exception.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/grupo_dia_model.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
@@ -10,6 +13,7 @@ import 'package:gastos_app/app/shared/paginado/models/paginated_response_model.d
 import 'package:gastos_app/app/shared/paginado/utils/paginacion_mixin.dart';
 import 'package:gastos_app/app/shared/utils/agrupacion_helpers.dart';
 
+/********************************* FEATURE **********************************/
 import '../constants/inicio_strings.dart';
 import '../models/periodo_filtro.dart';
 import '../services/inicio_service.dart';
@@ -38,7 +42,7 @@ class InicioProvider extends ChangeNotifier with PaginacionMixin<Movimiento> {
   Future<PaginatedResponse<Movimiento>> obtenerPagina(int pagina) =>
       _servicio.obtenerMovimientos(periodo: _periodo, pagina: pagina);
 
-  /// Recarga el resumen y vuelve a la primera página del periodo actual.
+  /********************************** CARGAR **********************************/
   Future<void> cargar() async {
     _cargando = true;
     _error = null;
@@ -60,7 +64,7 @@ class InicioProvider extends ChangeNotifier with PaginacionMixin<Movimiento> {
     }
   }
 
-  /// No pide más mientras se recarga la primera página.
+  /******************************** CARGAR MAS ********************************/
   @override
   Future<void> cargarMas() async {
     if (_cargando) return;

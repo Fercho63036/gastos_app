@@ -1,3 +1,4 @@
+/********************************** SHARED **********************************/
 import '../models/borrador_movimiento_model.dart';
 import '../models/categoria_movimiento.dart';
 import '../models/movimiento_model.dart';
@@ -8,7 +9,7 @@ import 'json_helpers.dart';
 class MovimientoDto {
   MovimientoDto._();
 
-  /// El id viaja como texto para no depender del tipo que use el backend.
+  /******************************** DESDE JSON ********************************/
   static Movimiento desdeJson(Json json) => Movimiento(
     id: json[ApiClaves.id].toString(),
     codigo: json[ApiClaves.codigo] as String,
@@ -38,7 +39,7 @@ class MovimientoDto {
     ApiClaves.ediciones: movimiento.ediciones.map(EdicionDto.aJson).toList(),
   };
 
-  /// Cuerpo de `POST /movimientos`.
+  /***************************** BORRADOR A JSON ******************************/
   static Json borradorAJson(BorradorMovimiento borrador) => {
     ApiClaves.titulo: borrador.titulo,
     ApiClaves.categoria: borrador.categoria.name,
@@ -46,7 +47,7 @@ class MovimientoDto {
     ApiClaves.esEntrada: borrador.esEntrada,
   };
 
-  /// Cuerpo de `PATCH /movimientos/{id}`: solo los campos editables.
+  /****************************** CAMBIOS A JSON ******************************/
   static Json cambiosAJson(Movimiento editado) => {
     ApiClaves.titulo: editado.titulo,
     ApiClaves.categoria: editado.categoria.name,

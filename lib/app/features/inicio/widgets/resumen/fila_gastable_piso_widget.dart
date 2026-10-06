@@ -1,9 +1,13 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/inicio_strings.dart';
 
 class FilaGastablePisoWidget extends StatelessWidget {

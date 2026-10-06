@@ -1,8 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// Barra de progreso en forma de píldora; sin colores usa los del tema.
+/************************** BARRA PROGRESO WIDGET ***************************/
 class BarraProgresoWidget extends StatelessWidget {
   final double fraccion;
   final Color? color;

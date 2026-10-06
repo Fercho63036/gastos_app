@@ -1,3 +1,4 @@
+/********************************** SHARED **********************************/
 import 'categoria_movimiento.dart';
 import 'edicion_movimiento_model.dart';
 import 'estado_movimiento.dart';
@@ -12,7 +13,7 @@ class Movimiento {
   final bool anulado;
   final bool esEntrada;
 
-  /// De la más reciente a la más antigua.
+  /******************************** EDICIONES *********************************/
   final List<EdicionMovimiento> ediciones;
 
   const Movimiento({

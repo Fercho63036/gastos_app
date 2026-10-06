@@ -1,6 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/paginado/models/base_tab_model.dart';
 import 'package:gastos_app/app/shared/paginado/widgets/base_tab_item_widget.dart';
 

@@ -1,14 +1,23 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:provider/provider.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/config/app_config.dart';
 import 'package:gastos_app/app/core/di/injection.dart';
 import 'package:gastos_app/app/core/routes/app_router.dart';
 import 'package:gastos_app/app/core/theme/app_tema.dart';
+
+/********************************* FEATURE **********************************/
 import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
 import 'package:gastos_app/app/features/inicio/providers/inicio_provider.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/providers/theme_provider.dart';
+
+/********************************* FEATURE **********************************/
 import 'package:gastos_app/features/expenses/presentation/providers/expenses_provider.dart';
 
 class GastosApp extends StatelessWidget {

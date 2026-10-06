@@ -1,9 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/monto_input_formatter.dart';
 
-/// Tarjeta con un monto grande editable: "[prefijo] 25,00" y un subtítulo.
+/************************ CAMPO MONTO GRANDE WIDGET *************************/
 class CampoMontoGrandeWidget extends StatelessWidget {
   final String etiqueta;
   final String prefijo;

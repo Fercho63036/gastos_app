@@ -1,7 +1,7 @@
 class AuthStrings {
   AuthStrings._();
 
-  // Login
+  /********************************** LOGIN ***********************************/
   static const String bienvenido = 'Bienvenido';
   static const String iniciaSesion = 'Inicia sesión para continuar';
   static const String iniciarSesion = 'Iniciar sesión';
@@ -11,7 +11,7 @@ class AuthStrings {
   static const String separador = 'o';
   static const String crearCuenta = 'Crear cuenta';
 
-  // Registro
+  /********************************* REGISTRO *********************************/
   static const String registroTitulo = 'Crear cuenta';
   static const String registroSubtitulo = 'Completa tus datos para empezar';
   static const String nombreCompleto = 'Nombre completo';
@@ -20,7 +20,7 @@ class AuthStrings {
   static const String registroExitoso =
       'Cuenta creada. Ya puedes iniciar sesión';
 
-  // Recuperar contraseña
+  /*************************** RECUPERAR CONTRASEÑA ***************************/
   static const String recuperarTitulo = 'Recuperar contraseña';
   static const String recuperarSubtitulo =
       'Ingresa tu correo y define una nueva contraseña';
@@ -34,7 +34,7 @@ class AuthStrings {
   static const String ocultarContrasena = 'Ocultar contraseña';
   static const String cambiarTema = 'Cambiar tema';
 
-  // Validaciones
+  /******************************* VALIDACIONES *******************************/
   static const String ingresaCorreo = 'Ingresa tu correo electrónico';
   static const String correoInvalido = 'Ingresa un correo válido';
   static const String ingresaNombre = 'Ingresa tu nombre';

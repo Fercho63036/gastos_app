@@ -1,9 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// ListTile base del Drawer: mismo espaciado, icono y tipografía para items,
-/// cabeceras expandibles y "Cerrar sesión".
+/************************** MENU LIST TILE WIDGET ***************************/
 class MenuListTileWidget extends StatelessWidget {
   final IconData icono;
   final String titulo;

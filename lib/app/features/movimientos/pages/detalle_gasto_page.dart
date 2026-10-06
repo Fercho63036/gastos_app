@@ -1,8 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:provider/provider.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/estado_movimiento.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/utils/navegacion_helpers.dart';
@@ -14,6 +17,7 @@ import 'package:gastos_app/app/shared/widgets/seleccion/selector_segmentado_widg
 import 'package:gastos_app/app/shared/widgets/tarjetas/nota_icono_widget.dart';
 import 'package:gastos_app/app/shared/widgets/textos/mensaje_centrado_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../constants/movimientos_strings.dart';
 import '../providers/detalle_gasto_provider.dart';
 import '../utils/movimientos_helpers.dart';

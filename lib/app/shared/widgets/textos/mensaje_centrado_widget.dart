@@ -1,8 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
-/// Mensaje centrado a pantalla completa (errores, estados vacíos).
+/************************* MENSAJE CENTRADO WIDGET **************************/
 class MensajeCentradoWidget extends StatelessWidget {
   final String mensaje;
 

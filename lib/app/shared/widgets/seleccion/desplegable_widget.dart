@@ -1,8 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// Lista desplegable con el estilo de campo del tema.
+/**************************** DESPLEGABLE WIDGET ****************************/
 class DesplegableWidget<T> extends StatelessWidget {
   final List<T> opciones;
   final T valor;

@@ -1,7 +1,11 @@
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:get_it/get_it.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/database/app_database.dart';
 import 'package:gastos_app/app/core/routes/app_router.dart';
+
+/********************************* FEATURE **********************************/
 import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
 import 'package:gastos_app/app/features/auth/repositories/auth_local_repositorio.dart';
 import 'package:gastos_app/app/features/auth/repositories/auth_repositorio.dart';
@@ -11,48 +15,51 @@ import 'package:gastos_app/app/features/movimientos/providers/detalle_gasto_prov
 import 'package:gastos_app/app/features/movimientos/providers/nueva_entrada_provider.dart';
 import 'package:gastos_app/app/features/movimientos/providers/nuevo_gasto_provider.dart';
 import 'package:gastos_app/app/features/periodo/providers/iniciar_mes_provider.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/providers/theme_provider.dart';
 import 'package:gastos_app/app/shared/repositories/local/movimientos_local_repositorio.dart';
 import 'package:gastos_app/app/shared/repositories/movimientos_repositorio.dart';
 import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 import 'package:gastos_app/app/shared/services/movimientos_sqlite_almacen.dart';
 import 'package:gastos_app/app/shared/services/storage_service.dart';
+
+/********************************* FEATURE **********************************/
 import 'package:gastos_app/features/expenses/data/repositories/expenses_repository.dart';
 import 'package:gastos_app/features/expenses/presentation/providers/expenses_provider.dart';
 
 final getIt = GetIt.instance;
 
 Future<void> setupDependencias() async {
-  // Nivel 1: core
+  /****************************** NIVEL 1: CORE *******************************/
   final storage = StorageService();
   await storage.init();
   getIt.registerSingleton<StorageService>(storage);
 
-  // Nivel 2: providers globales
+  /******************************* NIVEL 2: PROVIDERS GLOBALES ********************************/
   getIt.registerLazySingleton<ThemeProvider>(
     () => ThemeProvider(getIt<StorageService>()),
   );
 
-  // Nivel 3: repositorios (hoy locales; mañana, el backend)
+  /***************************** NIVEL 3: REPOSITORIOS ****************************/
   _registrarRepositorios();
 
-  // Nivel 4: autenticación y datos
+  /**************************** NIVEL 4: AUTENTICACION Y DATOS ********************************/
   getIt.registerLazySingleton<AuthProvider>(
     () => AuthProvider(getIt<AuthRepositorio>(), getIt<StorageService>()),
   );
   await _registrarDatos();
 
-  // Nivel 5: features
+  /**************************** NIVEL 5: FEATURES *****************************/
   _registrarFeatures();
 
-  // Nivel 6: routing
+  /******************************** NIVEL 6: ROUTING ***************************************/
   getIt.registerLazySingleton<AppRouter>(
     () => AppRouter(refrescarCon: getIt<AuthProvider>()),
   );
 }
 
-/// Único punto que cambia al conectar el backend: registrar aquí las
-/// implementaciones que llaman al API (ver `docs/api_contrato.md`).
+/************************** REGISTRAR REPOSITORIOS **************************/
 void _registrarRepositorios() {
   getIt.registerLazySingleton<AuthRepositorio>(AuthLocalRepositorio.new);
   getIt.registerLazySingleton<MovimientosRepositorio>(
@@ -62,7 +69,7 @@ void _registrarRepositorios() {
   );
 }
 
-/// Se carga antes de mostrar la app para que Inicio arranque con el resumen.
+/***************************** REGISTRAR DATOS ******************************/
 Future<void> _registrarDatos() async {
   final movimientos = MovimientosService(getIt<MovimientosRepositorio>());
   await movimientos.cargar();
@@ -79,7 +86,7 @@ void _registrarFeatures() {
   _registrarFormularios();
 }
 
-/// Providers por pantalla: `registerFactory` crea uno nuevo en cada apertura.
+/************************** REGISTRAR FORMULARIOS ***************************/
 void _registrarFormularios() {
   getIt.registerFactory<NuevoGastoProvider>(
     () => NuevoGastoProvider(getIt<MovimientosService>()),

@@ -1,12 +1,16 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/grupo_dia_model.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/widgets/textos/encabezado_seccion_widget.dart';
 
+/********************************* FEATURE **********************************/
 import 'tarjeta_movimiento_widget.dart';
 
 class GrupoDiaWidget extends StatelessWidget {

@@ -1,4 +1,4 @@
-/// Sesión abierta: el [token] va en cada llamada al backend.
+/******************************* SESION MODEL *******************************/
 class SesionModel {
   final String token;
   final String correo;

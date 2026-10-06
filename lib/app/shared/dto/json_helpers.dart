@@ -1,10 +1,10 @@
 typedef Json = Map<String, Object?>;
 
-/// Conversiones comunes del JSON del API.
+/******************************* JSON HELPERS *******************************/
 class JsonHelpers {
   JsonHelpers._();
 
-  /// Se envía siempre en UTC para que el servidor no dependa de la zona.
+  /******************************* FECHA A JSON *******************************/
   static String fechaAJson(DateTime fecha) => fecha.toUtc().toIso8601String();
 
   static DateTime fechaDesdeJson(Object? valor) =>

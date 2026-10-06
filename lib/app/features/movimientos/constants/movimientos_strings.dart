@@ -1,7 +1,7 @@
 class MovimientosStrings {
   MovimientosStrings._();
 
-  // Comunes
+  /********************************* COMUNES **********************************/
   static const String hintMonto = '0,00';
   static const String descripcion = 'Descripción';
   static const String categoria = 'Categoría';
@@ -9,7 +9,7 @@ class MovimientosStrings {
   static const String montoInvalido = 'Ingresa un monto mayor a cero';
   static const String descripcionVacia = 'Escribe una descripción';
 
-  // Nuevo gasto
+  /******************************* NUEVO GASTO ********************************/
   static const String nuevoGasto = 'Nuevo gasto';
   static const String monto = 'Monto';
   static const String saldoDespues = 'Saldo después: ';
@@ -17,7 +17,7 @@ class MovimientosStrings {
   static const String guardarGasto = 'Guardar gasto';
   static const String gastoRegistrado = 'Gasto registrado';
 
-  // Detalle del gasto
+  /**************************** DETALLE DEL GASTO *****************************/
   static const String detalleGasto = 'Detalle del gasto';
   static const String prefijoId = 'ID ';
   static const String registradoEl = 'Registrado el ';
@@ -32,7 +32,7 @@ class MovimientosStrings {
   static const String cambiosGuardados = 'Cambios guardados';
   static const String gastoNoEncontrado = 'No se encontró el gasto';
 
-  // Nueva entrada
+  /****************************** NUEVA ENTRADA *******************************/
   static const String nuevaEntrada = 'Nueva entrada';
   static const String introEntrada =
       'Registra una recarga o ampliación de tu dinero del mes.';

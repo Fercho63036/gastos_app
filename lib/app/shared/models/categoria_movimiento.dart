@@ -1,8 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/theme/app_colores.dart';
 
+/********************************** SHARED **********************************/
 import '../constants/dominio_strings.dart';
 
 enum CategoriaMovimiento {
@@ -36,7 +39,7 @@ enum CategoriaMovimiento {
 
   const CategoriaMovimiento(this.nombre, this.icono, this.color);
 
-  /// Las que se pueden elegir al registrar o editar un gasto.
+  /********************************* DE GASTO *********************************/
   static const List<CategoriaMovimiento> deGasto = [
     comida,
     pasajes,

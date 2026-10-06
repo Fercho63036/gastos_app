@@ -1,6 +1,6 @@
 enum EstiloFilaResumen { normal, destacado, acento, positivo }
 
-/// Una fila "etiqueta · valor" de una tarjeta de resumen.
+/******************************* FILA RESUMEN *******************************/
 class FilaResumen {
   final String etiqueta;
   final String valor;

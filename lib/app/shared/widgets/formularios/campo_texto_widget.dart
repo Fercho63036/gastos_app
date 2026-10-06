@@ -1,9 +1,11 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// Campo de texto relleno con el estilo del tema; sirve para texto o montos.
+/**************************** CAMPO TEXTO WIDGET ****************************/
 class CampoTextoWidget extends StatelessWidget {
   final TextEditingController controller;
   final String? hint;

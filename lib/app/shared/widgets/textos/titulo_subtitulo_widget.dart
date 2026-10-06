@@ -1,8 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-/// Título en negrita sobre un subtítulo atenuado; ambos opcionales.
+/************************* TITULO SUBTITULO WIDGET **************************/
 class TituloSubtituloWidget extends StatelessWidget {
   final String? titulo;
   final String? subtitulo;

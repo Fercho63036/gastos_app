@@ -1,6 +1,8 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/theme/app_colores.dart';
 

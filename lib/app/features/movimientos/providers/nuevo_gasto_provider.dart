@@ -1,12 +1,16 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/widgets.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 import 'package:gastos_app/app/shared/utils/guardado_mixin.dart';
 import 'package:gastos_app/app/shared/utils/resumen_helpers.dart';
 
+/********************************* FEATURE **********************************/
 import '../utils/movimientos_helpers.dart';
 
 class NuevoGastoProvider extends ChangeNotifier with GuardadoMixin {
@@ -33,7 +37,7 @@ class NuevoGastoProvider extends ChangeNotifier with GuardadoMixin {
     notifyListeners();
   }
 
-  /// Devuelve el error a mostrar, o `null` si el gasto se guardó.
+  /********************************* GUARDAR **********************************/
   Future<String?> guardar() => guardarConEstado(() async {
     final titulo = descripcionController.text.trim();
     final error = MovimientosHelpers.validarGasto(montoCentavos, titulo);

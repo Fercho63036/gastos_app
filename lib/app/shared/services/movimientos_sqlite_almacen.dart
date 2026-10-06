@@ -1,8 +1,11 @@
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:sqflite/sqflite.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/database_constants.dart';
 import 'package:gastos_app/app/core/database/app_database.dart';
 
+/********************************** SHARED **********************************/
 import '../models/edicion_movimiento_model.dart';
 import '../models/movimiento_model.dart';
 import '../models/periodo_mes_model.dart';

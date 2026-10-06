@@ -1,16 +1,16 @@
 class RouteNames {
   RouteNames._();
 
-  // Públicas
+  /********************************* PÚBLICAS *********************************/
   static const String auth = '/auth';
   static const String registro = '/registro';
   static const String recuperarPassword = '/recuperar-password';
 
-  // Protegidas
+  /******************************** PROTEGIDAS ********************************/
   static const String home = '/';
   static const String perfil = '/perfil';
 
-  // Protegidas en pantalla completa (fuera del layout con tabs)
+  /******* PROTEGIDAS EN PANTALLA COMPLETA (FUERA DEL LAYOUT CON TABS) ********/
   static const String nuevoGasto = '/nuevo-gasto';
   static const String nuevaEntrada = '/nueva-entrada';
   static const String iniciarMes = '/iniciar-mes';

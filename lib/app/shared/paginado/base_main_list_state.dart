@@ -1,7 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/paginado/base_main_list.dart';
 import 'package:gastos_app/app/shared/paginado/constants/base_main_list_constants.dart';
 import 'package:gastos_app/app/shared/paginado/constants/base_main_list_strings.dart';
@@ -44,7 +47,6 @@ class BaseMainListState<T> extends State<BaseMainList<T>> {
   void _onTabChanged(int index) {
     if (_tabIndex == index) return;
     setState(() => _tabIndex = index);
-    // El buscador se desmonta en tabs con página propia y vuelve vacío.
     if (_tabTienePagina) _busqueda = '';
     if (!_tabTienePagina) _onRefresh();
   }
@@ -63,7 +65,7 @@ class BaseMainListState<T> extends State<BaseMainList<T>> {
 
   Future<void> manualRefresh() async => _onRefresh();
 
-  /// Recarga sin indicador; si falla se conserva la lista visible.
+  /****************************** SILENT REFRESH ******************************/
   Future<void> silentRefresh() async {
     if (_ocupado || _tabTienePagina) return;
     _ocupado = true;

@@ -1,13 +1,17 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/paginado/constants/base_main_list_strings.dart';
 import 'package:gastos_app/app/shared/paginado/widgets/pie_carga_paginado_widget.dart';
 
-/// Lista con scroll propio y barra visible: tirar hacia abajo recarga y
-/// llegar al final pide la página siguiente.
+/*********************** LISTA PAGINADA SCROLL WIDGET ***********************/
 class ListaPaginadaScrollWidget<T> extends StatefulWidget {
   final List<T> items;
   final Widget Function(BuildContext context, T item) itemBuilder;
@@ -40,7 +44,7 @@ class _ListaPaginadaScrollWidgetState<T>
   final RefreshController _refreshController = RefreshController();
   final ScrollController _scrollController = ScrollController();
 
-  /// Muestra "No hay más" cuando ya se cargó todo; no pisa una carga en curso.
+  /************************* SINCRONIZAR FIN DE LISTA *************************/
   void _sincronizarFinDeLista() {
     if (!mounted) return;
     if (_refreshController.footerStatus == LoadStatus.loading) return;
@@ -62,7 +66,6 @@ class _ListaPaginadaScrollWidgetState<T>
       await widget.onCargarMas();
       if (!mounted) return;
       _refreshController.loadComplete();
-      // El provider avisa en el próximo frame; ahí `hayMas` ya está al día.
       WidgetsBinding.instance.addPostFrameCallback(
         (_) => _sincronizarFinDeLista(),
       );

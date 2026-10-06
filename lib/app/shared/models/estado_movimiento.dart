@@ -1,3 +1,4 @@
+/********************************** SHARED **********************************/
 import '../constants/dominio_strings.dart';
 
 enum EstadoMovimiento {

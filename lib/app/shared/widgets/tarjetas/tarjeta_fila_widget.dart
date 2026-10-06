@@ -1,11 +1,13 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************** SHARED **********************************/
 import '../decoracion/borde_punteado_widget.dart';
 
-/// Tarjeta en fila: [inicio] · [contenido] expandido · [fin].
-/// Con [punteado] pierde el fondo y se marca con borde punteado.
+/*************************** TARJETA FILA WIDGET ****************************/
 class TarjetaFilaWidget extends StatelessWidget {
   final Widget inicio;
   final Widget contenido;

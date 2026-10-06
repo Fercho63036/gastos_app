@@ -1,16 +1,20 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/monto_input_formatter.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/widgets/formularios/campo_etiquetado_widget.dart';
 import 'package:gastos_app/app/shared/widgets/formularios/campo_texto_widget.dart';
 import 'package:gastos_app/app/shared/widgets/seleccion/desplegable_widget.dart';
 
+/********************************* FEATURE **********************************/
 import '../../constants/movimientos_strings.dart';
 
-/// "Monto (Bs)" y "Categoría" lado a lado.
+/*********************** FILA MONTO CATEGORIA WIDGET ************************/
 class FilaMontoCategoriaWidget extends StatelessWidget {
   final TextEditingController montoController;
   final CategoriaMovimiento categoria;

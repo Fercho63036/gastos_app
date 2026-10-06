@@ -1,11 +1,14 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
+/********************************** SHARED **********************************/
 import '../textos/titulo_subtitulo_widget.dart';
 import 'tarjeta_superficie_widget.dart';
 
-/// Nota informativa en tarjeta: ícono, título opcional y texto.
+/**************************** NOTA ICONO WIDGET *****************************/
 class NotaIconoWidget extends StatelessWidget {
   final IconData icono;
   final String texto;

@@ -1,7 +1,10 @@
+/****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
+/**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
 
+/********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/widgets/app_bar_principal_widget.dart';
 import 'package:gastos_app/app/shared/layout/widgets/app_tab_bar_widget.dart';
 import 'package:gastos_app/app/shared/layout/widgets/drawer/menu_drawer_widget.dart';

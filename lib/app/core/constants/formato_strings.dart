@@ -1,4 +1,4 @@
-/// Textos de formato (moneda, separadores y fechas) compartidos por toda la app.
+/***************************** FORMATO STRINGS ******************************/
 class FormatoStrings {
   FormatoStrings._();
 
@@ -16,7 +16,7 @@ class FormatoStrings {
   static const String hoyMayuscula = 'HOY';
   static const String ayerMayuscula = 'AYER';
 
-  /// Índice 0 = lunes, igual que `DateTime.weekday - 1`.
+  /***************************** DIAS ABREVIADOS ******************************/
   static const List<String> diasAbreviados = [
     'LUN',
     'MAR',
@@ -27,7 +27,7 @@ class FormatoStrings {
     'DOM',
   ];
 
-  /// Índice 0 = enero, igual que `DateTime.month - 1`.
+  /***************************** MESES ABREVIADOS *****************************/
   static const List<String> mesesAbreviados = [
     'ENE',
     'FEB',
@@ -43,7 +43,7 @@ class FormatoStrings {
     'DIC',
   ];
 
-  /// Índice 0 = enero, igual que `DateTime.month - 1`.
+  /***************************** MESES COMPLETOS ******************************/
   static const List<String> mesesCompletos = [
     'Enero',
     'Febrero',
