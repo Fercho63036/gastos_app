@@ -13,6 +13,7 @@ import 'package:gastos_app/app/features/movimientos/pages/nuevo_gasto_page.dart'
 import 'package:gastos_app/app/features/movimientos/providers/detalle_gasto_provider.dart';
 import 'package:gastos_app/app/features/movimientos/providers/nueva_entrada_provider.dart';
 import 'package:gastos_app/app/features/movimientos/providers/nuevo_gasto_provider.dart';
+import 'package:gastos_app/app/features/perfil/pages/editar_perfil_page.dart';
 import 'package:gastos_app/app/features/periodo/pages/iniciar_mes_page.dart';
 import 'package:gastos_app/app/features/periodo/providers/iniciar_mes_provider.dart';
 
@@ -50,6 +51,10 @@ class RutasFormularios {
         create: (_) => getIt<IniciarMesProvider>(),
         child: const IniciarMesPage(),
       ),
+    ),
+    GoRoute(
+      path: RouteNames.editarPerfil,
+      builder: (context, state) => const EditarPerfilPage(),
     ),
   ];
 }

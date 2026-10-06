@@ -7,11 +7,11 @@ import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 /********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/widgets/app_brand_logo_widget.dart';
 
-class AuthEncabezadoWidget extends StatelessWidget {
+class EncabezadoFormularioWidget extends StatelessWidget {
   final String titulo;
   final String subtitulo;
 
-  const AuthEncabezadoWidget({
+  const EncabezadoFormularioWidget({
     super.key,
     required this.titulo,
     required this.subtitulo,

@@ -1,5 +1,4 @@
 /****************************** FLUTTER / DART ******************************/
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /*********************************** CORE ***********************************/
@@ -7,9 +6,8 @@ import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/utils/responsive_helper.dart';
 
 /********************************** SHARED **********************************/
-import '../../constants/comun_strings.dart';
-import '../../utils/navegacion_helpers.dart';
 import '../botones/boton_primario_widget.dart';
+import 'boton_volver_widget.dart';
 
 /************************* PAGINA FORMULARIO WIDGET *************************/
 class PaginaFormularioWidget extends StatelessWidget {
@@ -30,11 +28,7 @@ class PaginaFormularioWidget extends StatelessWidget {
 
   PreferredSizeWidget _buildAppBar(BuildContext context) {
     return AppBar(
-      leading: IconButton(
-        icon: const Icon(CupertinoIcons.back),
-        tooltip: ComunStrings.volver,
-        onPressed: () => NavegacionHelpers.volver(context),
-      ),
+      leading: const BotonVolverWidget(),
       titleSpacing: AppDimensions.elevacionNula,
       title: Text(titulo, style: const TextStyle(fontWeight: FontWeight.w700)),
     );

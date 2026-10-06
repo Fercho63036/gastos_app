@@ -11,7 +11,9 @@ import 'package:gastos_app/app/core/errors/app_exception.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 
 /********************************** SHARED **********************************/
+import 'package:gastos_app/app/shared/utils/mensajes_helpers.dart';
 import 'package:gastos_app/app/shared/widgets/botones/boton_primario_widget.dart';
+import 'package:gastos_app/app/shared/widgets/campos/campo_correo_widget.dart';
 
 /********************************* FEATURE **********************************/
 import '../../constants/auth_constants.dart';
@@ -19,9 +21,7 @@ import '../../constants/auth_strings.dart';
 import '../../models/credenciales_model.dart';
 import '../../providers/auth_provider.dart';
 import '../../utils/auth_helpers.dart';
-import '../../utils/auth_mensajes.dart';
 import '../campos/campo_contrasena_widget.dart';
-import '../campos/campo_correo_widget.dart';
 
 class FormularioLoginWidget extends StatefulWidget {
   const FormularioLoginWidget({super.key});
@@ -52,10 +52,10 @@ class _FormularioLoginWidgetState extends State<FormularioLoginWidget> {
       await context.read<AuthProvider>().iniciarSesion(credenciales);
       if (mounted) context.go(RouteNames.home);
     } on AppException catch (error) {
-      if (mounted) AuthMensajes.mostrar(context, error.mensaje);
+      if (mounted) MensajesHelpers.mostrar(context, error.mensaje);
     } on Exception catch (error) {
       debugPrint('[Login] $error');
-      if (mounted) AuthMensajes.mostrar(context, AuthStrings.ocurrioError);
+      if (mounted) MensajesHelpers.mostrar(context, AuthStrings.ocurrioError);
     }
   }
 

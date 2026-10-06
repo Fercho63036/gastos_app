@@ -6,25 +6,24 @@ import 'package:gastos_app/app/shared/widgets/estructura/encabezado_formulario_w
 import 'package:gastos_app/app/shared/widgets/estructura/tarjeta_layout_widget.dart';
 
 /********************************* FEATURE **********************************/
-import '../constants/auth_strings.dart';
-import '../widgets/estructura/volver_login_widget.dart';
-import '../widgets/formularios/formulario_registro_widget.dart';
+import '../constants/perfil_strings.dart';
+import '../widgets/formularios/formulario_editar_perfil_widget.dart';
 
-class RegistrarPage extends StatelessWidget {
-  const RegistrarPage({super.key});
+class EditarPerfilPage extends StatelessWidget {
+  const EditarPerfilPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const TarjetaLayoutWidget(
+      mostrarBotonVolver: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           EncabezadoFormularioWidget(
-            titulo: AuthStrings.registroTitulo,
-            subtitulo: AuthStrings.registroSubtitulo,
+            titulo: PerfilStrings.editarDatosTitulo,
+            subtitulo: PerfilStrings.editarDatosSubtitulo,
           ),
-          FormularioRegistroWidget(),
-          VolverLoginWidget(),
+          FormularioEditarPerfilWidget(),
         ],
       ),
     );

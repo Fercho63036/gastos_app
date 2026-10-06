@@ -5,7 +5,6 @@ class AuthStrings {
   static const String bienvenido = 'Bienvenido';
   static const String iniciaSesion = 'Inicia sesión para continuar';
   static const String iniciarSesion = 'Iniciar sesión';
-  static const String correoElectronico = 'Correo electrónico';
   static const String contrasena = 'Contraseña';
   static const String olvidasteContrasena = '¿Olvidaste tu contraseña?';
   static const String separador = 'o';
@@ -14,7 +13,6 @@ class AuthStrings {
   /********************************* REGISTRO *********************************/
   static const String registroTitulo = 'Crear cuenta';
   static const String registroSubtitulo = 'Completa tus datos para empezar';
-  static const String nombreCompleto = 'Nombre completo';
   static const String confirmarContrasena = 'Confirmar contraseña';
   static const String registrar = 'Registrarme';
   static const String registroExitoso =
@@ -32,13 +30,8 @@ class AuthStrings {
   static const String volverALogin = 'Volver a iniciar sesión';
   static const String mostrarContrasena = 'Mostrar contraseña';
   static const String ocultarContrasena = 'Ocultar contraseña';
-  static const String cambiarTema = 'Cambiar tema';
 
   /******************************* VALIDACIONES *******************************/
-  static const String ingresaCorreo = 'Ingresa tu correo electrónico';
-  static const String correoInvalido = 'Ingresa un correo válido';
-  static const String ingresaNombre = 'Ingresa tu nombre';
-  static const String nombreCorto = 'El nombre es demasiado corto';
   static const String ingresaContrasena = 'Ingresa tu contraseña';
   static const String contrasenaCorta = 'La contraseña es demasiado corta';
   static const String contrasenasNoCoinciden = 'Las contraseñas no coinciden';

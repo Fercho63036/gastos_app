@@ -16,6 +16,12 @@ abstract class AuthRepositorio {
   /*************************** RECUPERAR CONTRASENA ***************************/
   Future<void> recuperarContrasena(CredencialesModel credenciales);
 
+  /****************************** ACTUALIZAR PERFIL ****************************/
+  Future<void> actualizarPerfil({
+    required String nombre,
+    required String correo,
+  });
+
   /****************************** CERRAR SESION *******************************/
   Future<void> cerrarSesion(String token);
 }

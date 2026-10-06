@@ -8,5 +8,6 @@ class AppConfig {
 
   static const String storageTokenKey = 'sesion_token';
   static const String storageCorreoKey = 'sesion_correo';
+  static const String storageNombreKey = 'sesion_nombre';
   static const String storageTemaKey = 'tema_oscuro';
 }

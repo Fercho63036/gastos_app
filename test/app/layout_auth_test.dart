@@ -3,7 +3,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 import 'package:gastos_app/app/features/auth/constants/auth_strings.dart';
 import 'package:gastos_app/app/features/auth/utils/auth_helpers.dart';
+import 'package:gastos_app/app/shared/constants/formulario_strings.dart';
 import 'package:gastos_app/app/shared/layout/config/menu_config.dart';
+import 'package:gastos_app/app/shared/utils/validadores_helpers.dart';
 
 void main() {
   group('MenuConfig', () {
@@ -22,13 +24,21 @@ void main() {
     });
   });
 
-  group('AuthHelpers', () {
+  group('ValidadoresHelpers', () {
     test('validarCorreo', () {
-      expect(AuthHelpers.validarCorreo(''), AuthStrings.ingresaCorreo);
-      expect(AuthHelpers.validarCorreo('abc'), AuthStrings.correoInvalido);
-      expect(AuthHelpers.validarCorreo('a@b.co'), isNull);
+      expect(
+        ValidadoresHelpers.validarCorreo(''),
+        FormularioStrings.ingresaCorreo,
+      );
+      expect(
+        ValidadoresHelpers.validarCorreo('abc'),
+        FormularioStrings.correoInvalido,
+      );
+      expect(ValidadoresHelpers.validarCorreo('a@b.co'), isNull);
     });
+  });
 
+  group('AuthHelpers', () {
     test('validarConfirmacion', () {
       expect(
         AuthHelpers.validarConfirmacion('x', 'y'),

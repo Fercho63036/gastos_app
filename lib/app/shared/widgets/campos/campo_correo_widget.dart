@@ -1,10 +1,12 @@
 /****************************** FLUTTER / DART ******************************/
 import 'package:flutter/cupertino.dart';
 
+/********************************** SHARED **********************************/
+import 'package:gastos_app/app/shared/constants/formulario_strings.dart';
+import 'package:gastos_app/app/shared/utils/validadores_helpers.dart';
+
 /********************************* FEATURE **********************************/
-import '../../constants/auth_strings.dart';
-import '../../utils/auth_helpers.dart';
-import 'campo_texto_auth_widget.dart';
+import 'campo_texto_widget.dart';
 
 class CampoCorreoWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -13,12 +15,12 @@ class CampoCorreoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CampoTextoAuthWidget(
+    return CampoTextoWidget(
       controller: controller,
-      etiqueta: AuthStrings.correoElectronico,
+      etiqueta: FormularioStrings.correoElectronico,
       icono: CupertinoIcons.mail,
       keyboardType: TextInputType.emailAddress,
-      validator: AuthHelpers.validarCorreo,
+      validator: ValidadoresHelpers.validarCorreo,
     );
   }
 }

@@ -11,16 +11,15 @@ import 'package:gastos_app/app/core/errors/app_exception.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 
 /********************************** SHARED **********************************/
+import 'package:gastos_app/app/shared/utils/mensajes_helpers.dart';
 import 'package:gastos_app/app/shared/widgets/botones/boton_primario_widget.dart';
+import 'package:gastos_app/app/shared/widgets/campos/campo_correo_widget.dart';
+import 'package:gastos_app/app/shared/widgets/campos/campo_nombre_widget.dart';
 
 /********************************* FEATURE **********************************/
 import '../../constants/auth_strings.dart';
 import '../../models/credenciales_model.dart';
 import '../../providers/auth_provider.dart';
-import '../../utils/auth_helpers.dart';
-import '../../utils/auth_mensajes.dart';
-import '../campos/campo_correo_widget.dart';
-import '../campos/campo_texto_auth_widget.dart';
 import '../campos/campos_contrasena_confirmacion_widget.dart';
 
 class FormularioRegistroWidget extends StatefulWidget {
@@ -59,11 +58,11 @@ class _FormularioRegistroWidgetState extends State<FormularioRegistroWidget> {
         credenciales: credenciales,
       );
     } on AppException catch (error) {
-      if (mounted) AuthMensajes.mostrar(context, error.mensaje);
+      if (mounted) MensajesHelpers.mostrar(context, error.mensaje);
       return;
     }
     if (!mounted) return;
-    AuthMensajes.mostrar(context, AuthStrings.registroExitoso);
+    MensajesHelpers.mostrar(context, AuthStrings.registroExitoso);
     context.go(RouteNames.auth);
   }
 
@@ -84,12 +83,7 @@ class _FormularioRegistroWidgetState extends State<FormularioRegistroWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CampoTextoAuthWidget(
-            controller: _nombreController,
-            etiqueta: AuthStrings.nombreCompleto,
-            icono: CupertinoIcons.person,
-            validator: AuthHelpers.validarNombre,
-          ),
+          CampoNombreWidget(controller: _nombreController),
           CampoCorreoWidget(controller: _correoController),
           CamposContrasenaConfirmacionWidget(
             contrasenaController: _contrasenaController,

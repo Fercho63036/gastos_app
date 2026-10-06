@@ -1,5 +1,5 @@
 /****************************** FLUTTER / DART ******************************/
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 /**************************** PAQUETES EXTERNOS *****************************/
 import 'package:go_router/go_router.dart';
@@ -8,56 +8,72 @@ import 'package:provider/provider.dart';
 /*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/errors/app_exception.dart';
-import 'package:gastos_app/app/core/routes/route_names.dart';
 
 /********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/utils/mensajes_helpers.dart';
 import 'package:gastos_app/app/shared/widgets/botones/boton_primario_widget.dart';
 import 'package:gastos_app/app/shared/widgets/campos/campo_correo_widget.dart';
+import 'package:gastos_app/app/shared/widgets/campos/campo_nombre_widget.dart';
 
 /********************************* FEATURE **********************************/
-import '../../constants/auth_strings.dart';
-import '../../models/credenciales_model.dart';
-import '../../providers/auth_provider.dart';
-import '../campos/campos_contrasena_confirmacion_widget.dart';
+import '../../../auth/providers/auth_provider.dart';
+import '../../constants/perfil_strings.dart';
 
-class FormularioRecuperarWidget extends StatefulWidget {
-  const FormularioRecuperarWidget({super.key});
+class FormularioEditarPerfilWidget extends StatefulWidget {
+  const FormularioEditarPerfilWidget({super.key});
 
   @override
-  State<FormularioRecuperarWidget> createState() =>
-      _FormularioRecuperarWidgetState();
+  State<FormularioEditarPerfilWidget> createState() =>
+      _FormularioEditarPerfilWidgetState();
 }
 
-class _FormularioRecuperarWidgetState extends State<FormularioRecuperarWidget> {
+class _FormularioEditarPerfilWidgetState
+    extends State<FormularioEditarPerfilWidget> {
   final _formKey = GlobalKey<FormState>();
-  final _correoController = TextEditingController();
-  final _nuevaController = TextEditingController();
-  final _repetirController = TextEditingController();
+  late final TextEditingController _nombreController;
+  late final TextEditingController _correoController;
+
+  @override
+  void initState() {
+    super.initState();
+    final authProvider = context.read<AuthProvider>();
+    _nombreController = TextEditingController(
+      text: authProvider.nombreUsuario ?? '',
+    );
+    _correoController = TextEditingController(
+      text: authProvider.correoUsuario ?? '',
+    );
+  }
 
   @override
   void dispose() {
+    _nombreController.dispose();
     _correoController.dispose();
-    _nuevaController.dispose();
-    _repetirController.dispose();
     super.dispose();
   }
 
-  Future<void> _manejarRecuperar() async {
+  Future<void> _manejarGuardar() async {
     if (!(_formKey.currentState?.validate() ?? false)) return;
-    final credenciales = CredencialesModel(
-      correo: _correoController.text.trim(),
-      contrasena: _nuevaController.text,
-    );
     try {
-      await context.read<AuthProvider>().recuperarContrasena(credenciales);
+      await context.read<AuthProvider>().actualizarDatos(
+        nombre: _nombreController.text.trim(),
+        correo: _correoController.text.trim(),
+      );
     } on AppException catch (error) {
       if (mounted) MensajesHelpers.mostrar(context, error.mensaje);
       return;
     }
     if (!mounted) return;
-    MensajesHelpers.mostrar(context, AuthStrings.recuperarExitoso);
-    context.go(RouteNames.auth);
+    MensajesHelpers.mostrar(context, PerfilStrings.datosActualizados);
+    context.pop();
+  }
+
+  Widget _buildBotonGuardar(bool cargando) {
+    return BotonPrimarioWidget(
+      texto: PerfilStrings.guardarCambios,
+      cargando: cargando,
+      onPressed: _manejarGuardar,
+    );
   }
 
   @override
@@ -69,19 +85,10 @@ class _FormularioRecuperarWidgetState extends State<FormularioRecuperarWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          CampoNombreWidget(controller: _nombreController),
           CampoCorreoWidget(controller: _correoController),
-          CamposContrasenaConfirmacionWidget(
-            contrasenaController: _nuevaController,
-            confirmacionController: _repetirController,
-            etiquetaContrasena: AuthStrings.nuevaContrasena,
-            etiquetaConfirmacion: AuthStrings.repetirContrasena,
-          ),
           const SizedBox(height: AppDimensions.paddingS),
-          BotonPrimarioWidget(
-            texto: AuthStrings.cambiarContrasena,
-            cargando: cargando,
-            onPressed: _manejarRecuperar,
-          ),
+          _buildBotonGuardar(cargando),
         ],
       ),
     );

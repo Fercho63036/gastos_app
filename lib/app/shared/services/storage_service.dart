@@ -16,6 +16,11 @@ class StorageService {
 
   String? leerCorreoSesion() => _prefs.getString(AppConfig.storageCorreoKey);
 
+  String? leerNombreSesion() => _prefs.getString(AppConfig.storageNombreKey);
+
+  Future<void> guardarNombre(String nombre) =>
+      _prefs.setString(AppConfig.storageNombreKey, nombre);
+
   Future<void> guardarSesion({
     required String token,
     required String correo,

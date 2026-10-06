@@ -33,7 +33,11 @@ class AuthProvider extends ChangeNotifier {
     final correo = _storage.leerCorreoSesion();
     _sesion = token == null || correo == null
         ? null
-        : SesionModel(token: token, correo: correo);
+        : SesionModel(
+            token: token,
+            correo: correo,
+            nombre: _storage.leerNombreSesion(),
+          );
     notifyListeners();
   }
 
@@ -42,19 +46,37 @@ class AuthProvider extends ChangeNotifier {
     () async {
       final sesion = await _repositorio.iniciarSesion(credenciales);
       await _storage.guardarSesion(token: sesion.token, correo: sesion.correo);
-      _sesion = sesion;
+      _sesion = SesionModel(
+        token: sesion.token,
+        correo: sesion.correo,
+        nombre: _storage.leerNombreSesion(),
+      );
     },
   );
 
   Future<void> registrarUsuario({
     required String nombre,
     required CredencialesModel credenciales,
-  }) => _ejecutar(
-    () => _repositorio.registrar(nombre: nombre, credenciales: credenciales),
-  );
+  }) => _ejecutar(() async {
+    await _repositorio.registrar(nombre: nombre, credenciales: credenciales);
+    await _storage.guardarNombre(nombre);
+  });
 
   Future<void> recuperarContrasena(CredencialesModel credenciales) =>
       _ejecutar(() => _repositorio.recuperarContrasena(credenciales));
+
+  /***************************** ACTUALIZAR DATOS ******************************/
+  Future<void> actualizarDatos({
+    required String nombre,
+    required String correo,
+  }) => _ejecutar(() async {
+    final sesion = _sesion;
+    await _repositorio.actualizarPerfil(nombre: nombre, correo: correo);
+    await _storage.guardarNombre(nombre);
+    if (sesion == null) return;
+    await _storage.guardarSesion(token: sesion.token, correo: correo);
+    _sesion = SesionModel(token: sesion.token, correo: correo, nombre: nombre);
+  });
 
   /********************************** LOGOUT **********************************/
   Future<void> logout() async {

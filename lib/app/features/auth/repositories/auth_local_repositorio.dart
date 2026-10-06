@@ -29,5 +29,11 @@ class AuthLocalRepositorio implements AuthRepositorio {
       _simularLlamada();
 
   @override
+  Future<void> actualizarPerfil({
+    required String nombre,
+    required String correo,
+  }) => _simularLlamada();
+
+  @override
   Future<void> cerrarSesion(String token) async {}
 }

@@ -8,10 +8,12 @@ import 'package:go_router/go_router.dart';
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 import 'package:gastos_app/app/core/routes/route_names.dart';
 
+/********************************** SHARED **********************************/
+import 'package:gastos_app/app/shared/widgets/estructura/encabezado_formulario_widget.dart';
+import 'package:gastos_app/app/shared/widgets/estructura/tarjeta_layout_widget.dart';
+
 /********************************* FEATURE **********************************/
 import '../constants/auth_strings.dart';
-import '../widgets/estructura/auth_encabezado_widget.dart';
-import '../widgets/estructura/auth_tarjeta_layout_widget.dart';
 import '../widgets/estructura/boton_crear_cuenta_widget.dart';
 import '../widgets/estructura/separador_auth_widget.dart';
 import '../widgets/formularios/formulario_login_widget.dart';
@@ -21,11 +23,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AuthTarjetaLayoutWidget(
+    return TarjetaLayoutWidget(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const AuthEncabezadoWidget(
+          const EncabezadoFormularioWidget(
             titulo: AuthStrings.bienvenido,
             subtitulo: AuthStrings.iniciaSesion,
           ),

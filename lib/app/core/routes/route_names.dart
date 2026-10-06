@@ -15,6 +15,7 @@ class RouteNames {
   static const String nuevoGasto = '/nuevo-gasto';
   static const String nuevaEntrada = '/nueva-entrada';
   static const String iniciarMes = '/iniciar-mes';
+  static const String editarPerfil = '/editar-perfil';
   static const String parametroId = 'id';
   static const String detalleGasto = '/gasto/:$parametroId';
 
