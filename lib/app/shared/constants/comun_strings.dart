@@ -7,4 +7,6 @@ class ComunStrings {
   static const String irAlInicio = 'Ir al inicio';
   static const String proximamente = 'Próximamente';
   static const String volver = 'Volver';
+  static const String cancelar = 'Cancelar';
+  static const String guardar = 'Guardar';
 }

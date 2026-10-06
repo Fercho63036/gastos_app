@@ -2,39 +2,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/**************************** PAQUETES EXTERNOS *****************************/
-import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-
 /*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
-import 'package:gastos_app/app/core/routes/route_names.dart';
-
-/********************************* FEATURE **********************************/
-import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
 
 /********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/constants/layout_strings.dart';
+import 'package:gastos_app/app/shared/layout/utils/cerrar_sesion_helpers.dart';
 import 'package:gastos_app/app/shared/layout/utils/menu_colores.dart';
-import 'package:gastos_app/app/shared/layout/widgets/drawer/dialogo_cerrar_sesion_widget.dart';
 import 'package:gastos_app/app/shared/layout/widgets/drawer/menu_chevron_widget.dart';
 import 'package:gastos_app/app/shared/layout/widgets/drawer/menu_list_tile_widget.dart';
 
 class CerrarSesionTileWidget extends StatelessWidget {
   const CerrarSesionTileWidget({super.key});
-
-  Future<void> _manejarCerrarSesion(BuildContext context) async {
-    final authProvider = context.read<AuthProvider>();
-    final confirmar = await showCupertinoDialog<bool>(
-      context: context,
-      builder: (_) => const DialogoCerrarSesionWidget(),
-    );
-    if (confirmar != true || !context.mounted) return;
-
-    Navigator.of(context).pop();
-    await authProvider.logout();
-    if (context.mounted) context.go(RouteNames.auth);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +29,10 @@ class CerrarSesionTileWidget extends StatelessWidget {
         titulo: LayoutStrings.cerrarSesion,
         color: MenuColores.inactivo(colorScheme),
         trailing: const MenuChevronWidget(),
-        onTap: () => _manejarCerrarSesion(context),
+        onTap: () => CerrarSesionHelpers.manejarCerrarSesion(
+          context,
+          popAntes: true,
+        ),
       ),
     );
   }

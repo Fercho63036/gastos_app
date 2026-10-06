@@ -6,7 +6,7 @@ import 'package:gastos_app/app/shared/constants/formulario_strings.dart';
 import 'package:gastos_app/app/shared/utils/validadores_helpers.dart';
 
 /********************************* FEATURE **********************************/
-import 'campo_texto_widget.dart';
+import 'campo_texto_base_widget.dart';
 
 class CampoCorreoWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -15,7 +15,7 @@ class CampoCorreoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CampoTextoWidget(
+    return CampoTextoBaseWidget(
       controller: controller,
       etiqueta: FormularioStrings.correoElectronico,
       icono: CupertinoIcons.mail,

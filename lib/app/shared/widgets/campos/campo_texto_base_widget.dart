@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 /*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
-class CampoTextoWidget extends StatelessWidget {
+class CampoTextoBaseWidget extends StatelessWidget {
   final TextEditingController controller;
   final String etiqueta;
   final IconData icono;
   final FormFieldValidator<String> validator;
   final TextInputType keyboardType;
 
-  const CampoTextoWidget({
+  const CampoTextoBaseWidget({
     super.key,
     required this.controller,
     required this.etiqueta,

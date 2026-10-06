@@ -6,6 +6,7 @@ import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 import 'package:gastos_app/app/core/utils/monto_input_formatter.dart';
 
 /********************************** SHARED **********************************/
+import 'package:gastos_app/app/shared/constants/comun_strings.dart';
 import 'package:gastos_app/app/shared/widgets/formularios/campo_texto_widget.dart';
 
 /********************************* FEATURE **********************************/
@@ -55,7 +56,7 @@ class _DialogoEditarPisoWidgetState extends State<DialogoEditarPisoWidget> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: const Text('Cancelar'),
+          child: const Text(ComunStrings.cancelar),
         ),
         TextButton(
           onPressed: () {
@@ -63,7 +64,7 @@ class _DialogoEditarPisoWidgetState extends State<DialogoEditarPisoWidget> {
                 FormatoHelpers.parsearMonto(_controller.text);
             Navigator.of(context).pop(nuevoPiso);
           },
-          child: const Text('Guardar'),
+          child: const Text(ComunStrings.guardar),
         ),
       ],
     );
