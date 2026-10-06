@@ -78,10 +78,26 @@ Regla de dependencias: presentation → domain ← data. La UI no contiene lógi
 - Funciones de máximo 30 líneas, una sola responsabilidad.
 - Variables con nombres completos (`colorScheme`, `screenWidth`, no `cs`, `w`).
 - Extraer código duplicado a helpers o métodos genéricos.
-- Sin comentarios obvios; solo comentar el "por qué".
 - Sin código muerto, sin `dynamic` ni `!` sin justificación.
 - Errores manejados de forma explícita; nunca `catch` vacío.
 - Para dinero no usar `double`; usar enteros (centavos) o `Decimal`.
+
+### 5.1 Comentarios de encabezado (banner)
+
+Cada método y cada bloque lógico de una clase (variables estáticas, variables de carga, validadores, etc.) lleva **un comentario de encabezado tipo banner** inmediatamente arriba, en mayúsculas, con asteriscos de relleno a ambos lados:
+
+```dart
+/*************************** VALIDADORES ***********************************/
+/***************************** VARIABLES ESTATICAS *************************/
+/******************************** VARIABLE DE CARGA *******************************************/
+    /*************************** CARGAR *********************************************************/
+    /***************************** MENSAJES TOAST SATISFACTORIAMENTE ****************************/
+```
+
+- El texto del banner es el **nombre del bloque o método en mayúsculas** (p. ej. `CARGAR`, `VALIDADORES`), no una explicación de qué hace el código.
+- Esta regla reemplaza cualquier criterio de "solo comentar si no es obvio": el banner va siempre, en todo método y bloque relevante.
+- Indentación del banner igual a la del bloque que encabeza (los banners de métodos dentro de una clase van indentados igual que el método).
+- Dentro del cuerpo del método sigue prohibido comentar línea por línea lo que el código ya dice por sí mismo; el banner es la única excepción permitida.
 
 ## 6. Orden de imports
 
