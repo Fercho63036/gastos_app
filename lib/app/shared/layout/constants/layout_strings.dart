@@ -16,6 +16,7 @@ class LayoutStrings {
   static const String menuIniciarMes = 'Iniciar mes';
   static const String seccionCuenta = 'Cuenta';
   static const String menuPerfil = 'Perfil';
+  static const String menuResumen = 'Resumen';
 
   /****************************** CERRAR SESIÓN *******************************/
   static const String cerrarSesion = 'Cerrar sesión';

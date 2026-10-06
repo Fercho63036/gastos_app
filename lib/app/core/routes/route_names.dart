@@ -9,6 +9,7 @@ class RouteNames {
   /******************************** PROTEGIDAS ********************************/
   static const String home = '/';
   static const String perfil = '/perfil';
+  static const String resumen = '/resumen';
 
   /******* PROTEGIDAS EN PANTALLA COMPLETA (FUERA DEL LAYOUT CON TABS) ********/
   static const String nuevoGasto = '/nuevo-gasto';

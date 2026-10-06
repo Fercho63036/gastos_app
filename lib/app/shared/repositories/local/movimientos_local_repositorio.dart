@@ -54,6 +54,17 @@ class MovimientosLocalRepositorio implements MovimientosRepositorio {
     );
   }
 
+  /************************** LISTAR VIGENTES DESDE ****************************/
+  @override
+  Future<List<Movimiento>> listarVigentesDesde({
+    required DateTime desde,
+  }) async {
+    final todos = await _almacen.cargarMovimientos();
+    return todos
+        .where((mov) => !mov.anulado && !mov.fecha.isBefore(desde))
+        .toList();
+  }
+
   @override
   Future<Movimiento> obtenerMovimiento(String id) async {
     final movimiento = await _buscar(id);

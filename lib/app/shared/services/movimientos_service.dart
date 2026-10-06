@@ -39,6 +39,10 @@ class MovimientosService extends ChangeNotifier {
     porPagina: porPagina,
   );
 
+  /************************** LISTAR VIGENTES DESDE ****************************/
+  Future<List<Movimiento>> listarVigentesDesde({required DateTime desde}) =>
+      _repositorio.listarVigentesDesde(desde: desde);
+
   Future<Movimiento> obtener(String id) => _repositorio.obtenerMovimiento(id);
 
   Future<Movimiento> _registrar(BorradorMovimiento borrador) async {

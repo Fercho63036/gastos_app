@@ -17,6 +17,9 @@ abstract class MovimientosRepositorio {
     required int porPagina,
   });
 
+  /************************** LISTAR VIGENTES DESDE ****************************/
+  Future<List<Movimiento>> listarVigentesDesde({required DateTime desde});
+
   /**************************** OBTENER MOVIMIENTO ****************************/
   Future<Movimiento> obtenerMovimiento(String id);
 

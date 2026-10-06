@@ -15,6 +15,8 @@ import 'package:gastos_app/app/features/movimientos/providers/detalle_gasto_prov
 import 'package:gastos_app/app/features/movimientos/providers/nueva_entrada_provider.dart';
 import 'package:gastos_app/app/features/movimientos/providers/nuevo_gasto_provider.dart';
 import 'package:gastos_app/app/features/periodo/providers/iniciar_mes_provider.dart';
+import 'package:gastos_app/app/features/resumen/providers/resumen_provider.dart';
+import 'package:gastos_app/app/features/resumen/services/resumen_service.dart';
 
 /********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/providers/theme_provider.dart';
@@ -79,6 +81,9 @@ Future<void> _registrarDatos() async {
 void _registrarFeatures() {
   getIt.registerLazySingleton<InicioProvider>(
     () => InicioProvider(InicioService(getIt<MovimientosService>())),
+  );
+  getIt.registerLazySingleton<ResumenProvider>(
+    () => ResumenProvider(ResumenService(getIt<MovimientosService>())),
   );
   getIt.registerLazySingleton<ExpensesProvider>(
     () => ExpensesProvider(ExpensesRepository()),

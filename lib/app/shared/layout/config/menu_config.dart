@@ -33,6 +33,12 @@ class MenuConfig {
       ruta: RouteNames.iniciarMes,
     ),
     MenuItem(
+      id: 'resumen',
+      titulo: LayoutStrings.menuResumen,
+      icono: CupertinoIcons.chart_pie,
+      ruta: RouteNames.resumen,
+    ),
+    MenuItem(
       id: 'seccion_cuenta',
       titulo: LayoutStrings.seccionCuenta,
       tipo: TipoMenuItem.seccion,

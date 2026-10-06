@@ -111,6 +111,17 @@ class AppDimensions {
   static const double radioAvatarPerfil = 48.0;
   static const double fontInicialesAvatar = 28.0;
 
+  /********************************** RESUMEN **********************************/
+  static const double alturaGraficoCircular = 220.0;
+  static const double radioCentroGraficoCircular = 48.0;
+  static const double radioPorcionGraficoCircular = 70.0;
+  static const double espacioPorcionGraficoCircular = 2.0;
+  static const double alturaGraficoBarras = 220.0;
+  static const double anchoBarraGrafico = 18.0;
+  static const double radiusBarraGrafico = 4.0;
+  static const double fontEtiquetaGrafico = 11.0;
+  static const double tamanoPuntoLeyenda = 12.0;
+
   /******************************* FORMULARIOS ********************************/
   static const double fontMontoGrande = 48.0;
   static const double fontPrefijoMonto = 22.0;

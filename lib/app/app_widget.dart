@@ -13,6 +13,7 @@ import 'package:gastos_app/app/core/theme/app_tema.dart';
 /********************************* FEATURE **********************************/
 import 'package:gastos_app/app/features/auth/providers/auth_provider.dart';
 import 'package:gastos_app/app/features/inicio/providers/inicio_provider.dart';
+import 'package:gastos_app/app/features/resumen/providers/resumen_provider.dart';
 
 /********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/providers/theme_provider.dart';
@@ -31,6 +32,7 @@ class GastosApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: getIt<AuthProvider>()),
         ChangeNotifierProvider.value(value: getIt<ExpensesProvider>()),
         ChangeNotifierProvider.value(value: getIt<InicioProvider>()),
+        ChangeNotifierProvider.value(value: getIt<ResumenProvider>()),
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, temaProvider, _) => MaterialApp.router(

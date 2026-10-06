@@ -16,6 +16,7 @@ import 'package:gastos_app/app/features/auth/pages/recuperar_contrasena_page.dar
 import 'package:gastos_app/app/features/auth/pages/registrar_page.dart';
 import 'package:gastos_app/app/features/inicio/pages/inicio_page.dart';
 import 'package:gastos_app/app/features/perfil/pages/perfil_page.dart';
+import 'package:gastos_app/app/features/resumen/pages/resumen_page.dart';
 
 /********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/main_layout.dart';
@@ -60,6 +61,10 @@ class AppRouter {
               GoRoute(
                 path: RouteNames.perfil,
                 builder: (context, state) => const PerfilPage(),
+              ),
+              GoRoute(
+                path: RouteNames.resumen,
+                builder: (context, state) => const ResumenPage(),
               ),
             ],
           ),

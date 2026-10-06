@@ -1,6 +1,6 @@
 # Estado vivo de implementación — MI Chuspa
 
-Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige o se decide algo distinto a la spec sobre un RF. Última actualización: 2026-10-06 (auditoría de código real contra RF-01 a RF-21). Actualizado: 2026-10-07 (RF-16 completado).
+Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige o se decide algo distinto a la spec sobre un RF. Última actualización: 2026-10-06 (auditoría de código real contra RF-01 a RF-21). Actualizado: 2026-10-07 (RF-16 completado, luego ajustado a solo lectura en Inicio). Actualizado: 2026-10-06 (RF-21 completado).
 
 ## Completados (verificado contra código)
 
@@ -23,12 +23,12 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 - [x] RF-15 — Semana de 7 días corridos, no semana calendario (`inicio_helpers.dart` → `desdeDePeriodo`)
 - [x] RF-17 — Se puede gastar bajo el piso sin bloqueo (`PeriodoHelpers.validar` solo rechaza piso > saldo inicial; nada impide `gastable` negativo)
 - [x] RF-02 — Monto del mes editable en cualquier momento, subiendo o bajando (ver "Desviaciones acordadas": se implementa en la pantalla "Iniciar Mes", con modo de edición in-place)
-- [x] RF-16 — Piso editable y `gastable = saldo − piso` funcionan. Sin default (lo define el usuario). Editable desde Inicio (columna "Piso" tocable abre diálogo) y desde "Iniciar/Editar mes" (`iniciar_mes_page.dart`, `ResumenHelpers.calcular`, `dialogo_editar_piso_widget.dart`)
+- [x] RF-16 — Piso editable y `gastable = saldo − piso` funcionan. Sin default (lo define el usuario). La tarjeta de Inicio (`fila_gastable_piso_widget.dart`) es solo lectura (Gastable/Gastado/Piso, sin tocar); el piso se edita exclusivamente desde "Iniciar/Editar mes" (`iniciar_mes_page.dart`, `ResumenHelpers.calcular`). El `MovimientosService.actualizarPiso` y `DialogoEditarPisoWidget` quedaron sin usar desde Inicio tras este ajuste — pendiente decidir si se eliminan.
+- [x] RF-21 — Gráficos: circular por categoría y barras por día, con selector Hoy/Semana/Mes (mismo `PeriodoFiltro` de Inicio) y acceso desde el menú lateral. Nueva feature `lib/app/features/resumen/` (`resumen_page.dart`, `resumen_provider.dart`, `resumen_service.dart`, `resumen_helpers.dart`, `widgets/grafico_categorias_widget.dart`, `widgets/grafico_barras_widget.dart`, `widgets/leyenda_categorias_widget.dart`) usando `fl_chart`. Reutiliza `CategoriaMovimiento` (color/nombre), `AgrupacionHelpers.agruparPorDia` y el filtro de vigentes; se agregó `MovimientosService.listarVigentesDesde` (no paginado) para alimentar los gráficos. Ruta `/resumen` y entrada "Resumen" en `menu_config.dart`.
 
 ## Pendientes, en orden de la fase que les corresponde
 
 - [ ] RF-18, RF-19, RF-20 — Alertas tipo batería (20/15/10/5/0%), saldo en rojo bajo 20%, aviso al abrir la app bajo el piso — no existe lógica de umbrales ni diálogo de aviso
-- [ ] RF-21 — Gráficos (circular por categoría, barras por día/semana/mes) — no existe carpeta de resumen/gráficos ni librería de charts en uso
 - [ ] RF-22 — Exportación a Excel
 - [ ] RF-27 — Pantalla Perfil (definir contenido con Ariel antes de construir)
 
@@ -38,8 +38,8 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 - Fase 2 (presupuesto y entradas) — **completa**, incluyendo RF-02 (ver "Desviaciones acordadas").
 - Fase 3 (gastos: alta/edición/anulación/historial) — **completa**.
 - Fase 4 (listados) — **completa**.
-- Fase 5 (piso y alertas) — **en curso**: RF-16 parcial, RF-17 completo, RF-18/19/20 pendientes. Siguiente trabajo real del proyecto.
-- Fase 6 (resumen y gráficos) — pendiente (RF-21).
+- Fase 5 (piso y alertas) — **en curso**: RF-16 completo, RF-17 completo, RF-18/19/20 pendientes. Siguiente trabajo real del proyecto.
+- Fase 6 (resumen y gráficos) — **completa** (RF-21).
 - Fase 7 (exportación a Excel) — pendiente (RF-22).
 - Fase 8 (perfil) — pendiente (RF-27).
 
@@ -50,7 +50,7 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
   - **Con período del mes actual**: modo "Editar monto del mes" — precarga el `montoMesCentavos`/`pisoCentavos` vigentes y, al guardar, **actualiza esa misma fila in-place** (`MovimientosService.actualizarMontoMes` → `MovimientosRepositorio.actualizarMontoMes` → `MovimientosAlmacen.actualizarPeriodoActual`, UPDATE sobre la fila de mayor id en `periodos`), sin tocar el arrastre ni crear una fila nueva. Esto resuelve RF-02 ("editable en cualquier momento, subiendo o bajando") de forma directa.
   - **"Entrada" (`nueva_entrada_page.dart` / `nueva_entrada_provider.dart`) vuelve a ser solo RF-03**: pantalla simple para sumar un ingreso extra (campo vacío al abrir, se suma tal cual al saldo vía un `Movimiento` con `esEntrada: true`, sin delta ni precarga de saldo).
   - **Historial de decisiones sobre RF-02 (para que una sesión futura no lo reintente):** (1) primer intento: fusionar RF-02+RF-03 en "Entrada", precargando `montoMesCentavos + entradas` — descartado porque ese valor no coincidía con el saldo real visto en inicio (excluía arrastre y gastos). (2) segundo intento: misma fusión pero precargando `saldoCentavos` (sí coincidía con "Te queda este mes") — descartado por Ariel porque "Entrada" e "Iniciar Mes" terminaban manejando el mismo dato por caminos distintos, lo cual es confuso. (3) diseño final (el de arriba): cada pantalla maneja su propio dato — "Iniciar Mes" el monto del mes (con modo edición in-place), "Entrada" solo ingresos extra.
-  - RF-16 se deja como "parcial", no como desviación: el comportamiento objetivo sigue siendo el de la spec, solo falta completar el default de 50 Bs y permitir editar el piso fuera de "Iniciar mes" (esto último ya ocurre de hecho ahora en el modo "Editar monto del mes", que incluye el campo de piso).
+  - RF-16 queda completo: el piso se define y edita únicamente desde "Iniciar/Editar mes" (modo "Editar monto del mes", que incluye el campo de piso); la tarjeta de Inicio solo lo muestra, sin edición directa ahí.
 
 ## Nota sobre código legado (no tocado en esta auditoría)
 
