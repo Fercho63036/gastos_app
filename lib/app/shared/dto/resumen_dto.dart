@@ -4,8 +4,10 @@ import 'api_claves.dart';
 import 'json_helpers.dart';
 
 class ResumenDto {
+  /****************************** CONSTRUCTOR PRIVADO ******************************/
   ResumenDto._();
 
+  /********************************* DESDE JSON *********************************/
   static ResumenMes desdeJson(Json json) => ResumenMes(
     saldoCentavos: json[ApiClaves.saldoCentavos] as int,
     gastableCentavos: json[ApiClaves.gastableCentavos] as int,
@@ -16,6 +18,7 @@ class ResumenDto {
     montoInicialCentavos: json[ApiClaves.montoInicialCentavos] as int,
   );
 
+  /************************************ A JSON ************************************/
   static Json aJson(ResumenMes resumen) => {
     ApiClaves.saldoCentavos: resumen.saldoCentavos,
     ApiClaves.gastableCentavos: resumen.gastableCentavos,

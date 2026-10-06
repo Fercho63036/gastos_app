@@ -11,11 +11,14 @@ import 'package:gastos_app/app/shared/models/resumen_mes_model.dart';
 import '../../constants/inicio_strings.dart';
 
 class FilaGastablePisoWidget extends StatelessWidget {
+  /******************************** PROPIEDADES ********************************/
   final ResumenMes resumen;
   final TextStyle? estilo;
 
+  /******************************** CONSTRUCTOR ********************************/
   const FilaGastablePisoWidget({super.key, required this.resumen, this.estilo});
 
+  /********************************* BUILD VALOR *********************************/
   Widget _buildValor(
     String etiqueta,
     int montoCentavos,
@@ -41,6 +44,7 @@ class FilaGastablePisoWidget extends StatelessWidget {
     );
   }
 
+  /************************************ BUILD ************************************/
   @override
   Widget build(BuildContext context) {
     return Row(

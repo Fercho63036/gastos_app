@@ -1,4 +1,5 @@
 class ResumenMes {
+  /******************************** PROPIEDADES ********************************/
   final int saldoCentavos;
   final int gastableCentavos;
   final int gastableTotalCentavos;
@@ -7,6 +8,7 @@ class ResumenMes {
   final int gastadoCentavos;
   final int montoInicialCentavos;
 
+  /******************************** CONSTRUCTOR ********************************/
   const ResumenMes({
     required this.saldoCentavos,
     required this.gastableCentavos,
@@ -17,6 +19,7 @@ class ResumenMes {
     required this.montoInicialCentavos,
   });
 
+  /************************************ VACIO ************************************/
   static const ResumenMes vacio = ResumenMes(
     saldoCentavos: 0,
     gastableCentavos: 0,

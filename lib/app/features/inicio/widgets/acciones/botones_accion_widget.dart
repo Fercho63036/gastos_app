@@ -11,15 +11,18 @@ import 'package:gastos_app/app/shared/widgets/botones/boton_contorno_icono_widge
 import '../../constants/inicio_strings.dart';
 
 class BotonesAccionWidget extends StatelessWidget {
+  /******************************** PROPIEDADES ********************************/
   final VoidCallback onGasto;
   final VoidCallback onEntrada;
 
+  /******************************** CONSTRUCTOR ********************************/
   const BotonesAccionWidget({
     super.key,
     required this.onGasto,
     required this.onEntrada,
   });
 
+  /************************************ BUILD ************************************/
   @override
   Widget build(BuildContext context) {
     return Row(

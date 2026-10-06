@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:gastos_app/app/core/constants/app_dimensions.dart';
 
 class BotonContornoIconoWidget extends StatelessWidget {
+  /******************************** PROPIEDADES ********************************/
   final String etiqueta;
   final IconData icono;
   final VoidCallback onPressed;
 
+  /******************************** CONSTRUCTOR ********************************/
   const BotonContornoIconoWidget({
     super.key,
     required this.etiqueta,
@@ -16,6 +18,7 @@ class BotonContornoIconoWidget extends StatelessWidget {
     required this.onPressed,
   });
 
+  /************************************ BUILD ************************************/
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;

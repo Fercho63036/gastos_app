@@ -8,15 +8,18 @@ import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 import '../../constants/inicio_strings.dart';
 
 class MontoInicialWidget extends StatelessWidget {
+  /******************************** PROPIEDADES ********************************/
   final int montoInicialCentavos;
   final TextStyle? estilo;
 
+  /******************************** CONSTRUCTOR ********************************/
   const MontoInicialWidget({
     super.key,
     required this.montoInicialCentavos,
     this.estilo,
   });
 
+  /************************************ BUILD ************************************/
   @override
   Widget build(BuildContext context) {
     final monto = FormatoHelpers.formatearMonto(montoInicialCentavos);

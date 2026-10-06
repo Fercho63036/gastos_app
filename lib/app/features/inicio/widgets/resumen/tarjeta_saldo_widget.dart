@@ -19,15 +19,19 @@ import 'fila_gastable_piso_widget.dart';
 import 'monto_inicial_widget.dart';
 
 class TarjetaSaldoWidget extends StatelessWidget {
+  /******************************** PROPIEDADES ********************************/
   final ResumenMes resumen;
 
+  /******************************** CONSTRUCTOR ********************************/
   const TarjetaSaldoWidget({super.key, required this.resumen});
 
+  /********************************* DECORACION *********************************/
   static final BoxDecoration _decoracion = BoxDecoration(
     color: AppColores.tarjetaSaldo,
     borderRadius: BorderRadius.circular(AppDimensions.radiusTarjetaSaldo),
   );
 
+  /******************************** ESTILO BASE *********************************/
   TextStyle? _buildEstiloBase(BuildContext context) {
     return Theme.of(context).textTheme.bodyMedium?.copyWith(
       color: AppColores.textoTarjetaSaldo,
@@ -35,6 +39,7 @@ class TarjetaSaldoWidget extends StatelessWidget {
     );
   }
 
+  /******************************** ESTILO SALDO *********************************/
   TextStyle? _buildEstiloSaldo(BuildContext context, TextStyle? estiloBase) {
     return estiloBase?.copyWith(
       fontSize: ResponsiveHelper.fontSize(context, AppDimensions.fontSaldo),
@@ -42,12 +47,14 @@ class TarjetaSaldoWidget extends StatelessWidget {
     );
   }
 
+  /****************************** TEXTO PORCENTAJE *******************************/
   String _buildTextoPorcentaje() {
     final porcentaje = InicioHelpers.porcentajeDisponible(resumen);
     return '$porcentaje${FormatoStrings.porcentaje} '
         '${InicioStrings.gastableDisponible}';
   }
 
+  /************************************ BUILD ************************************/
   @override
   Widget build(BuildContext context) {
     final estiloBase = _buildEstiloBase(context);
