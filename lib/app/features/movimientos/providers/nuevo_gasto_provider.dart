@@ -40,7 +40,11 @@ class NuevoGastoProvider extends ChangeNotifier with GuardadoMixin {
   /********************************* GUARDAR **********************************/
   Future<String?> guardar() => guardarConEstado(() async {
     final titulo = descripcionController.text.trim();
-    final error = MovimientosHelpers.validarGasto(montoCentavos, titulo);
+    final error = MovimientosHelpers.validarGasto(
+      montoCentavos,
+      titulo,
+      saldoDisponibleCentavos: _datos.resumen.saldoCentavos,
+    );
     if (error != null) return error;
     await _datos.registrarGasto(
       titulo: titulo,

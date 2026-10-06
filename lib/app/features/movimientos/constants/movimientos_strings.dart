@@ -8,6 +8,8 @@ class MovimientosStrings {
   static const String fechaAutomatica = 'Fecha y hora automáticas';
   static const String montoInvalido = 'Ingresa un monto mayor a cero';
   static const String descripcionVacia = 'Escribe una descripción';
+  static const String montoExcedeSaldo =
+      'El gasto supera el saldo disponible este mes';
 
   /******************************* NUEVO GASTO ********************************/
   static const String nuevoGasto = 'Nuevo gasto';

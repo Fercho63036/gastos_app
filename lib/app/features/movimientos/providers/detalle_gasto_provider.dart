@@ -77,7 +77,17 @@ class DetalleGastoProvider extends ChangeNotifier with GuardadoMixin {
     if (gasto == null) return MovimientosStrings.gastoNoEncontrado;
     final monto = FormatoHelpers.parsearMonto(montoController.text);
     final titulo = descripcionController.text.trim();
-    final error = MovimientosHelpers.validarGasto(monto, titulo);
+    final quedaVigente = _estado != EstadoMovimiento.anulado;
+    final error = quedaVigente
+        ? MovimientosHelpers.validarGasto(
+            monto,
+            titulo,
+            saldoDisponibleCentavos:
+                _datos.resumen.saldoCentavos +
+                (gasto.anulado ? 0 : gasto.montoCentavos),
+          )
+        : MovimientosHelpers.validarMonto(monto) ??
+              (titulo.isEmpty ? MovimientosStrings.descripcionVacia : null);
     if (error != null) return error;
     final editado = gasto.copyWith(
       montoCentavos: monto,

@@ -20,9 +20,26 @@ class MovimientosHelpers {
       ? MovimientosStrings.montoInvalido
       : null;
 
-  static String? validarGasto(int montoCentavos, String descripcion) {
+  /**************************** VALIDAR TOPE SALDO ****************************/
+  static String? validarTopeSaldo({
+    required int montoCentavos,
+    required int saldoDisponibleCentavos,
+  }) => montoCentavos > saldoDisponibleCentavos
+      ? MovimientosStrings.montoExcedeSaldo
+      : null;
+
+  static String? validarGasto(
+    int montoCentavos,
+    String descripcion, {
+    required int saldoDisponibleCentavos,
+  }) {
     if (descripcion.trim().isEmpty) return MovimientosStrings.descripcionVacia;
-    return validarMonto(montoCentavos);
+    final errorMonto = validarMonto(montoCentavos);
+    if (errorMonto != null) return errorMonto;
+    return validarTopeSaldo(
+      montoCentavos: montoCentavos,
+      saldoDisponibleCentavos: saldoDisponibleCentavos,
+    );
   }
 
   /************************** TEXTO FECHA AUTOMATICA **************************/
