@@ -98,11 +98,15 @@ class AppDimensions {
   static const double tamanoIconoCategoria = 48.0;
   static const double radiusTarjeta = 18.0;
   static const double radiusTarjetaSaldo = 24.0;
+  static const double radiusMetricaTarjeta = 12.0;
   static const double alturaBotonAccion = 44.0;
   static const double largoGuionBorde = 5.0;
   static const double espacioGuionBorde = 4.0;
   static const double opacidadAnulado = 0.45;
   static const double opacidadPistaIcono = 0.18;
+  static const double paddingMetricaTarjeta = 12.0;
+  static const double tamanoIconoEditar = 14.0;
+  static const double espacioMetricas = 10.0;
 
   /********************************** PERFIL ***********************************/
   static const double radioAvatarPerfil = 48.0;

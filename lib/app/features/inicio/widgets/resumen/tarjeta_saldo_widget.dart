@@ -52,6 +52,16 @@ class TarjetaSaldoWidget extends StatelessWidget {
     );
   }
 
+  /***************************** ESTILO ATENUADO *****************************/
+  TextStyle? _buildEstiloAtenuado(BuildContext context, TextStyle? estiloBase) {
+    final colorAtenuado = estiloBase?.color?.withValues(
+      alpha: AppColores.opacidadTextoAtenuado,
+    ) ?? Colors.black.withValues(
+      alpha: AppColores.opacidadTextoAtenuado,
+    );
+    return estiloBase?.copyWith(color: colorAtenuado);
+  }
+
   /****************************** TEXTO PORCENTAJE *******************************/
   String _buildTextoPorcentaje() {
     final porcentaje = InicioHelpers.porcentajeDisponible(resumen);
@@ -63,6 +73,7 @@ class TarjetaSaldoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final estiloBase = _buildEstiloBase(context);
+    final estiloAtenuado = _buildEstiloAtenuado(context, estiloBase);
 
     return Container(
       padding: const EdgeInsets.all(AppDimensions.paddingSM),
@@ -71,7 +82,7 @@ class TarjetaSaldoWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: AppDimensions.paddingS,
         children: [
-          Text(InicioStrings.teQuedaEsteMes, style: estiloBase),
+          Text(InicioStrings.teQuedaEsteMes, style: estiloAtenuado),
           FittedBox(
             fit: BoxFit.scaleDown,
             alignment: Alignment.centerLeft,
@@ -96,7 +107,7 @@ class TarjetaSaldoWidget extends StatelessWidget {
           ),
           Text(
             _buildTextoPorcentaje(),
-            style: estiloBase?.copyWith(fontWeight: FontWeight.w700),
+            style: estiloAtenuado?.copyWith(fontWeight: FontWeight.w700),
           ),
         ],
       ),

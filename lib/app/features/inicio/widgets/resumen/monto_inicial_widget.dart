@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 /*********************************** CORE ***********************************/
+import 'package:gastos_app/app/core/theme/app_colores.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
 /********************************* FEATURE **********************************/
@@ -23,9 +24,17 @@ class MontoInicialWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final monto = FormatoHelpers.formatearMonto(montoInicialCentavos);
+    final colorAtenuado = estilo?.color?.withValues(
+      alpha: AppColores.opacidadTextoAtenuado,
+    ) ?? Colors.black.withValues(
+      alpha: AppColores.opacidadTextoAtenuado,
+    );
     return Text(
       '${InicioStrings.montoInicial}: $monto',
-      style: estilo?.copyWith(fontWeight: FontWeight.w500),
+      style: estilo?.copyWith(
+        fontWeight: FontWeight.w500,
+        color: colorAtenuado,
+      ),
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
     );

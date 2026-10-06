@@ -37,6 +37,8 @@ class AppColores {
   static const Color tarjetaSaldo = Color(0xFF9C8EEB);
   static const Color textoTarjetaSaldo = Color(0xFF1E1A3C);
   static const Color pistaProgresoSaldo = Color(0xFF7C6CD6);
+  static const Color fondoMetricaTarjeta = Color(0x40FFFFFF); // blanco 25% opacidad
+  static const double opacidadTextoAtenuado = 0.70;
 
   /*************** INICIO: CATEGORÍAS Y ESTADOS DE MOVIMIENTOS ****************/
   static const Color categoriaComida = Color(0xFFF2B84B);

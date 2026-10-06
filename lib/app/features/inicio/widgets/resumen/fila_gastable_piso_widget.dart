@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 
 /*********************************** CORE ***********************************/
+import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+import 'package:gastos_app/app/core/theme/app_colores.dart';
 import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 
 /********************************** SHARED **********************************/
@@ -24,29 +26,87 @@ class FilaGastablePisoWidget extends StatelessWidget {
     this.onEditarPiso,
   });
 
-  /********************************* BUILD VALOR *********************************/
-  Widget _buildValor(
-    String etiqueta,
-    int montoCentavos,
-    CrossAxisAlignment alineacion,
-  ) {
+  /***************************** BUILD MÉTRICA ****************************/
+  Widget _buildMetrica({
+    required String etiqueta,
+    required int montoCentavos,
+    required bool esEditableConPiso,
+  }) {
     final monto = FormatoHelpers.formatearMonto(montoCentavos);
-    return Column(
-      crossAxisAlignment: alineacion,
+    final colorAtenuado = estilo?.color?.withValues(
+      alpha: AppColores.opacidadTextoAtenuado,
+    ) ?? Colors.black.withValues(
+      alpha: AppColores.opacidadTextoAtenuado,
+    );
+
+    Widget contenido = Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          etiqueta,
-          style: estilo?.copyWith(fontWeight: FontWeight.w500),
-          overflow: TextOverflow.ellipsis,
+        // Etiqueta con ícono opcional
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          spacing: AppDimensions.paddingXS,
+          children: [
+            Flexible(
+              child: Text(
+                etiqueta,
+                style: estilo?.copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: colorAtenuado,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            if (esEditableConPiso)
+              Icon(
+                Icons.edit,
+                size: AppDimensions.tamanoIconoEditar,
+                color: colorAtenuado,
+              ),
+          ],
         ),
-        Text(
-          monto,
-          style: estilo,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
+        SizedBox(height: AppDimensions.paddingXS),
+        // Monto
+        FittedBox(
+          fit: BoxFit.scaleDown,
+          alignment: Alignment.centerLeft,
+          child: Text(
+            monto,
+            style: estilo?.copyWith(fontWeight: FontWeight.w700),
+            maxLines: 1,
+          ),
         ),
       ],
+    );
+
+    // Si es editable (Piso), envolver en InkWell
+    if (esEditableConPiso && onEditarPiso != null) {
+      return Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onEditarPiso,
+          borderRadius: BorderRadius.circular(
+            AppDimensions.radiusMetricaTarjeta,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(AppDimensions.paddingMetricaTarjeta),
+            child: contenido,
+          ),
+        ),
+      );
+    }
+
+    // Si no es editable, solo con fondo y padding
+    return Container(
+      padding: const EdgeInsets.all(AppDimensions.paddingMetricaTarjeta),
+      decoration: BoxDecoration(
+        color: AppColores.fondoMetricaTarjeta,
+        borderRadius: BorderRadius.circular(
+          AppDimensions.radiusMetricaTarjeta,
+        ),
+      ),
+      child: contenido,
     );
   }
 
@@ -54,41 +114,27 @@ class FilaGastablePisoWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      spacing: AppDimensions.espacioMetricas,
       children: [
         Expanded(
-          child: _buildValor(
-            InicioStrings.gastable,
-            resumen.gastableCentavos,
-            CrossAxisAlignment.start,
+          child: _buildMetrica(
+            etiqueta: InicioStrings.gastable,
+            montoCentavos: resumen.gastableCentavos,
+            esEditableConPiso: false,
           ),
         ),
         Expanded(
-          child: _buildValor(
-            InicioStrings.gastado,
-            resumen.gastadoCentavos,
-            CrossAxisAlignment.center,
+          child: _buildMetrica(
+            etiqueta: InicioStrings.gastado,
+            montoCentavos: resumen.gastadoCentavos,
+            esEditableConPiso: false,
           ),
         ),
         Expanded(
-          child: GestureDetector(
-            onTap: onEditarPiso,
-            child: MouseRegion(
-              cursor: onEditarPiso != null
-                  ? SystemMouseCursors.click
-                  : MouseCursor.defer,
-              child: Stack(
-                alignment: Alignment.topRight,
-                children: [
-                  _buildValor(
-                    InicioStrings.piso,
-                    resumen.pisoCentavos,
-                    CrossAxisAlignment.end,
-                  ),
-                  if (onEditarPiso != null)
-                    const Icon(Icons.edit, size: 16),
-                ],
-              ),
-            ),
+          child: _buildMetrica(
+            etiqueta: InicioStrings.piso,
+            montoCentavos: resumen.pisoCentavos,
+            esEditableConPiso: true,
           ),
         ),
       ],
