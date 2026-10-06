@@ -1,13 +1,11 @@
 /****************************** FLUTTER / DART ******************************/
 import 'package:flutter/material.dart';
 
-/**************************** PAQUETES EXTERNOS *****************************/
-import 'package:go_router/go_router.dart';
-
 /*********************************** CORE ***********************************/
 import 'package:gastos_app/app/core/routes/route_names.dart';
 
 /********************************** SHARED **********************************/
+import 'package:gastos_app/app/shared/utils/navegacion_helpers.dart';
 import 'package:gastos_app/app/shared/widgets/estructura/encabezado_formulario_widget.dart';
 import 'package:gastos_app/app/shared/widgets/estructura/tarjeta_layout_widget.dart';
 
@@ -23,7 +21,7 @@ class RecuperarContrasenaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return TarjetaLayoutWidget(
       mostrarBotonVolver: true,
-      onVolver: () => context.go(RouteNames.auth),
+      onVolver: () => NavegacionHelpers.volverOIr(context, RouteNames.auth),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [

@@ -18,4 +18,13 @@ class NavegacionHelpers {
       context.go(RouteNames.home);
     }
   }
+
+  /******************************* VOLVER O IR *****************************/
+  static void volverOIr(BuildContext context, String rutaFallback) {
+    if (context.canPop()) {
+      context.pop();
+    } else {
+      context.go(rutaFallback);
+    }
+  }
 }

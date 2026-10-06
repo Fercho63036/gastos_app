@@ -2,7 +2,6 @@
 import 'package:flutter/cupertino.dart';
 
 /**************************** PAQUETES EXTERNOS *****************************/
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 /*********************************** CORE ***********************************/
@@ -12,6 +11,7 @@ import 'package:gastos_app/app/core/routes/route_names.dart';
 
 /********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/utils/mensajes_helpers.dart';
+import 'package:gastos_app/app/shared/utils/navegacion_helpers.dart';
 import 'package:gastos_app/app/shared/widgets/botones/boton_primario_widget.dart';
 import 'package:gastos_app/app/shared/widgets/campos/campo_correo_widget.dart';
 
@@ -57,7 +57,7 @@ class _FormularioRecuperarWidgetState extends State<FormularioRecuperarWidget> {
     }
     if (!mounted) return;
     MensajesHelpers.mostrar(context, AuthStrings.recuperarExitoso);
-    context.go(RouteNames.auth);
+    NavegacionHelpers.volverOIr(context, RouteNames.auth);
   }
 
   @override

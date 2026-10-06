@@ -3,6 +3,7 @@ class PerfilStrings {
 
   static const String sinCorreo = 'Usuario local';
   static const String editarDatos = 'Editar datos';
+  static const String cambiarContrasena = 'Recuperar contraseña';
 
   /******************************* EDITAR DATOS ********************************/
   static const String editarDatosTitulo = 'Editar datos';

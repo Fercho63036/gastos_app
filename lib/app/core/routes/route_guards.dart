@@ -19,7 +19,10 @@ class RouteGuards {
     final esRutaPublica = RouteNames.publicas.contains(state.matchedLocation);
 
     if (!autenticado && !esRutaPublica) return RouteNames.auth;
-    if (autenticado && esRutaPublica) return RouteNames.home;
+    if (autenticado && esRutaPublica) {
+      if (state.matchedLocation == RouteNames.recuperarPassword) return null;
+      return RouteNames.home;
+    }
     return null;
   }
 }

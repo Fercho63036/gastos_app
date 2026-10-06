@@ -45,6 +45,11 @@ class AccionesPerfilWidget extends StatelessWidget {
           icono: Icons.edit_outlined,
           onPressed: () => context.push(RouteNames.editarPerfil),
         ),
+        _botonAncho(
+          etiqueta: PerfilStrings.cambiarContrasena,
+          icono: Icons.lock_reset_outlined,
+          onPressed: () => context.push(RouteNames.recuperarPassword),
+        ),
       ],
     );
   }
