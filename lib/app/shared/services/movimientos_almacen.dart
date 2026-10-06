@@ -21,4 +21,7 @@ abstract class MovimientosAlmacen {
   );
 
   Future<void> insertarPeriodo(PeriodoMes periodo);
+
+  /************************* ACTUALIZAR PERIODO ACTUAL *************************/
+  Future<void> actualizarPeriodoActual(PeriodoMes periodo);
 }

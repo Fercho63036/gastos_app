@@ -34,4 +34,10 @@ abstract class MovimientosRepositorio {
     required int montoMesCentavos,
     required int pisoCentavos,
   });
+
+  /***************************** ACTUALIZAR MONTO MES ***************************/
+  Future<PeriodoMes> actualizarMontoMes({
+    required int montoMesCentavos,
+    required int pisoCentavos,
+  });
 }

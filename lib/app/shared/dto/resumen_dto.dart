@@ -11,6 +11,7 @@ class ResumenDto {
     gastableCentavos: json[ApiClaves.gastableCentavos] as int,
     gastableTotalCentavos: json[ApiClaves.gastableTotalCentavos] as int,
     pisoCentavos: json[ApiClaves.pisoCentavos] as int,
+    entradasCentavos: json[ApiClaves.entradasCentavos] as int,
   );
 
   static Json aJson(ResumenMes resumen) => {
@@ -18,5 +19,6 @@ class ResumenDto {
     ApiClaves.gastableCentavos: resumen.gastableCentavos,
     ApiClaves.gastableTotalCentavos: resumen.gastableTotalCentavos,
     ApiClaves.pisoCentavos: resumen.pisoCentavos,
+    ApiClaves.entradasCentavos: resumen.entradasCentavos,
   };
 }

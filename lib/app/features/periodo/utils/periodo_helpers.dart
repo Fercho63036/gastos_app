@@ -26,6 +26,12 @@ class PeriodoHelpers {
     return FormatoHelpers.formatearNumero(anterior.pisoCentavos);
   }
 
+  /******************************* ES MES ACTUAL *******************************/
+  static bool esMesActual(PeriodoMes? periodo, DateTime ahora) =>
+      periodo != null &&
+      periodo.inicio.year == ahora.year &&
+      periodo.inicio.month == ahora.month;
+
   static String? validar({
     required int montoMesCentavos,
     required int pisoCentavos,

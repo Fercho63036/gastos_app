@@ -90,4 +90,17 @@ void main() {
     expect(servicio.resumen.saldoCentavos, 128500);
     expect(almacen.periodos.length, 1);
   });
+
+  test('actualizar monto del mes corrige el periodo sin duplicarlo', () async {
+    await servicio.iniciarMes(montoMesCentavos: 190000, pisoCentavos: 5000);
+    await servicio.actualizarMontoMes(
+      montoMesCentavos: 250000,
+      pisoCentavos: 8000,
+    );
+    expect(almacen.periodos.length, 1);
+    expect(servicio.periodoActual?.montoMesCentavos, 250000);
+    expect(servicio.periodoActual?.pisoCentavos, 8000);
+    expect(servicio.periodoActual?.arrastradoCentavos, 0);
+    expect(servicio.resumen.saldoCentavos, 250000);
+  });
 }

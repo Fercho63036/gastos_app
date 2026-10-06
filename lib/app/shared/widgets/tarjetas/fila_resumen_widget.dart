@@ -35,6 +35,11 @@ class FilaResumenWidget extends StatelessWidget {
         fontSize: AppDimensions.fontS,
         fontWeight: FontWeight.w700,
       ),
+      EstiloFilaResumen.negativo => TextStyle(
+        color: colorScheme.error,
+        fontSize: AppDimensions.fontS,
+        fontWeight: FontWeight.w700,
+      ),
     };
   }
 

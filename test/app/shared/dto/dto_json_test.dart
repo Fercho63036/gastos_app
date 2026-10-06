@@ -92,6 +92,7 @@ void main() {
       gastableCentavos: 2,
       gastableTotalCentavos: 3,
       pisoCentavos: 4,
+      entradasCentavos: 5,
     );
     final resumenLeido = ResumenDto.desdeJson(ResumenDto.aJson(resumen));
     expect(resumenLeido.gastableTotalCentavos, 3);

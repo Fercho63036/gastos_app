@@ -22,6 +22,7 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 - [x] RF-14 — Vistas Hoy / Semana / Mes (`lib/app/features/inicio/models/periodo_filtro.dart`, `inicio_page.dart`)
 - [x] RF-15 — Semana de 7 días corridos, no semana calendario (`inicio_helpers.dart` → `desdeDePeriodo`)
 - [x] RF-17 — Se puede gastar bajo el piso sin bloqueo (`PeriodoHelpers.validar` solo rechaza piso > saldo inicial; nada impide `gastable` negativo)
+- [x] RF-02 — Monto del mes editable en cualquier momento, subiendo o bajando (ver "Desviaciones acordadas": se implementa fusionado con RF-03 en la pantalla "Entrada")
 
 ## Parcial (falta terminar)
 
@@ -29,7 +30,6 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 
 ## Pendientes, en orden de la fase que les corresponde
 
-- [ ] RF-02 — Monto del mes editable en cualquier momento (hoy solo se fija al iniciar mes; no hay pantalla para subirlo/bajarlo después)
 - [ ] RF-18, RF-19, RF-20 — Alertas tipo batería (20/15/10/5/0%), saldo en rojo bajo 20%, aviso al abrir la app bajo el piso — no existe lógica de umbrales ni diálogo de aviso
 - [ ] RF-21 — Gráficos (circular por categoría, barras por día/semana/mes) — no existe carpeta de resumen/gráficos ni librería de charts en uso
 - [ ] RF-22 — Exportación a Excel
@@ -38,7 +38,7 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 ## Fases (actualizado contra el código real)
 
 - Fase 1 (modelo de datos base) — **completa**: `Movimiento`, `EdicionMovimiento`, `CategoriaMovimiento`, `PeriodoMes` ya existen en `lib/app/shared/models/`.
-- Fase 2 (presupuesto y entradas) — **completa excepto RF-02** (ver arriba).
+- Fase 2 (presupuesto y entradas) — **completa**, incluyendo RF-02 (ver "Desviaciones acordadas").
 - Fase 3 (gastos: alta/edición/anulación/historial) — **completa**.
 - Fase 4 (listados) — **completa**.
 - Fase 5 (piso y alertas) — **en curso**: RF-16 parcial, RF-17 completo, RF-18/19/20 pendientes. Siguiente trabajo real del proyecto.
@@ -48,7 +48,12 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 
 ## Desviaciones acordadas respecto a la spec original
 
-(Ninguna registrada todavía. RF-16 se deja como "parcial", no como desviación: el comportamiento objetivo sigue siendo el de la spec, solo falta completar el default de 50 Bs y permitir editar el piso fuera de "Iniciar mes".)
+- **RF-02 se resuelve en "Iniciar Mes", no en "Entrada"** (decisión final de Ariel, 2026-10-06, tras dos intentos previos descartados — ver historial abajo): "Iniciar Mes" (`iniciar_mes_page.dart` / `iniciar_mes_provider.dart`) ahora tiene dos modos, decididos por `PeriodoHelpers.esMesActual(periodoActual, ahora)` (¿el período vigente es del mes calendario actual?):
+  - **Sin período del mes actual** (primera vez en el mes): modo "Iniciar mes" de siempre — crea un período nuevo, arrastrando `resumen.saldoCentavos` del período anterior.
+  - **Con período del mes actual**: modo "Editar monto del mes" — precarga el `montoMesCentavos`/`pisoCentavos` vigentes y, al guardar, **actualiza esa misma fila in-place** (`MovimientosService.actualizarMontoMes` → `MovimientosRepositorio.actualizarMontoMes` → `MovimientosAlmacen.actualizarPeriodoActual`, UPDATE sobre la fila de mayor id en `periodos`), sin tocar el arrastre ni crear una fila nueva. Esto resuelve RF-02 ("editable en cualquier momento, subiendo o bajando") de forma directa.
+  - **"Entrada" (`nueva_entrada_page.dart` / `nueva_entrada_provider.dart`) vuelve a ser solo RF-03**: pantalla simple para sumar un ingreso extra (campo vacío al abrir, se suma tal cual al saldo vía un `Movimiento` con `esEntrada: true`, sin delta ni precarga de saldo).
+  - **Historial de decisiones sobre RF-02 (para que una sesión futura no lo reintente):** (1) primer intento: fusionar RF-02+RF-03 en "Entrada", precargando `montoMesCentavos + entradas` — descartado porque ese valor no coincidía con el saldo real visto en inicio (excluía arrastre y gastos). (2) segundo intento: misma fusión pero precargando `saldoCentavos` (sí coincidía con "Te queda este mes") — descartado por Ariel porque "Entrada" e "Iniciar Mes" terminaban manejando el mismo dato por caminos distintos, lo cual es confuso. (3) diseño final (el de arriba): cada pantalla maneja su propio dato — "Iniciar Mes" el monto del mes (con modo edición in-place), "Entrada" solo ingresos extra.
+  - RF-16 se deja como "parcial", no como desviación: el comportamiento objetivo sigue siendo el de la spec, solo falta completar el default de 50 Bs y permitir editar el piso fuera de "Iniciar mes" (esto último ya ocurre de hecho ahora en el modo "Editar monto del mes", que incluye el campo de piso).
 
 ## Nota sobre código legado (no tocado en esta auditoría)
 

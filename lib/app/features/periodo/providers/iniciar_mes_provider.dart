@@ -15,19 +15,42 @@ import '../utils/periodo_helpers.dart';
 /*************************** INICIAR MES PROVIDER ***************************/
 class IniciarMesProvider extends ChangeNotifier with GuardadoMixin {
   final MovimientosService _datos;
+  final bool editando;
   final int arrastradoCentavos;
   final String tituloMes;
   final String textoSobrante;
-  final TextEditingController montoController = TextEditingController();
+  final TextEditingController montoController;
   final TextEditingController pisoController;
 
-  IniciarMesProvider(this._datos, DateTime ahora)
-    : arrastradoCentavos = _datos.resumen.saldoCentavos,
-      tituloMes = FormatoHelpers.formatearMesAnio(ahora),
-      textoSobrante = PeriodoHelpers.textoSobrante(_datos.periodoActual),
-      pisoController = TextEditingController(
-        text: PeriodoHelpers.pisoPrecargado(_datos.periodoActual),
-      ) {
+  factory IniciarMesProvider(MovimientosService datos, DateTime ahora) {
+    final editando = PeriodoHelpers.esMesActual(datos.periodoActual, ahora);
+    return IniciarMesProvider._(
+      datos,
+      ahora,
+      editando: editando,
+      arrastradoCentavos: editando
+          ? datos.periodoActual!.arrastradoCentavos
+          : datos.resumen.saldoCentavos,
+      montoPrecargado: editando
+          ? FormatoHelpers.formatearNumero(
+              datos.periodoActual!.montoMesCentavos,
+            )
+          : '',
+    );
+  }
+
+  IniciarMesProvider._(
+    this._datos,
+    DateTime ahora, {
+    required this.editando,
+    required this.arrastradoCentavos,
+    required String montoPrecargado,
+  }) : tituloMes = FormatoHelpers.formatearMesAnio(ahora),
+       textoSobrante = PeriodoHelpers.textoSobrante(_datos.periodoActual),
+       montoController = TextEditingController(text: montoPrecargado),
+       pisoController = TextEditingController(
+         text: PeriodoHelpers.pisoPrecargado(_datos.periodoActual),
+       ) {
     montoController.addListener(notifyListeners);
     pisoController.addListener(notifyListeners);
   }
@@ -49,7 +72,17 @@ class IniciarMesProvider extends ChangeNotifier with GuardadoMixin {
       saldoInicialCentavos: arrastradoCentavos + _montoMes,
     );
     if (error != null) return error;
-    await _datos.iniciarMes(montoMesCentavos: _montoMes, pisoCentavos: _piso);
+    if (editando) {
+      await _datos.actualizarMontoMes(
+        montoMesCentavos: _montoMes,
+        pisoCentavos: _piso,
+      );
+    } else {
+      await _datos.iniciarMes(
+        montoMesCentavos: _montoMes,
+        pisoCentavos: _piso,
+      );
+    }
     return null;
   });
 

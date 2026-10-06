@@ -2,6 +2,8 @@ class PeriodoStrings {
   PeriodoStrings._();
 
   static const String iniciarMes = 'Iniciar mes';
+  static const String editarMontoMes = 'Editar monto del mes';
+  static const String montoMesActualizado = 'Monto del mes actualizado';
   static const String inicioManual = 'Inicio manual del periodo';
   static const String saldoArrastra = 'Saldo que se arrastra';
   static const String sobranteDe = 'Sobrante de ';

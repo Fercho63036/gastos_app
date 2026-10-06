@@ -35,14 +35,14 @@ class MovimientosStrings {
   /****************************** NUEVA ENTRADA *******************************/
   static const String nuevaEntrada = 'Nueva entrada';
   static const String introEntrada =
-      'Registra una recarga o ampliación de tu dinero del mes.';
-  static const String montoEntrada = 'Monto de la entrada';
+      'Agrega un ingreso extra a tu saldo del mes.';
+  static const String montoEntrada = 'Monto que ingresa';
   static const String motivo = 'Motivo';
   static const String opcional = '(opcional)';
   static const String hintMotivo = 'Ej.: me pagaron un trabajo';
-  static const String saldoActual = 'Saldo actual';
   static const String entrada = 'Entrada';
+  static const String saldoActual = 'Saldo actual';
   static const String nuevoSaldo = 'Nuevo saldo';
-  static const String registrarEntrada = 'Registrar entrada';
+  static const String registrarEntrada = 'Guardar entrada';
   static const String entradaRegistrada = 'Entrada registrada';
 }

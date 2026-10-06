@@ -112,4 +112,17 @@ class MovimientosSqliteAlmacen implements MovimientosAlmacen {
       MovimientoMapper.periodoAFila(periodo),
     );
   }
+
+  /************************* ACTUALIZAR PERIODO ACTUAL *************************/
+  @override
+  Future<void> actualizarPeriodoActual(PeriodoMes periodo) async {
+    final db = await _db;
+    await db.update(
+      DatabaseConstants.tablaPeriodos,
+      MovimientoMapper.periodoAFila(periodo),
+      where:
+          '${DatabaseConstants.colId} = '
+          '(SELECT MAX(${DatabaseConstants.colId}) FROM ${DatabaseConstants.tablaPeriodos})',
+    );
+  }
 }

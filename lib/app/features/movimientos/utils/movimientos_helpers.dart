@@ -7,7 +7,6 @@ import 'package:gastos_app/app/shared/constants/dominio_constants.dart';
 import 'package:gastos_app/app/shared/models/edicion_movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/fila_resumen_model.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
-import 'package:gastos_app/app/shared/utils/resumen_helpers.dart';
 
 /********************************* FEATURE **********************************/
 import '../constants/movimientos_strings.dart';
@@ -50,26 +49,20 @@ class MovimientosHelpers {
       '${FormatoHelpers.formatearFecha(edicion.fecha)}'
       '${FormatoStrings.separadorPunto}${FormatoHelpers.formatearHora(edicion.fecha)}';
 
-  static List<FilaResumen> filasResumenEntrada(
-    int saldoCentavos,
-    int entradaCentavos,
-  ) {
+  /**************************** FILAS RESUMEN ENTRADA **************************/
+  static List<FilaResumen> filasResumenEntrada({
+    required int saldoActualCentavos,
+    required int montoCentavos,
+  }) {
     return [
       FilaResumen(
         etiqueta: MovimientosStrings.saldoActual,
-        valor: FormatoHelpers.formatearMonto(saldoCentavos),
-      ),
-      FilaResumen(
-        etiqueta: MovimientosStrings.entrada,
-        valor:
-            '${FormatoStrings.signoPositivo}'
-            '${FormatoHelpers.formatearMonto(entradaCentavos)}',
-        estilo: EstiloFilaResumen.positivo,
+        valor: FormatoHelpers.formatearMonto(saldoActualCentavos),
       ),
       FilaResumen(
         etiqueta: MovimientosStrings.nuevoSaldo,
         valor: FormatoHelpers.formatearMonto(
-          ResumenHelpers.saldoDespuesDeEntrada(saldoCentavos, entradaCentavos),
+          saldoActualCentavos + montoCentavos,
         ),
         estilo: EstiloFilaResumen.destacado,
         divisorAntes: true,

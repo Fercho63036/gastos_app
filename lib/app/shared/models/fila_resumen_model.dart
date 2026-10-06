@@ -1,4 +1,4 @@
-enum EstiloFilaResumen { normal, destacado, acento, positivo }
+enum EstiloFilaResumen { normal, destacado, acento, positivo, negativo }
 
 /******************************* FILA RESUMEN *******************************/
 class FilaResumen {

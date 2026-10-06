@@ -25,14 +25,14 @@ class NuevaEntradaProvider extends ChangeNotifier with GuardadoMixin {
   int get montoCentavos => FormatoHelpers.parsearMonto(montoController.text);
 
   List<FilaResumen> get filasResumen => MovimientosHelpers.filasResumenEntrada(
-    _datos.resumen.saldoCentavos,
-    montoCentavos,
+    saldoActualCentavos: _datos.resumen.saldoCentavos,
+    montoCentavos: montoCentavos,
   );
 
   /******************************** REGISTRAR *********************************/
   Future<String?> registrar() => guardarConEstado(() async {
-    final error = MovimientosHelpers.validarMonto(montoCentavos);
-    if (error != null) return error;
+    final errorMonto = MovimientosHelpers.validarMonto(montoCentavos);
+    if (errorMonto != null) return errorMonto;
     final motivo = motivoController.text.trim();
     await _datos.registrarEntrada(
       titulo: motivo.isEmpty ? MovimientosStrings.entrada : motivo,

@@ -37,7 +37,10 @@ class IniciarMesPage extends StatelessWidget {
   ) async {
     final error = await provider.iniciar();
     if (!context.mounted) return;
-    SnackbarHelpers.mostrar(context, error ?? PeriodoStrings.mesIniciado);
+    final mensajeExito = provider.editando
+        ? PeriodoStrings.montoMesActualizado
+        : PeriodoStrings.mesIniciado;
+    SnackbarHelpers.mostrar(context, error ?? mensajeExito);
     if (error == null) NavegacionHelpers.volver(context);
   }
 
@@ -70,10 +73,13 @@ class IniciarMesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = context.watch<IniciarMesProvider>();
+    final titulo = provider.editando
+        ? PeriodoStrings.editarMontoMes
+        : PeriodoStrings.iniciarMes;
 
     return PaginaFormularioWidget(
-      titulo: PeriodoStrings.iniciarMes,
-      textoBoton: PeriodoStrings.iniciarMes,
+      titulo: titulo,
+      textoBoton: titulo,
       onConfirmar: () => _iniciar(context, provider),
       cargando: provider.guardando,
       children: [

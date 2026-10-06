@@ -88,4 +88,16 @@ class MovimientosService extends ChangeNotifier {
     );
     await cargar();
   }
+
+  /***************************** ACTUALIZAR MONTO MES ***************************/
+  Future<void> actualizarMontoMes({
+    required int montoMesCentavos,
+    required int pisoCentavos,
+  }) async {
+    await _repositorio.actualizarMontoMes(
+      montoMesCentavos: montoMesCentavos,
+      pisoCentavos: pisoCentavos,
+    );
+    await cargar();
+  }
 }

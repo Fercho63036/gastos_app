@@ -23,6 +23,7 @@ void main() {
       gastableCentavos: 119550,
       gastableTotalCentavos: 192800,
       pisoCentavos: 5000,
+      entradasCentavos: 0,
     );
     expect(InicioHelpers.porcentajeDisponible(resumen), 62);
     expect(InicioHelpers.porcentajeDisponible(ResumenMes.vacio), 0);

@@ -32,6 +32,7 @@ class ResumenHelpers {
       gastableCentavos: saldo - periodo.pisoCentavos,
       gastableTotalCentavos: ingresado - periodo.pisoCentavos,
       pisoCentavos: periodo.pisoCentavos,
+      entradasCentavos: entradas,
     );
   }
 

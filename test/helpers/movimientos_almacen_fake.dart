@@ -36,4 +36,9 @@ class MovimientosAlmacenFake implements MovimientosAlmacen {
   @override
   Future<void> insertarPeriodo(PeriodoMes periodo) async =>
       periodos.add(periodo);
+
+  @override
+  Future<void> actualizarPeriodoActual(PeriodoMes periodo) async {
+    periodos[periodos.length - 1] = periodo;
+  }
 }
