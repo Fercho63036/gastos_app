@@ -26,10 +26,6 @@ import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 import 'package:gastos_app/app/shared/services/movimientos_sqlite_almacen.dart';
 import 'package:gastos_app/app/shared/services/storage_service.dart';
 
-/********************************* FEATURE **********************************/
-import 'package:gastos_app/features/expenses/data/repositories/expenses_repository.dart';
-import 'package:gastos_app/features/expenses/presentation/providers/expenses_provider.dart';
-
 final getIt = GetIt.instance;
 
 Future<void> setupDependencias() async {
@@ -84,9 +80,6 @@ void _registrarFeatures() {
   );
   getIt.registerLazySingleton<ResumenProvider>(
     () => ResumenProvider(ResumenService(getIt<MovimientosService>())),
-  );
-  getIt.registerLazySingleton<ExpensesProvider>(
-    () => ExpensesProvider(ExpensesRepository()),
   );
   _registrarFormularios();
 }

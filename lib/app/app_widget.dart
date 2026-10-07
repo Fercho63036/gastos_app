@@ -18,9 +18,6 @@ import 'package:gastos_app/app/features/resumen/providers/resumen_provider.dart'
 /********************************** SHARED **********************************/
 import 'package:gastos_app/app/shared/layout/providers/theme_provider.dart';
 
-/********************************* FEATURE **********************************/
-import 'package:gastos_app/features/expenses/presentation/providers/expenses_provider.dart';
-
 class GastosApp extends StatelessWidget {
   const GastosApp({super.key});
 
@@ -30,7 +27,6 @@ class GastosApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider.value(value: getIt<ThemeProvider>()),
         ChangeNotifierProvider.value(value: getIt<AuthProvider>()),
-        ChangeNotifierProvider.value(value: getIt<ExpensesProvider>()),
         ChangeNotifierProvider.value(value: getIt<InicioProvider>()),
         ChangeNotifierProvider.value(value: getIt<ResumenProvider>()),
       ],
