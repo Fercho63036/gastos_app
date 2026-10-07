@@ -45,10 +45,10 @@ Estado: ✅ pantalla ya desarrollada · 🔲 pendiente de desarrollar · ⚠️ 
 - **RF-19** 🔲 Saldo en rojo desde el 20% hacia abajo.
 - **RF-20** 🔲 Bajo el piso, cada vez que se abre la app sale un aviso de que ya no deberías gastar más.
 
-## Resumen y exportación
+## Resumen y listado
 
 - **RF-21** 🔲 Gráfico circular por categoría y barras por día, semana o mes.
-- **RF-22** 🔲 Exportar a Excel (.xlsx) por semana, mes y año, con gastos, entradas, resumen por categoría e historial de ediciones.
+- **RF-22** 🔲 Listado de gastos filtrable por Semana, Mes y Año, con entradas, resumen por categoría e historial de ediciones, todo dentro de la app (sin Excel).
 
 ## Puntos por confirmar (ver decisiones adoptadas en SKILL.md)
 
@@ -58,6 +58,6 @@ Estado: ✅ pantalla ya desarrollada · 🔲 pendiente de desarrollar · ⚠️ 
 
 ## Pendientes de antes (genuinamente abiertos, preguntar a Ariel si la tarea los toca)
 
-- ¿El historial de ediciones se ve dentro de la app o solo en el Excel?
+- ¿El historial de ediciones se ve dentro de la app (decidido: dentro de la app)?
 - ¿Las categorías son fijas o puedes crear las tuyas?
-- ¿Vista Año dentro de la app o solo en la exportación?
+- ¿Vista Año dentro del listado? (decidido: sí, filtro Semana/Mes/Año)

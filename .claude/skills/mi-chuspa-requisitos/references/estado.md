@@ -30,7 +30,7 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 ## Pendientes, en orden de la fase que les corresponde
 
 - [ ] RF-18, RF-19, RF-20 — Alertas tipo batería (20/15/10/5/0%), saldo en rojo bajo 20%, aviso al abrir la app bajo el piso — no existe lógica de umbrales ni diálogo de aviso
-- [ ] RF-22 — Exportación a Excel
+- [ ] RF-22 — Listado de gastos filtrado por Semana/Mes/Año (reemplaza la exportación a Excel)
 
 ## Fases (actualizado contra el código real)
 
@@ -40,10 +40,12 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 - Fase 4 (listados) — **completa**.
 - Fase 5 (piso y alertas) — **en curso**: RF-16 completo, RF-17 completo, RF-18/19/20 pendientes. Siguiente trabajo real del proyecto.
 - Fase 6 (resumen y gráficos) — **completa** (RF-21).
-- Fase 7 (exportación a Excel) — pendiente (RF-22).
+- Fase 7 (listado de gastos por Semana/Mes/Año) — pendiente (RF-22).
 - Fase 8 (perfil) — **completa** (RF-27).
 
 ## Desviaciones acordadas respecto a la spec original
+
+- **RF-22 ya no exporta a Excel** (decisión de Ariel, 2026-10-07): se reemplaza por un listado de gastos dentro de la app, filtrado por Semana / Mes / Año. No se agrega librería ni archivo .xlsx.
 
 - **RF-02 se resuelve en "Iniciar Mes", no en "Entrada"** (decisión final de Ariel, 2026-10-06, tras dos intentos previos descartados — ver historial abajo): "Iniciar Mes" (`iniciar_mes_page.dart` / `iniciar_mes_provider.dart`) ahora tiene dos modos, decididos por `PeriodoHelpers.esMesActual(periodoActual, ahora)` (¿el período vigente es del mes calendario actual?):
   - **Sin período del mes actual** (primera vez en el mes): modo "Iniciar mes" de siempre — crea un período nuevo, arrastrando `resumen.saldoCentavos` del período anterior.

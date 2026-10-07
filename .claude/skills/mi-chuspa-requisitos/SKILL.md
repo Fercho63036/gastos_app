@@ -1,6 +1,6 @@
 ---
 name: mi-chuspa-requisitos
-description: Especificación y plan de migración/implementación para "MI Chuspa", la app Flutter de control de gastos personales de Ariel (login, presupuesto, gastos, alertas tipo batería, exportación a Excel). Usa esta skill SIEMPRE que trabajes en código, pantallas, modelos de datos, lógica de saldo/alertas o exportación de MI Chuspa, aunque el pedido sea algo puntual como "agrega la pantalla de perfil" o "arregla el cálculo del saldo" — esos requisitos puntuales dependen de reglas definidas aquí (RF-01 a RF-27) que no deben romperse ni reinterpretarse sobre la marcha.
+description: Especificación y plan de migración/implementación para "MI Chuspa", la app Flutter de control de gastos personales de Ariel (login, presupuesto, gastos, alertas tipo batería, listado de gastos por Semana/Mes/Año). Usa esta skill SIEMPRE que trabajes en código, pantallas, modelos de datos, lógica de saldo/alertas o listado de gastos de MI Chuspa, aunque el pedido sea algo puntual como "agrega la pantalla de perfil" o "arregla el cálculo del saldo" — esos requisitos puntuales dependen de reglas definidas aquí (RF-01 a RF-27) que no deben romperse ni reinterpretarse sobre la marcha.
 ---
 
 # MI Chuspa — Skill de implementación
@@ -39,9 +39,9 @@ El documento de requisitos dejaba 3 puntos abiertos. Para no bloquear la impleme
 - **RF-24 (seguridad de recuperación de contraseña):** se implementa tal como está especificado, **sin** pregunta de seguridad ni verificación adicional (es consistente con que la app es local y de un solo usuario). Esto es una decisión de producto aceptada, no un bug pendiente.
 
 Puntos que siguen genuinamente abiertos (no asumas, pregúntale a Ariel si la tarea los toca):
-- Si el historial de ediciones se muestra dentro de la app (no solo en el Excel exportado).
+- Si el historial de ediciones se muestra dentro de la app (decidido: sí, dentro de la app).
 - Si las categorías son fijas (como están listadas en RF-07) o el usuario puede crear las suyas.
-- Si debe existir una vista "Año" dentro de la app, o el año solo aparece en la exportación a Excel.
+- Si debe existir una vista "Año" dentro de la app, (decidido: sí, filtro Semana/Mes/Año en el listado).
 
 ## Plan de migración / implementación por fases
 
@@ -68,8 +68,8 @@ Depende de que el saldo y el gastable (fases 2 y 3) ya se calculen correctamente
 **Fase 6 — Resumen y gráficos** (RF-21)
 Circular por categoría, barras por día/semana/mes. Es una vista de lectura sobre los datos ya existentes.
 
-**Fase 7 — Exportación a Excel** (RF-22)
-.xlsx por semana/mes/año con gastos, entradas, resumen por categoría e historial de ediciones. Depende de que todo lo anterior ya tenga datos consistentes que exportar.
+**Fase 7 — Listado de gastos por Semana/Mes/Año** (RF-22)
+Listado dentro de la app filtrado por semana/mes/año con gastos, entradas, resumen por categoría e historial de ediciones. Sin exportación a Excel. Depende de que todo lo anterior ya tenga datos consistentes que listar.
 
 **Fase 8 — Perfil** (RF-27)
 Contenido por definir con Ariel antes de construirla; no asumas campos.
