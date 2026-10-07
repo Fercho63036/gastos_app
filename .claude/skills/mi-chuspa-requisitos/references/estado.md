@@ -1,6 +1,6 @@
 # Estado vivo de implementación — MI Chuspa
 
-Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige o se decide algo distinto a la spec sobre un RF. Última actualización: 2026-10-06 (auditoría de código real contra RF-01 a RF-21). Actualizado: 2026-10-07 (RF-16 completado, luego ajustado a solo lectura en Inicio). Actualizado: 2026-10-06 (RF-21 completado).
+Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige o se decide algo distinto a la spec sobre un RF. Última actualización: 2026-10-06 (auditoría de código real contra RF-01 a RF-21). Actualizado: 2026-10-07 (RF-16 completado, luego ajustado a solo lectura en Inicio). Actualizado: 2026-10-06 (RF-21 completado). Actualizado: 2026-10-07 (RF-27 completado, limpieza de código legado confirmada).
 
 ## Completados (verificado contra código)
 
@@ -25,12 +25,12 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 - [x] RF-02 — Monto del mes editable en cualquier momento, subiendo o bajando (ver "Desviaciones acordadas": se implementa en la pantalla "Iniciar Mes", con modo de edición in-place)
 - [x] RF-16 — Piso editable. Sin default (lo define el usuario). La tarjeta de Inicio (`fila_gastable_piso_widget.dart`) es solo lectura (Gastado/Piso, sin tocar); el piso se edita exclusivamente desde "Iniciar/Editar mes" (`iniciar_mes_page.dart`, `ResumenHelpers.calcular`). El `MovimientosService.actualizarPiso` y `DialogoEditarPisoWidget` quedaron sin usar desde Inicio tras este ajuste — pendiente decidir si se eliminan.
 - [x] RF-21 — Gráficos: circular por categoría y barras por día, con selector Hoy/Semana/Mes (mismo `PeriodoFiltro` de Inicio) y acceso desde el menú lateral. Nueva feature `lib/app/features/resumen/` (`resumen_page.dart`, `resumen_provider.dart`, `resumen_service.dart`, `resumen_helpers.dart`, `widgets/grafico_categorias_widget.dart`, `widgets/grafico_barras_widget.dart`, `widgets/leyenda_categorias_widget.dart`) usando `fl_chart`. Reutiliza `CategoriaMovimiento` (color/nombre), `AgrupacionHelpers.agruparPorDia` y el filtro de vigentes; se agregó `MovimientosService.listarVigentesDesde` (no paginado) para alimentar los gráficos. Ruta `/resumen` y entrada "Resumen" en `menu_config.dart`.
+- [x] RF-27 — Pantalla Perfil: avatar con iniciales, nombre/correo del usuario, acciones (editar datos, recuperar contraseña), botón cerrar sesión (`lib/app/features/perfil/pages/perfil_page.dart`, `editar_perfil_page.dart`, widgets: `avatar_iniciales_widget.dart`, `datos_usuario_widget.dart`, `acciones_perfil_widget.dart`, `boton_cerrar_sesion_widget.dart`)
 
 ## Pendientes, en orden de la fase que les corresponde
 
 - [ ] RF-18, RF-19, RF-20 — Alertas tipo batería (20/15/10/5/0%), saldo en rojo bajo 20%, aviso al abrir la app bajo el piso — no existe lógica de umbrales ni diálogo de aviso
 - [ ] RF-22 — Exportación a Excel
-- [ ] RF-27 — Pantalla Perfil (definir contenido con Ariel antes de construir)
 
 ## Fases (actualizado contra el código real)
 
@@ -41,7 +41,7 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 - Fase 5 (piso y alertas) — **en curso**: RF-16 completo, RF-17 completo, RF-18/19/20 pendientes. Siguiente trabajo real del proyecto.
 - Fase 6 (resumen y gráficos) — **completa** (RF-21).
 - Fase 7 (exportación a Excel) — pendiente (RF-22).
-- Fase 8 (perfil) — pendiente (RF-27).
+- Fase 8 (perfil) — **completa** (RF-27).
 
 ## Desviaciones acordadas respecto a la spec original
 
@@ -54,6 +54,3 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 - **El saldo total nunca puede quedar negativo** (corrección de bug sobre RF-10, 2026-10-06): crear o editar un gasto que haría que `resumen.saldoCentavos` ("Te queda este mes") quede negativo se bloquea con el error "El gasto supera el saldo disponible este mes" (`MovimientosHelpers.validarTopeSaldo`, usado en `NuevoGastoProvider.guardar` y `DetalleGastoProvider._guardarBorrador`).
 - **El piso ahora se resta del total de una sola vez y en la práctica bloquea gastos** (decisión explícita de producto de Ariel, 2026-10-06, **reemplaza RF-17** tal como estaba escrito): `ResumenHelpers.calcular` resta `periodo.pisoCentavos` sobre `ingresado` (antes de restar gastos), de modo que `resumen.saldoCentavos` ("Te queda este mes") ya sale neto de piso. Como el tope de saldo (punto anterior) sigue bloqueando sobre ese mismo `saldoCentavos`, el efecto conjunto es que ya no se puede gastar por debajo del piso — las dos reglas ahora trabajan juntas, no son independientes como antes. El descuento queda visible en el tile "Piso" de Inicio y en la fila "Piso descontado" de la pantalla "Iniciar/Editar mes" (`PeriodoHelpers.filasResumen`). El tile "Gastable" se eliminó de `FilaGastablePisoWidget` porque `resumen.gastableCentavos` quedó idéntico a `resumen.saldoCentavos`.
 
-## Nota sobre código legado (no tocado en esta auditoría)
-
-Existe un árbol de código sin usar desde el bootstrap de la app: `lib/core/` (incluye `database_helper.dart`) y `lib/features/expenses/` (modelo `Expense` con `amount` en `double`, en vez de centavos enteros como el `Movimiento` activo). No está referenciado desde `lib/app/...`, que es el árbol activo. Queda pendiente decidir si se elimina.
