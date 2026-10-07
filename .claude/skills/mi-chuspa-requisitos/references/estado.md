@@ -45,6 +45,8 @@ Actualiza este archivo (no `requisitos.md`) cada vez que se completa, se corrige
 
 ## Desviaciones acordadas respecto a la spec original
 
+- **Paleta verde y colores centralizados** (decisión de Ariel, 2026-10-07): la app pasó de morado a azul y luego a verde (primario `2E7D32`, acento ámbar `FFB300`). Todos los colores viven solo en `lib/app/core/theme/app_colores.dart` (`AppColores`); ningún widget define colores propios (regla 5.3 de `AGENTS.md`).
+
 - **RF-22 ya no exporta a Excel** (decisión de Ariel, 2026-10-07): se reemplaza por un listado de gastos dentro de la app, filtrado por Semana / Mes / Año. No se agrega librería ni archivo .xlsx.
 
 - **RF-02 se resuelve en "Iniciar Mes", no en "Entrada"** (decisión final de Ariel, 2026-10-06, tras dos intentos previos descartados — ver historial abajo): "Iniciar Mes" (`iniciar_mes_page.dart` / `iniciar_mes_provider.dart`) ahora tiene dos modos, decididos por `PeriodoHelpers.esMesActual(periodoActual, ahora)` (¿el período vigente es del mes calendario actual?):

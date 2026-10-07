@@ -105,6 +105,14 @@ Cada método y cada bloque lógico de una clase (variables estáticas, variables
 - Esa información va en el mensaje de commit o en la conversación, nunca en el código.
 - Los únicos comentarios permitidos en el código son los banners de 5.1; todo lo demás queda prohibido, incluso si parece útil para el reviewer.
 
+### 5.3 Colores
+
+- Todo color se define únicamente en `AppColores` (`lib/app/core/theme/app_colores.dart`); `AppTema` lo toma de ahí.
+- Prohibido `Color(0x...)`, `Colors.xxx` y hex sueltos en widgets, features o shared.
+- En widgets usar `Theme.of(context).colorScheme` cuando exista el rol; si no, `AppColores.<token>`.
+- Un color nuevo se agrega primero como token en `AppColores` (con su variante oscura si aplica), nunca directo en el widget.
+- Cambiar la paleta implica editar solo `app_colores.dart`.
+
 ## 6. Orden de imports
 
 1. Flutter/Dart
@@ -159,6 +167,7 @@ Al crear una feature nueva, trabajar por fases: constants/utils → models/servi
 - [ ] Ningún archivo supera 200 líneas ni función 30 líneas
 - [ ] Sin strings, números ni breakpoints hardcodeados
 - [ ] Usa `AppDimensions` y `ResponsiveHelper`
+- [ ] Sin colores hardcodeados fuera de `AppColores`
 - [ ] Nombres descriptivos y sin código duplicado
 - [ ] Misma funcionalidad que el original
 - [ ] Providers/servicios registrados en DI si son nuevos
