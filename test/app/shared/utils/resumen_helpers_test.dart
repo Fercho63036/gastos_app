@@ -4,7 +4,7 @@ import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/models/movimiento_model.dart';
 import 'package:gastos_app/app/shared/models/periodo_mes_model.dart';
 import 'package:gastos_app/app/shared/utils/ediciones_helpers.dart';
-import 'package:gastos_app/app/shared/utils/resumen_helpers.dart';
+import 'package:gastos_app/app/shared/utils/saldo_helpers.dart';
 
 Movimiento _mov(
   String id,
@@ -31,7 +31,7 @@ void main() {
   );
 
   test('el saldo ignora anulados y movimientos de antes del periodo', () {
-    final resumen = ResumenHelpers.calcular(periodo, [
+    final resumen = SaldoHelpers.calcular(periodo, [
       _mov('almuerzo', 2500),
       _mov('anulado', 800, anulado: true),
       _mov('viejo', 9999, fecha: DateTime(2026, 9, 30)),

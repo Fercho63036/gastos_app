@@ -11,7 +11,7 @@ import '../../paginado/models/paginated_response_model.dart';
 import '../../paginado/utils/paginado_helpers.dart';
 import '../../services/movimientos_almacen.dart';
 import '../../utils/ediciones_helpers.dart';
-import '../../utils/resumen_helpers.dart';
+import '../../utils/saldo_helpers.dart';
 import '../movimientos_repositorio.dart';
 
 /********************** MOVIMIENTOS LOCAL REPOSITORIO ***********************/
@@ -34,7 +34,7 @@ class MovimientosLocalRepositorio implements MovimientosRepositorio {
   @override
   Future<ResumenMes> obtenerResumen() async {
     final periodo = await _almacen.cargarPeriodoActual();
-    return ResumenHelpers.calcular(
+    return SaldoHelpers.calcular(
       periodo ?? PeriodoMes.sinIniciar,
       await _almacen.cargarMovimientos(),
     );

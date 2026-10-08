@@ -8,7 +8,7 @@ import 'package:gastos_app/app/core/utils/formato_helpers.dart';
 import 'package:gastos_app/app/shared/models/categoria_movimiento.dart';
 import 'package:gastos_app/app/shared/services/movimientos_service.dart';
 import 'package:gastos_app/app/shared/utils/guardado_mixin.dart';
-import 'package:gastos_app/app/shared/utils/resumen_helpers.dart';
+import 'package:gastos_app/app/shared/utils/saldo_helpers.dart';
 
 /********************************* FEATURE **********************************/
 import '../utils/movimientos_helpers.dart';
@@ -27,7 +27,7 @@ class NuevoGastoProvider extends ChangeNotifier with GuardadoMixin {
 
   int get montoCentavos => FormatoHelpers.parsearMonto(montoController.text);
 
-  int get saldoDespuesCentavos => ResumenHelpers.saldoDespuesDeGasto(
+  int get saldoDespuesCentavos => SaldoHelpers.saldoDespuesDeGasto(
     _datos.resumen.saldoCentavos,
     montoCentavos,
   );

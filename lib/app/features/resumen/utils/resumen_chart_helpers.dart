@@ -7,9 +7,9 @@ import 'package:gastos_app/app/shared/utils/agrupacion_helpers.dart';
 import '../models/categoria_totalizada_model.dart';
 import '../models/punto_barra_model.dart';
 
-/***************************** RESUMEN HELPERS *******************************/
-class ResumenHelpers {
-  ResumenHelpers._();
+/***************************** RESUMEN CHART HELPERS *************************/
+class ResumenChartHelpers {
+  ResumenChartHelpers._();
 
   /******************************* POR CATEGORIA *******************************/
   static List<CategoriaTotalizada> porCategoria(List<Movimiento> movimientos) {

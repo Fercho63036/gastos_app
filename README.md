@@ -42,12 +42,17 @@ flutter run
 ```
 lib/
 ├── main.dart
-├── app.dart          # MultiProvider (inyección de dependencias)
-├── core/             # constants, database, theme, widgets compartidos
-└── features/
-    └── expenses/
-        ├── data/         # models, repositories
-        └── presentation/ # providers, screens
+└── app/
+    ├── app_widget.dart       # MultiProvider + GoRouter (punto de entrada)
+    ├── core/                 # constants, database, theme, di, routes, utils
+    ├── shared/               # models, widgets, services, repos compartidos
+    └── features/
+        ├── auth/             # login, registro, recuperar contraseña
+        ├── inicio/           # pantalla principal con movimientos y saldo
+        ├── movimientos/      # nuevo gasto, nueva entrada, detalle
+        ├── perfil/           # ver y editar perfil de usuario
+        ├── periodo/          # iniciar mes / periodo
+        └── resumen/          # gráficas de gastos por categoría y por día
 ```
 
 Las reglas de arquitectura para desarrolladores e IAs están en [AGENTS.md](AGENTS.md).

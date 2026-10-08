@@ -20,14 +20,14 @@ Antes de escribir código, detecta o pregunta una sola vez:
 
 Respeta el stack existente; no agregues dependencias ni cambies la arquitectura sin consultar.
 
-### Stack detectado en gastos_app (2026-10-05)
+### Stack detectado en gastos_app (2026-10-08)
 
-- Estado: `provider` (ChangeNotifier + MultiProvider en `app.dart`)
-- DI: manual, vía `MultiProvider` en `lib/app.dart`
-- Persistencia: SQLite con `sqflite` (`DatabaseHelper` en core)
-- Sistema de diseño: `AppDimensions` y `ResponsiveHelper` **no existen aún** → proponer crearlos en core/ antes de usarlos
-- Idioma: el código existente usa nombres en inglés (`Expense`, `ExpensesProvider`); confirmar con el usuario antes de mezclar idiomas
-- Desvíos actuales respecto a la estructura objetivo: el código vive en `lib/core` y `lib/features` (no `lib/app/...`), usa `presentation/screens` en lugar de `pages`, y `Expense.amount` es `double` (debe migrar a centavos `int`)
+- Estado: `provider` (ChangeNotifier + MultiProvider en `app_widget.dart`)
+- DI: `get_it` + `injection.dart` en `lib/app/core/di/`
+- Persistencia: SQLite con `sqflite` (`AppDatabase` en `lib/app/core/database/`)
+- Rutas: `go_router` (`AppRouter` en `lib/app/core/routes/`)
+- Sistema de diseño: `AppDimensions` en `lib/app/core/constants/`, `ResponsiveHelper` en `lib/app/core/utils/`
+- Idioma: el código usa nombres en español (`Movimiento`, `PeriodoMes`, `ResumenMes`, etc.)
 
 ## 1. Estructura obligatoria
 

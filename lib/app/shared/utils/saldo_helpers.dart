@@ -3,9 +3,9 @@ import '../models/movimiento_model.dart';
 import '../models/periodo_mes_model.dart';
 import '../models/resumen_mes_model.dart';
 
-/***************************** RESUMEN HELPERS ******************************/
-class ResumenHelpers {
-  ResumenHelpers._();
+/***************************** SALDO HELPERS ********************************/
+class SaldoHelpers {
+  SaldoHelpers._();
 
   /********************************* VIGENTES *********************************/
   static Iterable<Movimiento> vigentes(

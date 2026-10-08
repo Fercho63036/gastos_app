@@ -10,7 +10,7 @@ import '../constants/resumen_strings.dart';
 import '../models/categoria_totalizada_model.dart';
 import '../models/punto_barra_model.dart';
 import '../services/resumen_service.dart';
-import '../utils/resumen_helpers.dart';
+import '../utils/resumen_chart_helpers.dart';
 
 class ResumenProvider extends ChangeNotifier {
   final ResumenService _servicio;
@@ -39,8 +39,8 @@ class ResumenProvider extends ChangeNotifier {
     notifyListeners();
     try {
       final movimientos = await _servicio.obtenerVigentes(_periodo);
-      _categorias = ResumenHelpers.porCategoria(movimientos);
-      _puntosBarras = ResumenHelpers.porDia(movimientos);
+      _categorias = ResumenChartHelpers.porCategoria(movimientos);
+      _puntosBarras = ResumenChartHelpers.porDia(movimientos);
     } on AppException catch (error) {
       _error = error.mensaje;
       debugPrint('${ResumenStrings.errorCarga}: $error');
