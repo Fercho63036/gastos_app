@@ -1,189 +1,225 @@
-# AGENTS.md — Reglas para asistentes de IA (gastos_app)
+# AGENTS.md — gastos_app (Flutter)
 
-> **Fuente única de verdad** para cualquier IA (Claude, ChatGPT/Codex, Gemini, Copilot, Cursor, etc.).
-> `CLAUDE.md`, `GEMINI.md`, `.github/copilot-instructions.md` y la skill de Claude solo apuntan aquí: **edita solo este archivo**.
-> **Chats web** (ChatGPT, Gemini, Claude.ai) no leen el repo: pega este archivo en Instrucciones personalizadas / Proyecto / Gem.
+> Fuente única de verdad para todos los asistentes de IA en este proyecto.
+> Solo convenciones técnicas; las reglas de negocio viven en la skill `mi-chuspa-requisitos` y no se duplican aquí.
 
-# Flutter Clean Architecture (Feature-First)
+---
 
-Actúa como experto en Flutter y arquitectura de software. Al crear o refactorizar código, aplica estas reglas de forma estricta y mantén la funcionalidad exacta (no cambies lógica de negocio al refactorizar).
+## Asistentes de IA
 
-## 0. Adaptación al proyecto (hacer primero)
+| Asistente | Archivo que lee | Cómo llega aquí |
+|---|---|---|
+| Claude Code | `CLAUDE.md` | `@AGENTS.md` |
+| Gemini CLI / Code Assist | `GEMINI.md` | `@AGENTS.md` |
+| GitHub Copilot Chat | `.github/copilot-instructions.md` | Remite a este archivo |
+| ChatGPT/Codex, Cursor, Windsurf | `AGENTS.md` | Lectura nativa |
 
-Antes de escribir código, detecta o pregunta una sola vez:
+- Los punteros solo redirigen aquí; nunca llevan reglas propias.
+- Los skills de `.claude/skills/` son atajos derivados de este archivo; si alguno lo contradice, gana `AGENTS.md`.
+- Una regla nueva se escribe aquí, no en un puntero, skill ni memoria de herramienta.
+- Chats web (ChatGPT, Gemini, Claude.ai) no leen el repo: pegar este archivo en Instrucciones personalizadas / Proyecto / Gem.
 
-- Gestor de estado (Provider, Riverpod, BLoC...)
-- Inyección de dependencias (GetIt, Riverpod, manual...)
-- Persistencia (Drift, Isar, SQLite, API...)
-- Clases del sistema de diseño existentes (p. ej. AppDimensions, ResponsiveHelper). Si no existen, propón crearlas en core/ antes de usarlas.
-- Idioma de código (por defecto: nombres en español salvo que el proyecto use inglés)
+---
 
-Respeta el stack existente; no agregues dependencias ni cambies la arquitectura sin consultar.
+## Stack
 
-### Stack detectado en gastos_app (2026-10-08)
+| Capa | Tecnología |
+|---|---|
+| Framework | Flutter / Dart |
+| Estado | Provider (`ChangeNotifier` + `MultiProvider` en `app_widget.dart`) |
+| Inyección | get_it (`lib/app/core/di/injection.dart`) |
+| Rutas | go_router (`lib/app/core/routes/`) |
+| Persistencia | sqflite (`AppDatabase` en `lib/app/core/database/`), shared_preferences |
+| Gráficos | fl_chart |
+| Diseño | `AppDimensions` (`core/constants/`), `ResponsiveHelper` (`core/utils/`), `AppColores` (`core/theme/`) |
+| Reglas de estilo | `dart run tools/verificar_reglas.dart [rutas]` |
 
-- Estado: `provider` (ChangeNotifier + MultiProvider en `app_widget.dart`)
-- DI: `get_it` + `injection.dart` en `lib/app/core/di/`
-- Persistencia: SQLite con `sqflite` (`AppDatabase` en `lib/app/core/database/`)
-- Rutas: `go_router` (`AppRouter` en `lib/app/core/routes/`)
-- Sistema de diseño: `AppDimensions` en `lib/app/core/constants/`, `ResponsiveHelper` en `lib/app/core/utils/`
-- Idioma: el código usa nombres en español (`Movimiento`, `PeriodoMes`, `ResumenMes`, etc.)
+- No agregar dependencias ni cambiar la arquitectura sin consultar.
+- Al refactorizar no cambiar la lógica de negocio.
 
-## 1. Estructura obligatoria
+---
+
+## Arquitectura: Feature-First
 
 ```
-lib/app/
-├── core/            # constants, theme, utils (ResponsiveHelper), di, errors
-├── shared/          # models y widgets compartidos entre features
-└── features/[feature]/
-    ├── constants/
-    │   ├── [feature]_strings.dart     # TODOS los textos visibles
-    │   └── [feature]_constants.dart   # TODOS los números de lógica
-    ├── utils/[feature]_helpers.dart   # funciones puras
-    ├── models/[nombre]_model.dart
-    ├── services/[nombre]_service.dart
-    ├── providers/[nombre]_provider.dart
-    ├── pages/[nombre]_page.dart       # scaffolds principales
-    └── widgets/
-        ├── [subcategoria]/            # agrupar si hay +3 widgets relacionados
-        └── [feature]_widget.dart
+lib/
+  main.dart            ← solo inicializa y llama a runApp
+  app/
+    app_widget.dart    ← proveedores, tema, router
+    core/              ← constants, theme, utils, di, database, routes, errors, config
+    shared/            ← models, dto, repositories, services, widgets, layout, constants, utils
+    features/<feature>/
+      constants/<feature>_strings.dart     ← TODOS los textos visibles
+      constants/<feature>_constants.dart   ← TODOS los números de lógica
+      utils/<feature>_helpers.dart         ← funciones puras
+      models/<nombre>_model.dart
+      services/<nombre>_service.dart
+      providers/<nombre>_provider.dart
+      pages/<nombre>_page.dart
+      widgets/[subcarpeta]/<nombre>_widget.dart
 ```
 
-Regla de dependencias: presentation → domain ← data. La UI no contiene lógica de negocio; los cálculos viven en services/helpers/use cases.
+- Dependencia: `features` puede importar `core` y `shared`; `core` y `shared` nunca importan un feature.
+- Un feature no importa páginas, providers ni widgets de otro; lo común sube a `shared`.
+- Capas: `page/widget` (UI) → `provider` (estado) → `service/repository` → `AppDatabase`. La UI nunca toca `sqflite` ni `AppDatabase`.
+- La UI no contiene lógica de negocio: los cálculos viven en services/helpers.
+- No crear archivos barrel; importar directamente.
+- Providers y servicios nuevos se registran en `injection.dart` / `MultiProvider`.
 
-## 2. Strings y constantes
+---
 
-- Todo texto visible → `[Feature]Strings`
-- Todo número de UI (padding, radius, icon, font, elevation, border) → `AppDimensions`
-- Todo número de lógica → `[Feature]Constants`
-- Todo breakpoint → `ResponsiveHelper`
-- Prohibido: `Text('Guardar')`, `EdgeInsets.all(16)`, `fontSize: 14`, `if (x > 8000)`.
+## Nomenclatura
 
-## 3. Widgets
-
-- Máximo 200 líneas por archivo; un widget = un archivo (excepto helpers privados pequeños).
-- Dividir widgets grandes en header/body/footer u otras partes lógicas.
-- Agrupar en subcarpetas si hay más de 3 relacionados.
-- Extraer widgets en clases, no en métodos grandes que devuelvan widgets.
-- Usar `const` siempre que sea posible.
+- Código en español (`Movimiento`, `PeriodoMes`, `ResumenMes`); excepción: nombres que exige Flutter/Dart.
+- Archivos: `snake_case.dart` con sufijo de tipo (`[nombre]_[tipo].dart`).
+- Clases: PascalCase. Métodos y variables: camelCase. Privados con `_`.
+- Variables con nombre completo (`colorScheme`, `screenWidth`), nunca `cs`, `w`, `tt`.
 - Nombres descriptivos: `BotonPrimarioWidget`, no `Boton1`.
 
-## 4. Responsividad
+---
 
-- Nunca hardcodear breakpoints (400, 600, 1024) ni usar `MediaQuery` suelto para decidir layout.
-- Usar `ResponsiveHelper.isMobile/isTablet/isDesktop(context)`, `paddingAll`, `fontSize`, `spacing`, `columnCount`.
+## Comentarios Banner
 
-## 5. Código limpio
-
-- Funciones de máximo 30 líneas, una sola responsabilidad.
-- Variables con nombres completos (`colorScheme`, `screenWidth`, no `cs`, `w`).
-- Extraer código duplicado a helpers o métodos genéricos.
-- Sin código muerto, sin `dynamic` ni `!` sin justificación.
-- Errores manejados de forma explícita; nunca `catch` vacío.
-- Para dinero no usar `double`; usar enteros (centavos) o `Decimal`.
-
-### 5.1 Comentarios de encabezado (banner)
-
-Cada método y cada bloque lógico de una clase (variables estáticas, variables de carga, validadores, etc.) lleva **un comentario de encabezado tipo banner** inmediatamente arriba, en mayúsculas, con asteriscos de relleno a ambos lados:
+Cada constante, clase, constructor y método lleva un banner en mayúsculas de **80 columnas fijas** (incluido `// `), con el texto centrado y relleno de `*` (si sobra uno, va a la derecha):
 
 ```dart
-/*************************** VALIDADORES ***********************************/
-/***************************** VARIABLES ESTATICAS *************************/
-/******************************** VARIABLE DE CARGA *******************************************/
-    /*************************** CARGAR *********************************************************/
-    /***************************** MENSAJES TOAST SATISFACTORIAMENTE ****************************/
+// ******************************** CONSTRUCTOR ********************************
+const MovimientoModel({required this.monto});
 ```
 
-- El texto del banner es el **nombre del bloque o método en mayúsculas** (p. ej. `CARGAR`, `VALIDADORES`), no una explicación de qué hace el código.
-- Esta regla reemplaza cualquier criterio de "solo comentar si no es obvio": el banner va siempre, en todo método y bloque relevante.
-- Indentación del banner igual a la del bloque que encabeza (los banners de métodos dentro de una clase van indentados igual que el método).
-- Dentro del cuerpo del método sigue prohibido comentar línea por línea lo que el código ya dice por sí mismo; el banner es la única excepción permitida.
+- El texto es el nombre del bloque o método en mayúsculas, no una explicación.
+- Se genera con `dart run tools/verificar_reglas.dart --banner "TEXTO"` y se corrige con `--normalizar <rutas>`.
+- Los campos de una clase se agrupan bajo un único banner `PROPIEDADES`.
+- La indentación del banner es la del bloque que encabeza.
+- Cero comentarios explicativos inline, cero emojis, cero código comentado.
+- Cero historial del cambio (`// se cambió para arreglar...`, `// nuevo`, `// antes era`): eso va en el commit.
 
-### 5.2 Prohibido comentar el historial del cambio
+### Imports
 
-- Nunca agregar comentarios que describan qué se modificó, por qué se tocó ese código ahora, o que hagan referencia a la tarea/fix en curso (ej. `// se cambió esto para arreglar el bug`, `// nuevo método`, `// antes estaba así`).
-- Esa información va en el mensaje de commit o en la conversación, nunca en el código.
-- Los únicos comentarios permitidos en el código son los banners de 5.1; todo lo demás queda prohibido, incluso si parece útil para el reviewer.
+Cada grupo lleva su banner y los imports van **pegados debajo**, sin líneas en blanco entre ellos ni entre grupos. Solo se emiten los grupos con imports. Orden fijo: `DART → FLUTTER → LIBRERIAS → CORE → SHARED → FEATURE`, y alfabético dentro de cada grupo.
 
-### 5.3 Colores
+```dart
+// *********************************** DART ************************************
+import 'dart:async';
+// ********************************** FLUTTER **********************************
+import 'package:flutter/material.dart';
+// ********************************* LIBRERIAS *********************************
+import 'package:provider/provider.dart';
+// *********************************** CORE ************************************
+import 'package:gastos_app/app/core/constants/app_dimensions.dart';
+// ********************************** SHARED ***********************************
+import 'package:gastos_app/app/shared/models/movimiento_model.dart';
+// ********************************** FEATURE **********************************
+import 'package:gastos_app/app/features/inicio/constants/inicio_strings.dart';
+```
+
+- `DART`: `dart:*`. `FLUTTER`: `package:flutter/*`. `LIBRERIAS`: resto de paquetes de terceros (incluye `flutter_test`).
+- `CORE`: `gastos_app/app/core/`. `SHARED`: `gastos_app/app/shared/`. `FEATURE`: el resto del proyecto (`app/features/`, `app/app_widget.dart`) y rutas relativas del mismo directorio.
+- Se usan imports `package:gastos_app/...`, nunca rutas relativas largas (`../../`).
+
+---
+
+## Límites de tamaño
+
+- Máx **200 líneas** por archivo; máx **30 líneas** por método/función.
+- Si se supera: extraer widget, helper `_x` o dividir en archivos. Un `build` grande se parte en widgets (header/body/footer) en `widgets/`, no en métodos que devuelvan widgets grandes.
+- Más de 3 widgets relacionados → agrupar en subcarpeta.
+
+---
+
+## Clean code
+
+- Un archivo, una responsabilidad; un widget = un archivo (salvo helpers privados pequeños).
+- Funciones pequeñas con un solo nivel de abstracción; nombres que dicen qué hacen.
+- Sin números ni textos mágicos:
+  - Todo texto visible → `[Feature]Strings` (`Text('Guardar')` está prohibido).
+  - Todo número de UI (padding, radius, icon, font, elevation, border) → `AppDimensions`.
+  - Todo número de lógica → `[Feature]Constants` (`if (x > 8000)` está prohibido).
+  - Todo breakpoint → `ResponsiveHelper.isMobile/isTablet/isDesktop(context)`, `paddingAll`, `fontSize`, `spacing`, `columnCount`; nunca `MediaQuery` suelto para decidir layout.
+- Dinero nunca en `double`: enteros (centavos) o `Decimal`.
+- `const` siempre que se pueda; widgets pequeños.
+- Errores manejados explícitamente; nunca `catch` vacío.
+- `late`, `!` y `dynamic` solo cuando no hay alternativa; preferir tipos explícitos.
+
+### Principios y patrones
+
+- **SRP**: una clase, una razón para cambiar. La lógica va en provider/service/helpers; el widget solo pinta.
+- **OCP**: se extiende con parámetros, callbacks, enums o composición; nunca copiando un archivo para variarlo.
+- **DIP**: la UI no instancia services ni repositories; dependen de inyección (get_it, Provider).
+- **DRY**: el bloque que aparece por segunda vez se extrae; tres copias es incumplimiento.
+- Composición sobre herencia.
+- Guard clauses y retorno temprano en vez de `if` anidados; máx 3 niveles de anidación.
+- Máx 4 parámetros por método; si hay más, agrupar en un modelo u objeto de configuración.
+- Un widget privado (`_Seccion`) vive en un solo archivo; si se necesita en un segundo, sube a `widgets/`.
+
+---
+
+## Reutilización de widgets y componentes
+
+- Antes de crear un widget se busca (`grep`/explorador) en este orden: `lib/app/shared/widgets/<categoria>/`, `features/<feature>/widgets/`; solo si no existe, se crea.
+- Un widget usado en 2 o más features se mueve a `lib/app/shared/widgets/<categoria>/`; un feature nunca importa widgets de otro feature.
+- Las variantes se resuelven con parámetros (`child`, callbacks, enums), no con archivos duplicados ni sufijos `_v2`, `_nuevo`, `_copia`.
+- Un widget recibe datos y callbacks por constructor; no lee providers ni services, salvo el widget contenedor de su feature.
+- Botones, tarjetas, campos de formulario, listas, progreso y estados vacío/carga/error se reutilizan de `shared/widgets/`; no se reimplementan por pantalla.
+- Radios, paddings, sombras y tamaños repetidos son constantes con nombre (`AppDimensions` o `constants/`).
+- Si dos pantallas casi iguales difieren en poco, se unifican en un único widget parametrizado.
+- Revisión manual obligatoria antes de entregar: confirmar que no se duplicó un widget existente.
+
+---
+
+## Servicios, repositorios y errores
+
+- Un service por feature en `services/`; el acceso a SQLite vive en repositories (`shared/repositories/`) vía `AppDatabase`.
+- Cada operación captura el error de la base y lanza una `Exception` con mensaje en español tomado de `constants/*_strings.dart`; nunca se traga el error.
+- Los providers exponen estado (`cargando`, `error`, datos) y llaman a `notifyListeners()`; no navegan ni muestran diálogos.
+
+---
+
+## Colores
 
 - Todo color se define únicamente en `AppColores` (`lib/app/core/theme/app_colores.dart`); `AppTema` lo toma de ahí.
-- Prohibido `Color(0x...)`, `Colors.xxx` y hex sueltos en widgets, features o shared.
-- En widgets usar `Theme.of(context).colorScheme` cuando exista el rol; si no, `AppColores.<token>`.
-- Un color nuevo se agrega primero como token en `AppColores` (con su variante oscura si aplica), nunca directo en el widget.
+- Fuera de `lib/app/core/theme/` no se escribe `Color(0x…)`, `Color.fromARGB`, `Colors.<nombre>` ni hex sueltos; solo se permite `Colors.transparent`.
+- En widgets: `Theme.of(context).colorScheme` cuando exista el rol; si no, `AppColores.<token>`.
+- Color nuevo: se agrega primero como token en `AppColores` (con su variante oscura si aplica), nunca en el widget.
 - Cambiar la paleta implica editar solo `app_colores.dart`.
 
-## 6. Orden de imports
+---
 
-1. Flutter/Dart
-2. Paquetes externos
-3. Core
-4. Shared
-5. Feature (relativos)
+## Tests
 
-Cada grupo presente en el archivo lleva su banner de encabezado (mismo formato de 5.1) inmediatamente arriba, en mayúsculas:
+- Tests en `test/` espejo de `lib/`, con los mismos banners e imports.
+- Un test por service/provider nuevo; la UI crítica con `testWidgets`.
 
-```dart
-/****************************** FLUTTER / DART ******************************/
-import 'package:flutter/material.dart';
+---
 
-/*********************************** CORE ***********************************/
-import 'package:gastos_app/app/core/utils/responsive_helper.dart';
-```
+## Verificación automática
 
-- Solo se agrega el banner de un grupo si el archivo tiene al menos un import de ese grupo.
-- No inventar grupos vacíos ni reordenar imports para agruparlos artificialmente.
+`dart run tools/verificar_reglas.dart [rutas]` (sin rutas revisa `lib`, `test` y `tools`) comprueba: nombre `snake_case`, ≤ 200 líneas por archivo, ≤ 30 por método, todo comentario es un banner de 80 columnas centrado, sin comentarios inline ni emojis, y grupos de imports bajo su banner, en orden, alfabéticos y sin líneas en blanco.
 
-## 7. Orden dentro de una clase
+- Todo archivo nuevo o tocado debe salir con 0 incumplimientos antes de entregar, además de `flutter analyze` sin warnings.
+- `--colores` (revisa `lib`) falla si hay `Color(0x…)`, `Color.fromARGB` o `Colors.x` (salvo `transparent`) fuera de `lib/app/core/theme/`.
+- `--normalizar <rutas>` reescribe los banners existentes (incluido el formato antiguo `/*** TEXTO ***/`) al formato de 80 columnas.
+- Regla nueva verificable → se añade en `tools/reglas/` y se documenta aquí.
+- El código antiguo se migra al tocarlo; no mezclar migración masiva con cambios funcionales.
 
-1. Propiedades finales
-2. Constructor
-3. Métodos privados (`_manejarX`, `_buildX`)
-4. `build`
+---
 
-## 8. Flujo de trabajo
+## Formato de entrega
 
-Al recibir código a refactorizar:
+1. **Árbol de carpetas** de lo creado o movido.
+2. **Código completo** de cada archivo con su ruta, sin `...` ni `// resto del código`.
+3. Orden: constants/utils → models/services/providers → widgets por carpeta → page.
+4. Comandos a ejecutar si aplica (`flutter pub get`, `dart run tools/verificar_reglas.dart <rutas>`).
+5. Al crear una feature nueva se trabaja por fases (constants/utils → models/services → providers → widgets → page → tests) y se entrega solo la fase pedida.
+6. Una nota breve de decisiones no obvias, sin explicaciones largas. Respuestas en español.
 
-1. Analizar la estructura actual e identificar violaciones.
-2. Extraer strings y constantes.
-3. Reemplazar valores hardcodeados por `AppDimensions` y `ResponsiveHelper`.
-4. Dividir en archivos si supera 200 líneas y organizar en carpetas.
-5. Verificar con el checklist.
+### Checklist antes de entregar
 
-Al crear una feature nueva, trabajar por fases: constants/utils → models/services → providers → widgets → page → tests. Entregar solo la fase pedida.
-
-## 9. Formato de entrega
-
-- Árbol de carpetas resultante.
-- Código completo de cada archivo con su ruta (nunca usar `...` ni `// más código`).
-- Orden: constants/utils → models/services/providers → widgets por carpeta → page.
-- Comandos a ejecutar si aplica (`flutter pub get`, `build_runner`).
-- Sin explicaciones largas: solo una nota breve de decisiones no obvias.
-
-## 10. Checklist antes de entregar
-
-- [ ] Archivos en las carpetas correctas y con nomenclatura `[nombre]_[tipo].dart`
-- [ ] Ningún archivo supera 200 líneas ni función 30 líneas
-- [ ] Sin strings, números ni breakpoints hardcodeados
-- [ ] Usa `AppDimensions` y `ResponsiveHelper`
-- [ ] Sin colores hardcodeados fuera de `AppColores`
-- [ ] Nombres descriptivos y sin código duplicado
+- [ ] Archivos en las carpetas correctas con nomenclatura `[nombre]_[tipo].dart`
+- [ ] `dart run tools/verificar_reglas.dart <rutas tocadas>` con 0 incumplimientos
+- [ ] Sin strings, números ni breakpoints hardcodeados; usa `AppDimensions` y `ResponsiveHelper`
+- [ ] Sin colores fuera de `AppColores`
+- [ ] No se duplicó un widget existente
 - [ ] Misma funcionalidad que el original
-- [ ] Providers/servicios registrados en DI si son nuevos
+- [ ] Providers/servicios nuevos registrados en DI
 - [ ] `flutter analyze` sin warnings
-
-## Errores comunes a evitar
-
-- `16.0` en vez de `AppDimensions.paddingM`
-- `width < 600` en vez de `ResponsiveHelper.isMobile(context)`
-- Texto hardcodeado en vez de `[Feature]Strings`
-- Archivos de 500 líneas sin dividir
-- Variables cortas (`cs`, `tt`, `w`)
-- Lógica de negocio dentro de widgets
-- Cambiar la lógica al refactorizar
-- Entregar sin pasar el checklist
-
-## Tono
-
-Sé preciso y directo, entrega código completo y ordenado, responde en español.
